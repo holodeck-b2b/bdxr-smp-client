@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<se:ServiceMetadata xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns:ccts-cct="urn:un:unece:uncefact:data:specification:CoreComponentTypeSchemaModule:2" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:ext="http://docs.oasis-open.org/bdxr/ns/SMP/2/ExtensionComponents" xmlns:ns0="http://uri.etsi.org/01903/v1.4.1#" xmlns:qdt="http://docs.oasis-open.org/bdxr/ns/SMP/2/QualifiedDataTypes" xmlns:se="http://docs.oasis-open.org/bdxr/ns/SMP/2/ServiceMetadata" xmlns:sma="http://docs.oasis-open.org/bdxr/ns/SMP/2/AggregateComponents" xmlns:udt="http://docs.oasis-open.org/bdxr/ns/SMP/2/UnqualifiedDataTypes" xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" xmlns:xhb="http://docs.oasis-open.org/bdxr/ns/SMP/2/BasicComponents" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/bdxr/ns/SMP/2/ServiceMetadata file:/Users/safi/Projects/OASIS/BDx/SMP/bdx-smp-v2.0-cs01/xsd/ServiceMetadata-2.0.xsd">
+    <xhb:SMPVersionID>SMPVersionID0</xhb:SMPVersionID>
+    <xhb:ID>ID0</xhb:ID>
+    <xhb:ParticipantID>ParticipantID0</xhb:ParticipantID>
+    <sma:ProcessMetadata>
+    </sma:ProcessMetadata>
+    <sma:ProcessMetadata>
+    </sma:ProcessMetadata>
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:SignedInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"/>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"/>
+<ds:Reference URI="" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:Transforms xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"/>
+<ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"/>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"/>
+<ds:DigestValue xmlns:ds="http://www.w3.org/2000/09/xmldsig#">yXsANvUDEHtTZ/r1WvOO+cjEOK9q2GAq6UwYG3Eh+pY=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+AJHep6thZkpNKCL9eUTnT0vaHAERq7Fmkbfj1D463RmkljE0RC7ue9yeMNBZBQgfkI95L6j/44V2
+RCWIuKLOgi0WS0ZV9E+m1QREh8ADHnTw40zcdVO9QLDs6zxex6eI7Ocnr/C2CBnJpKDxFtN9C3nZ
+2PJBl8eRZngssjvihyhtwYtU0Br9GgtIenhjZ72duDnQFoSZjgSw0ssqqN4Hteh4SC2V3gqSlLXr
+sELBnF1V+RYndpVX4RV4M4zeQdxL8IuoNFVnX9q3QCDfbEZoCdijdTcDxPUtBZOtDuJei5eMPkCe
+G+0lP897AzRnND+zfMy5TDJS71gsYO1+MD2swohR1G9MoiqlYGF6mzZXW94aY5aPW9Iqoksn0rO+
+JXQbMTAI7dYo4HsmQlHSe45BN5tAYoWeA4umT1NqPFb58IcEB9RXooVRsxfSQkt1Tyo/8/SKkFEe
+WFe5rU05eDLzW2dcX58+Y0rAaMC4f75SmnWIpoCSXHfHjFLUCtxFDSFlEje8CYQ9XkjsO/xCQ+AE
+9apF/Ufdper0n6rgCEo6Nao3N0OfQrLB9gqLjCp4dmqk2iSucGWwKs4+P/eYfwt/v8iacJynjLoE
+6OvtjVf62x0gRdjV36j8v/W0+eeH2sjcrW4M8FVcmeNAXAsYu7w8D7sPUxYM4VgOW3FqE9pcu7g=
+</ds:SignatureValue>
+<ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:X509Data xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:X509SubjectName xmlns:ds="http://www.w3.org/2000/09/xmldsig#">CN=partya.examples.holodeck-b2b.com,OU=Holodeck B2B Support,O=Chasquis,C=NL</ds:X509SubjectName>
+<ds:X509Certificate xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+MIIFvjCCA6agAwIBAgICEAAwDQYJKoZIhvcNAQELBQAwZjELMAkGA1UEBhMCTkwxETAPBgNVBAoM
+CENoYXNxdWlzMR0wGwYDVQQLDBRIb2xvZGVjayBCMkIgU3VwcG9ydDElMCMGA1UEAwwcY2EuZXhh
+bXBsZXMuaG9sb2RlY2stYjJiLm9yZzAeFw0xOTA4MTIxODEwMDlaFw0yMDA4MjExODEwMDlaMGox
+CzAJBgNVBAYTAk5MMREwDwYDVQQKDAhDaGFzcXVpczEdMBsGA1UECwwUSG9sb2RlY2sgQjJCIFN1
+cHBvcnQxKTAnBgNVBAMMIHBhcnR5YS5leGFtcGxlcy5ob2xvZGVjay1iMmIuY29tMIICIjANBgkq
+hkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA4T98DsywFKLH6UYqV8N9P8gTbdCEPbb5Gm8ndnCWUwSF
+wVX4CCMwHHAIxxy2gdf4lb7XUzOD6WahQsdpM8Fwcj+SX2HJHtpt6JS6Cu9QlPxp5MXW0gWyYv7+
+RLE2Xj+KM2++b/stBC1I6kjUyevtGmea9ufOA3XEJ5jOiQ+afk34UAlN9Ta+qpwrtJKxRq6SIB8z
+aGlU0OsEVZPP2a1QpBVm/1axbG4XRp+QF7mSh0PV1g2ICrE4xXPqqIWdiTKzTWl4xePnLCxdFQkX
+OjPxo+GAjNnNhXdtaZS+KUN2yLIw0Xay3I8HeLMGBHhAIOHBHvwng367RjO3zwbgvt5dcEKWVF57
+aOBoksGafEfqhN6KNqZM9d8/Aq46GiqHw/2JtEHledKRW8+9S0ri9yAo7vr2RiHQt74Ey+K++Nxp
+HMmAEmnTwK1ki40Lmeih3oKRucUOOWF62K4T++u7X71xkznIeEGxLznSqnPD8mwowHN3StQFiMn+
+Xt66m+a+K3F3NlWYkzeZRPrEA0Wqv6K+z0MbB3JYv1CXuhb5kYEGEqsau395/yrn/MbU8+iWU7fN
+ASlHBktwMXHm9NKcuLqiF8TuamZ/5XVBuPIeXwuTcdoOh2wxoH9hZDwerkBHJUOgLiUG4Rh6H332
+uBljkIESqe1eDEWbPNlHlTptKxjb5YcCAwEAAaNyMHAwCQYDVR0TBAIwADAOBgNVHQ8BAf8EBAMC
+BeAwEwYDVR0lBAwwCgYIKwYBBQUHAwIwHQYDVR0OBBYEFAPf9TzA6vwmsJlWTQY068Zjcks+MB8G
+A1UdIwQYMBaAFGogotBTFmhJkji5a7pAr+ggs75/MA0GCSqGSIb3DQEBCwUAA4ICAQDXJac5aC65
+s8akjU9iXYA7zhuG/g1aupy1n3X99btQTretYD69giOq1vUvi1CHnDOLq1E1aHJQTN89kKsu4RRl
+asbZf+XXO8F5p5OWYsPzSoqe8jjwlfN41qkz2ia8NNSxiJiLZzqk2VrPGViI9XHvIZ1B2WeMFqLK
+OWkSKhZ+sQwi1hL5UdJlPjH+hhZOmxjiHwTlrl0JFsGKEMwU/kHf+Rk7EN/65fv4uyCid/N4hflH
+JBcdIB9+suacSFwH9LX6tU8+PUpsJAnfKFLSQ0xgE6D4UyFVgRKJoo9uKGbTXzpjZkjKSf0PH+KH
+CCO7grQPQF+NhJ+d6C04mCCeWKYKUGFUGDrk6eHmmKHMTaPUa6OihKWyBNcSh/oE3oDJy0GntiCj
+7fXWnhgiKndZ+ioL+7qLIZurInXPqOliWPaBJnMvBd07P0ZuRxePuAvplb3MAsPmF+UjTzttcC0x
+FHnXf6Uo8eAtHRkPFY2sRgjudIr4RjoaF23JYk6ZSB4HcTuaBO/1XTXllcpR9HYSWVTn5JeQdQ0k
+k7DDRdOuQNMFU0BAlaFQH/ceVLf86REbZjJPE4duphTlVFtLU0b9Z+qxyxZ5vleAcyMDSL83z9Xn
+uEznlrQKV91dcMs/93lidKm8lI9iQUVbjAXd5+FvqpbPlDewIcHCIINZ2cGcuXgTUw==
+</ds:X509Certificate>
+</ds:X509Data>
+</ds:KeyInfo>
+</ds:Signature></se:ServiceMetadata>

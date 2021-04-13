@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<se:ServiceMetadata xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+ xmlns:udt="http://docs.oasis-open.org/bdxr/ns/SMP/2/UnqualifiedDataTypes"
+ xmlns:ccts="urn:un:unece:uncefact:documentation:2"
+ xmlns:xhb="http://docs.oasis-open.org/bdxr/ns/SMP/2/BasicComponents"
+ xmlns:sma="http://docs.oasis-open.org/bdxr/ns/SMP/2/AggregateComponents"
+ xmlns:ext="http://docs.oasis-open.org/bdxr/ns/SMP/2/ExtensionComponents"
+ xmlns:xades="http://uri.etsi.org/01903/v1.3.2#"
+ xmlns:qdt="http://docs.oasis-open.org/bdxr/ns/SMP/2/QualifiedDataTypes"
+ xmlns:ccts-cct="urn:un:unece:uncefact:data:specification:CoreComponentTypeSchemaModule:2"
+ xmlns:ns0="http://uri.etsi.org/01903/v1.4.1#"
+ xmlns:se="http://docs.oasis-open.org/bdxr/ns/SMP/2/ServiceMetadata"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://docs.oasis-open.org/bdxr/ns/SMP/2/ServiceMetadata file:/Users/safi/Projects/OASIS/BDx/SMP/bdx-smp-v2.0-cs01/xsd/ServiceMetadata-2.0.xsd">
+    <xhb:SMPVersionID>SMPVersionID0</xhb:SMPVersionID>
+    <xhb:ID>ID0</xhb:ID>
+    <xhb:ParticipantID>ParticipantID0</xhb:ParticipantID>
+    <sma:ProcessMetadata>
+    </sma:ProcessMetadata>
+    <sma:ProcessMetadata>
+    </sma:ProcessMetadata>
+</se:ServiceMetadata>

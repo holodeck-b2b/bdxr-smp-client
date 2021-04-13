@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.holodeckb2b.bdxr</groupId>
+	<artifactId>smp-client-parent</artifactId>
+	<version>2.0.0</version>
+	<packaging>pom</packaging>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	<name>BDXR SMP Client</name>
+	<description>This project contains clasess to create a SMP Client based on the BDXL and SMP specifications 
+    developed by the OASIS BDXR Technical Committee and its predecessors developed within PEPPOL.</description>
+	<scm>
+		<url>https://github.com/holodeck-b2b/bdxr-smp-client</url>
+		<connection>scm:git:https://github.com/holodeck-b2b/bdxr-smp-client.git</connection>
+		<developerConnection>scm:git:git@github.com:holodeck-b2b/bdxr-smp-client.git</developerConnection>
+	</scm>
+	<issueManagement>
+		<url>https://github.com/holodeck-b2b/bdxr-smp-client/issues</url>
+	</issueManagement>
+
+	<organization>
+		<name>The Holodeck B2B Team</name>
+		<url>http://www.holodeck-b2b.org/team</url>
+	</organization>
+	<developers>
+		<developer>
+			<name>Sander Fieten</name>
+			<organization>Chasquis</organization>
+			<organizationUrl>http://chasquis-consulting.com/holodeck-b2b-support/</organizationUrl>
+			<email>sander at chasquis-consulting.com/</email>
+			<roles>
+				<role>Architect</role>
+				<role>Lead developer</role>
+			</roles>
+			<timezone>Europe/Amsterdam</timezone>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>GNU Lesser General Public License v3</name>
+			<url>http://www.gnu.org/licenses/lgpl-3.0.html</url>
+		</license>
+	</licenses>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>bdxr-common</artifactId>
+				<version>2.0.0</version>
+			</dependency>
+ 			<dependency>
+				<groupId>org.holodeckb2b.commons</groupId>
+				<artifactId>generic-utils</artifactId>
+				<version>1.0.0</version>
+			</dependency>			
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>generic-smp-client</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+ 			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>1.10</version>
+			</dependency>
+ 			<dependency>
+				<groupId>dnsjava</groupId>
+				<artifactId>dnsjava</artifactId>
+				<version>2.1.8</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-api</artifactId>
+				<version>2.9.1</version>
+			</dependency>
+			<!-- Dependencies for testing -->
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter</artifactId>
+				<version>5.4.2</version>
+				<scope>test</scope>
+			</dependency>			
+			<dependency>
+				<groupId>org.holodeckb2b.commons</groupId>
+				<artifactId>generic-utils</artifactId>
+				<version>1.0.0</version>
+	            <type>test-jar</type>				
+				<scope>test</scope>
+			</dependency>			
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<scope>test</scope>
+				<version>2.9.1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>jaxb2-maven-plugin</artifactId>
+					<version>2.3.1</version>
+					<executions>
+						<execution>
+							<id>xjc</id>
+							<goals>
+								<goal>xjc</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<encoding>UTF-8</encoding>
+						<target>2.1</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	<modules>
+		<module>generic-client</module>
+		<module>oasis-smp</module>
+		<module>peppol-smp</module>
+		<module>oasis-smp2</module>
+	</modules>
+</project>
