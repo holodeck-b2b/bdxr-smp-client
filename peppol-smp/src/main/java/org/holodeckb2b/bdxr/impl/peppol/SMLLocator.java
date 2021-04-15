@@ -68,7 +68,7 @@ public class SMLLocator implements ISMPLocator {
             if (new Lookup(hostname).run() == null) {
             	log.warn("Participant with identifier {}::{} not registered in SML (lookup hostname={})", 
              				participant.getScheme(), participant.getValue(), hostname);
-                throw new SMPLocatorException("Participant not registered in SML");
+                throw new SMPLocatorException("Participant not registered in SML (" + hostname + ")");
             } else {
                 log.debug("Found SMP location [http://{}] for participant {}::{}", hostname, participant.getScheme(),
                            participant.getValue());
