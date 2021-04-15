@@ -281,7 +281,7 @@ public class OASISv2ResultProcessor implements ISMPResultProcessor {
 		cert.setActivationDate(activation != null ? activation.toGregorianCalendar().toZonedDateTime() : null);
 		final XMLGregorianCalendar expiration = certInfo.getExpirationDate() != null ? 
 				certInfo.getExpirationDate().getValue() : null;    																			
-		cert.setEpirationDate(expiration != null ? expiration.toGregorianCalendar().toZonedDateTime() : null);
+		cert.setExpirationDate(expiration != null ? expiration.toGregorianCalendar().toZonedDateTime() : null);
     
 		return cert;
     }
