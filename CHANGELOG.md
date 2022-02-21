@@ -3,10 +3,10 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 2.0.0
-##### Unreleased
+##### 2021-04-15
 
 **NOTE:** The code of this project was originally contained in the the [BDXR-Common](https://github.com/holodeck-b2b/bdxr-common) project. 
-To create a beter separation between generic and SMP client specific code however the SMP client code was split off into the current project.
+To create a beter separation between generic and SMP client specific code, the SMP client code was split off into the current project.
 Therefore the initial version number for this project is set to the next major version of the original project and the change log also continues from the original project.
 
 ### Added
@@ -16,16 +16,16 @@ Therefore the initial version number for this project is set to the next major v
 * Test cases for the SMP Client
 
 ### Changed
-* BDXL lookup now follows NAPTR replacements and does directly use URL of regexp
-* Consistent typing of URL information elements.
+* BDXL lookup now follows NAPTR replacements and directly uses the URL of regexp
+* Consistent typing of URL information elements
 * Generalised `org.holodeckb2b.bdxr.smp.impl.BDXLLocator` by parameterising the 
-  NAPTR service name to use for finding the record holding the SMP URL. 
+  NAPTR service name to use for finding the record holding the SMP URL 
 * Refactored package structure to have a better separation between API and implementations. 
-  Moved reference implementations of locators to sub projects.
+  Moved reference implementations of locators to sub projects
 
 ### Fixed
-* Incorrect handling of redirect URL in the SMP Client.
-* Only verify the first signature on the SMP response document itself.
+* Incorrect handling of redirect URL in the SMP Client
+* Only verify the first signature on the SMP response document itself
 
 ### Removed
 * Generic datamodel classes are now located in the [BDXR-Common](https://github.com/holodeck-b2b/bdxr-common) project
