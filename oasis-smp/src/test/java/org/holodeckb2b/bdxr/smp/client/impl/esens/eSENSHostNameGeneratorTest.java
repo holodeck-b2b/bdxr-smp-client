@@ -1,26 +1,27 @@
 /*
  * Copyright (C) 2018 The Holodeck B2B Team
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.holodeckb2b.bdxr.impl.esens;
+package org.holodeckb2b.bdxr.smp.client.impl.esens;
 
+import org.holodeckb2b.bdxr.smp.client.impl.esens.eSENSHostNameGenerator;
+import org.holodeckb2b.bdxr.smp.client.api.IHostNameGenerator;
+import org.holodeckb2b.bdxr.smp.datamodel.Identifier;
+import org.holodeckb2b.bdxr.smp.datamodel.impl.IdentifierImpl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-
-import org.holodeckb2b.bdxr.smp.api.IHostNameGenerator;
-import org.holodeckb2b.bdxr.smp.datamodel.Identifier;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -31,10 +32,10 @@ import org.junit.jupiter.api.Test;
 public class eSENSHostNameGeneratorTest {
 
     private static final String     VALID_SML_DOMAIN = "test-sml.holodeck-b2b.com";
-    private static final Identifier VALID_ID = new Identifier("0088:9999", "iso6523");
+    private static final Identifier VALID_ID = new IdentifierImpl("0088:9999", "iso6523");
     private static final String     B32_SHA256_HASH = "ZAS3CFEF3EL2XW3TCIMYF6YT253A735R7X7E2F6NYJGUEOFZ7JLQ";
-    private static final Identifier NO_SCHEME_ID = new Identifier("0000:xxxx");
-    private static final Identifier INVALID_SCHEME_ID = new Identifier("0000:yyyy", "gs1");
+    private static final Identifier NO_SCHEME_ID = new IdentifierImpl("0000:xxxx");
+    private static final Identifier INVALID_SCHEME_ID = new IdentifierImpl("0000:yyyy", "gs1");
 
 
     @Test

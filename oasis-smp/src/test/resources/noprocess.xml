@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ServiceMetadata xmlns="http://docs.oasis-open.org/bdxr/ns/SMP/2016/05"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/bdxr/ns/SMP/2016/05 ../../main/xsd/bdx-smp-201605.xsd">
+    <ServiceInformation>
+        <ParticipantIdentifier scheme="urn:oasis:tc:ebcore:partyid-type:unregistered">holodeckb2b-test</ParticipantIdentifier>
+        <DocumentIdentifier scheme="bdx-docid-qns">urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017</DocumentIdentifier>
+        <ProcessList>
+            <Process>
+                <ProcessIdentifier>bdx:noprocess</ProcessIdentifier>
+                <ServiceEndpointList>
+                    <Endpoint transportProfile="bdxr-transport-ebms3-as4-v1p0">
+                        <EndpointURI>https://ap.sample.holodeck-b2b.org/</EndpointURI>
+                        <Certificate/>
+                        <ServiceDescription>Only defined for testing of SMP client</ServiceDescription>
+                        <TechnicalContactUrl>sander at holodeck-b2b.org</TechnicalContactUrl>
+                        <TechnicalInformationUrl>http://doc.test.holodeck-b2b.org/smp-test</TechnicalInformationUrl>
+                    </Endpoint>
+                </ServiceEndpointList>
+            </Process>
+        </ProcessList>
+    </ServiceInformation> 
+</ServiceMetadata>

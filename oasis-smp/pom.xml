@@ -5,12 +5,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.holodeckb2b.bdxr</groupId>
-		<artifactId>parent</artifactId>
-		<version>2.0.0</version>
+		<artifactId>smp-client-parent</artifactId>
+		<version>3.0.0</version>
 	</parent>
 	<artifactId>oasis-smp</artifactId>
 	<packaging>jar</packaging>
-	<name>BDXR SMP: OASIS v1 SMP</name>
+	<name>Holodeck SMP Client: OASIS v1 SMP</name>
 	<description>
         This project is used to create Java classes for processing the XML documents defined by the OASIS SMP
         specification's XSD.
@@ -20,14 +20,39 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>generic-smp-client</artifactId>
 		</dependency>
+	    <dependency>
+	        <groupId>javax.xml.bind</groupId>
+	        <artifactId>jaxb-api</artifactId>
+	    </dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+	        <scope>runtime</scope>
+		</dependency>
+	    <dependency>
+	        <groupId>com.sun.xml.bind</groupId>
+	        <artifactId>jaxb-impl</artifactId>
+	        <scope>runtime</scope>
+	    </dependency>
+		<dependency>
+			<groupId>com.sun.activation</groupId>
+			<artifactId>javax.activation</artifactId>
+	        <scope>runtime</scope>
+		</dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>			
-		</dependency>		
+			<artifactId>commons-codec</artifactId>
+		</dependency>
 		<!-- Dependencies for testing -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.holodeckb2b.commons</groupId>
+			<artifactId>generic-utils</artifactId>
+            <type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -43,7 +68,7 @@
 				<artifactId>jaxb2-maven-plugin</artifactId>
 				<configuration>
 					<sources>
-						<source>src/main/xsd/bdx-smp-201605.xsd</source>
+						<source>src/main/resources/xsd/bdx-smp-201605.xsd</source>
 					</sources>
 				</configuration>
 			</plugin>

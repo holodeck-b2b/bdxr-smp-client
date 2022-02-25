@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ServiceMetadata xmlns="http://busdox.org/serviceMetadata/publishing/1.0/"
+    xmlns:ids="http://busdox.org/transport/identifiers/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://busdox.org/serviceMetadata/publishing/1.0/ ../../main/resources/xsd/peppol-smp-1.0.xsd">
+    <ServiceInformation>
+        <ids:ParticipantIdentifier scheme="urn:oasis:tc:ebcore:partyid-type:unregistered">holodeckb2b-test</ids:ParticipantIdentifier>
+        <ids:DocumentIdentifier scheme="busdox-docid-qns">urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017</ids:DocumentIdentifier>
+        <ProcessList>
+            <Process>
+                <ids:ProcessIdentifier>urn:cen.eu:en16931:2017</ids:ProcessIdentifier>
+                <ServiceEndpointList>
+                    <Endpoint transportProfile="bdxr-transport-ebms3-as4-v1p0">
+                        <EndpointReference xmlns="http://www.w3.org/2005/08/addressing">
+                            <Address>https://ap.sample.holodeck-b2b.org/</Address>
+                        </EndpointReference>
+                        <RequireBusinessLevelSignature>false</RequireBusinessLevelSignature>
+                        <Certificate/>
+                        <ServiceDescription>Only defined for testing of SMP client</ServiceDescription>
+                        <TechnicalContactUrl>sander at holodeck-b2b.org</TechnicalContactUrl>
+                        <TechnicalInformationUrl>http://doc.test.holodeck-b2b.org/smp-test</TechnicalInformationUrl>
+                    </Endpoint>
+                </ServiceEndpointList>
+            </Process>
+        </ProcessList>
+    </ServiceInformation> 
+</ServiceMetadata>

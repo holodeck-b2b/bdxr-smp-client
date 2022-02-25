@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.holodeckb2b.bdxr</groupId>
-        <artifactId>parent</artifactId>
-        <version>2.0.0</version>
-    </parent>
+	<parent>
+		<groupId>org.holodeckb2b.bdxr</groupId>
+		<artifactId>smp-client-parent</artifactId>
+		<version>3.0.0</version>
+	</parent>
     <artifactId>oasis-smp2</artifactId>
     <packaging>jar</packaging>
-    <name>BDXR SMP: OASIS SMP v2</name>
+    <name>Holodeck SMP Client: OASIS SMP v2</name>
     <description>
         This project is used to create Java classes for processing the XML documents defined by the OASIS SMP v2
         specification's XSD.
@@ -18,6 +18,25 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>generic-smp-client</artifactId>
 		</dependency>
+		<dependency>
+	        <groupId>javax.xml.bind</groupId>
+	        <artifactId>jaxb-api</artifactId>
+	    </dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+	        <scope>runtime</scope>
+		</dependency>
+	    <dependency>
+	        <groupId>com.sun.xml.bind</groupId>
+	        <artifactId>jaxb-impl</artifactId>
+	        <scope>runtime</scope>
+	    </dependency>
+		<dependency>
+			<groupId>com.sun.activation</groupId>
+			<artifactId>javax.activation</artifactId>
+	        <scope>runtime</scope>
+		</dependency>
 		<!-- Dependencies for testing -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
@@ -25,10 +44,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>bdxr-utils</artifactId>
-			<version>${project.version}</version>
-			<type>test-jar</type>
+			<groupId>org.holodeckb2b.commons</groupId>
+			<artifactId>generic-utils</artifactId>
+            <type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -36,7 +54,7 @@
 			<artifactId>log4j-core</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>    
+	</dependencies>
     <build>
         <plugins>
             <plugin>
@@ -44,8 +62,8 @@
                 <artifactId>jaxb2-maven-plugin</artifactId>
                 <configuration>
                     <sources>
-                        <source>src/main/xsd/ServiceGroup-2.0.xsd</source>
-                        <source>src/main/xsd/ServiceMetadata-2.0.xsd</source>
+                        <source>src/main/resources/xsd/ServiceGroup-2.0.xsd</source>
+                        <source>src/main/resources/xsd/ServiceMetadata-2.0.xsd</source>
                     </sources>
                 </configuration>
             </plugin>

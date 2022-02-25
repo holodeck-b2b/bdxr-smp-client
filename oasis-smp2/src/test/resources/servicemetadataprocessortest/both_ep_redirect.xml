@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<se:ServiceMetadata 
+ xmlns:sma="http://docs.oasis-open.org/bdxr/ns/SMP/2/AggregateComponents"
+ xmlns:smb="http://docs.oasis-open.org/bdxr/ns/SMP/2/BasicComponents"
+ xmlns:se="http://docs.oasis-open.org/bdxr/ns/SMP/2/ServiceMetadata"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://docs.oasis-open.org/bdxr/ns/SMP/2/ServiceMetadata ../../../main/resources/xsd/ServiceMetadata-2.0.xsd">
+    <smb:SMPVersionID>2.0</smb:SMPVersionID>
+    <smb:ID schemeID="bdx-docid-qns">urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017</smb:ID>
+    <smb:ParticipantID schemeID="urn:oasis:tc:ebcore:partyid-type:unregistered">holodeckb2b-test</smb:ParticipantID>
+    <sma:ProcessMetadata>
+        <sma:Endpoint>
+            <smb:TransportProfileID>bdxr-transport-ebms3-as4-v1p0</smb:TransportProfileID>
+            <smb:AddressURI>https://ap.sample.holodeck-b2b.org/</smb:AddressURI>
+        </sma:Endpoint>
+        <sma:Redirect>
+            <smb:PublisherURI>https://this.is.wrongboth_ep_redirectboth_ep_redirect</smb:PublisherURI>
+        </sma:Redirect>
+    </sma:ProcessMetadata>
+</se:ServiceMetadata>

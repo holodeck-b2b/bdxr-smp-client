@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ServiceGroup xmlns="http://busdox.org/serviceMetadata/publishing/1.0/"  xmlns:ids="http://busdox.org/transport/identifiers/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://busdox.org/serviceMetadata/publishing/1.0/ ../../main/resources/xsd/peppol-smp-1.0.xsd">
+    <ids:ParticipantIdentifier scheme="urn:oasis:tc:ebcore:partyid-type:unregistered">holodeckb2b-test</ids:ParticipantIdentifier>
+    <ServiceMetadataReferenceCollection/>
+</ServiceGroup>

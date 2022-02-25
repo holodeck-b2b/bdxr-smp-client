@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ServiceMetadata xmlns="http://busdox.org/serviceMetadata/publishing/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://busdox.org/serviceMetadata/publishing/1.0/ ../../main/resources/xsd/peppol-smp-1.0.xsd">
+    <Redirect href="http://link.to.new.smp">
+        <CertificateUID>Will be ignored</CertificateUID>
+    </Redirect>
+</ServiceMetadata>

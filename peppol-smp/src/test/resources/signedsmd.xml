@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SignedServiceMetadata xmlns="http://busdox.org/serviceMetadata/publishing/1.0/"
+        xmlns:ids="http://busdox.org/transport/identifiers/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://busdox.org/serviceMetadata/publishing/1.0/ ../../main/resources/xsd/peppol-smp-1.0.xsd">        
+    <ServiceMetadata>
+        <ServiceInformation>
+            <ids:ParticipantIdentifier scheme="urn:oasis:tc:ebcore:partyid-type:unregistered">holodeckb2b-test</ids:ParticipantIdentifier>
+            <ids:DocumentIdentifier scheme="busdox-docid-qns">urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017</ids:DocumentIdentifier>
+            <ProcessList>
+                <Process>
+                    <ids:ProcessIdentifier>urn:cen.eu:en16931:2017</ids:ProcessIdentifier>
+                    <ServiceEndpointList>
+                        <Endpoint transportProfile="bdxr-transport-ebms3-as4-v1p0">
+                            <EndpointReference xmlns="http://www.w3.org/2005/08/addressing">
+                                <Address>https://ap.sample.holodeck-b2b.org/</Address>
+                            </EndpointReference>
+                            <RequireBusinessLevelSignature>false</RequireBusinessLevelSignature>
+                            <MinimumAuthenticationLevel>none</MinimumAuthenticationLevel>
+                            <ServiceActivationDate>2021-02-24T10:38:23.888Z</ServiceActivationDate>
+                            <ServiceExpirationDate>2024-01-01T01:00:00.000+01:00</ServiceExpirationDate>
+                            <Certificate>MIIFvjCCA6agAwIBAgICEAswDQYJKoZIhvcNAQELBQAwZjELMAkGA1UEBhMCTkwx
+                                ETAPBgNVBAoMCENoYXNxdWlzMR0wGwYDVQQLDBRIb2xvZGVjayBCMkIgU3VwcG9y
+                                dDElMCMGA1UEAwwcY2EuZXhhbXBsZXMuaG9sb2RlY2stYjJiLm9yZzAeFw0yMTA1
+                                MjAxMTAzNDNaFw0yNDA1MTkxMTAzNDNaMGoxCzAJBgNVBAYTAk5MMREwDwYDVQQK
+                                DAhDaGFzcXVpczEdMBsGA1UECwwUSG9sb2RlY2sgQjJCIFN1cHBvcnQxKTAnBgNV
+                                BAMMIHBhcnR5YS5leGFtcGxlcy5ob2xvZGVjay1iMmIuY29tMIICIjANBgkqhkiG
+                                9w0BAQEFAAOCAg8AMIICCgKCAgEA4T98DsywFKLH6UYqV8N9P8gTbdCEPbb5Gm8n
+                                dnCWUwSFwVX4CCMwHHAIxxy2gdf4lb7XUzOD6WahQsdpM8Fwcj+SX2HJHtpt6JS6
+                                Cu9QlPxp5MXW0gWyYv7+RLE2Xj+KM2++b/stBC1I6kjUyevtGmea9ufOA3XEJ5jO
+                                iQ+afk34UAlN9Ta+qpwrtJKxRq6SIB8zaGlU0OsEVZPP2a1QpBVm/1axbG4XRp+Q
+                                F7mSh0PV1g2ICrE4xXPqqIWdiTKzTWl4xePnLCxdFQkXOjPxo+GAjNnNhXdtaZS+
+                                KUN2yLIw0Xay3I8HeLMGBHhAIOHBHvwng367RjO3zwbgvt5dcEKWVF57aOBoksGa
+                                fEfqhN6KNqZM9d8/Aq46GiqHw/2JtEHledKRW8+9S0ri9yAo7vr2RiHQt74Ey+K+
+                                +NxpHMmAEmnTwK1ki40Lmeih3oKRucUOOWF62K4T++u7X71xkznIeEGxLznSqnPD
+                                8mwowHN3StQFiMn+Xt66m+a+K3F3NlWYkzeZRPrEA0Wqv6K+z0MbB3JYv1CXuhb5
+                                kYEGEqsau395/yrn/MbU8+iWU7fNASlHBktwMXHm9NKcuLqiF8TuamZ/5XVBuPIe
+                                XwuTcdoOh2wxoH9hZDwerkBHJUOgLiUG4Rh6H332uBljkIESqe1eDEWbPNlHlTpt
+                                Kxjb5YcCAwEAAaNyMHAwCQYDVR0TBAIwADAOBgNVHQ8BAf8EBAMCBeAwEwYDVR0l
+                                BAwwCgYIKwYBBQUHAwIwHQYDVR0OBBYEFAPf9TzA6vwmsJlWTQY068Zjcks+MB8G
+                                A1UdIwQYMBaAFGogotBTFmhJkji5a7pAr+ggs75/MA0GCSqGSIb3DQEBCwUAA4IC
+                                AQAnJRyHZtCMukBtwJ6oEc776IVbnSijNP5y51U6V6FBGdq95RUGWsNqQIY6uC2R
+                                bWals1HlEE8RxoZICsqoY55tDn6/dcxc2Y+0DD2RkTplT1djenEXKDtqABeEBZTb
+                                EIrVIGTcJlMxQHBjP3B9xvel1Hl3QmY8sj6BUy2sQYlA6JX98ImCIGpw1yCCaNyR
+                                9bHSmW6O1Ndx5JtxXUYIePN9p3EHBggImZyYjPkftkaorIP8jWfSLOsFsRfgxFZI
+                                bhDHUhLhvtXZWs7GIBybPDGDDN0EqqLYs5oc4wHidsH8PJXv9FSxoMQWFv6u/KtL
+                                eFgOsHrDszUS9CoAvJpuNpmCOz9SSSBol5orsCPsz4PdlO3ElF4TstI+KHC+X2CH
+                                JCMXIR/mQAb023NMDoS9dcESs/4BMjKJJiXVVwCsfNHjQKM4GUMHM9OHuZdq6TUc
+                                /ajQjPNhMNNlngPpn54b5PKGb/m//g78ZwwsMiP9jn0gSHn3D8nKjs8R8sQhQxss
+                                XRgIIfmEsBIKEYLWj2Cbeh4SWG5e/5v2hSEM7Me4Xm97P5dSMj5+hPL91XSO6gIo
+                                sSz2k+xiS68vqhv9bnE+MnDXaGEFI4hdY/owJc1O/PpKNrbVB993F5+BYBvKYpCv
+                                Xr1tnZMMjwcmNAw5vHBJcrlMLBZyB9M+UwhO1K8WHcpkvA==</Certificate>
+                            <ServiceDescription>Only defined for testing of SMP client</ServiceDescription>
+                            <TechnicalContactUrl>sander at holodeck-b2b.org</TechnicalContactUrl>
+                        </Endpoint>
+                    </ServiceEndpointList>
+                </Process>
+                <Process>
+                    <ids:ProcessIdentifier>urn:cen.eu:en16931:2023</ids:ProcessIdentifier>
+                    <ServiceEndpointList>
+                        <Endpoint transportProfile="bdxr-transport-ebms3-as4-v14p0">
+                            <EndpointReference xmlns="http://www.w3.org/2005/08/addressing">
+                                <Address>https://ap.sample.holodeck-b2b.org/</Address>
+                            </EndpointReference>
+                            <RequireBusinessLevelSignature>true</RequireBusinessLevelSignature>
+                            <ServiceExpirationDate>2022-07-01T01:00:00.000+01:00</ServiceExpirationDate>                           
+                            <Certificate>MIIFvjCCA6agAwIBAgICEAswDQYJKoZIhvcNAQELBQAwZjELMAkGA1UEBhMCTkwx
+                                ETAPBgNVBAoMCENoYXNxdWlzMR0wGwYDVQQLDBRIb2xvZGVjayBCMkIgU3VwcG9y
+                                dDElMCMGA1UEAwwcY2EuZXhhbXBsZXMuaG9sb2RlY2stYjJiLm9yZzAeFw0yMTA1
+                                MjAxMTAzNDNaFw0yNDA1MTkxMTAzNDNaMGoxCzAJBgNVBAYTAk5MMREwDwYDVQQK
+                                DAhDaGFzcXVpczEdMBsGA1UECwwUSG9sb2RlY2sgQjJCIFN1cHBvcnQxKTAnBgNV
+                                BAMMIHBhcnR5YS5leGFtcGxlcy5ob2xvZGVjay1iMmIuY29tMIICIjANBgkqhkiG
+                                9w0BAQEFAAOCAg8AMIICCgKCAgEA4T98DsywFKLH6UYqV8N9P8gTbdCEPbb5Gm8n
+                                dnCWUwSFwVX4CCMwHHAIxxy2gdf4lb7XUzOD6WahQsdpM8Fwcj+SX2HJHtpt6JS6
+                                Cu9QlPxp5MXW0gWyYv7+RLE2Xj+KM2++b/stBC1I6kjUyevtGmea9ufOA3XEJ5jO
+                                iQ+afk34UAlN9Ta+qpwrtJKxRq6SIB8zaGlU0OsEVZPP2a1QpBVm/1axbG4XRp+Q
+                                F7mSh0PV1g2ICrE4xXPqqIWdiTKzTWl4xePnLCxdFQkXOjPxo+GAjNnNhXdtaZS+
+                                KUN2yLIw0Xay3I8HeLMGBHhAIOHBHvwng367RjO3zwbgvt5dcEKWVF57aOBoksGa
+                                fEfqhN6KNqZM9d8/Aq46GiqHw/2JtEHledKRW8+9S0ri9yAo7vr2RiHQt74Ey+K+
+                                +NxpHMmAEmnTwK1ki40Lmeih3oKRucUOOWF62K4T++u7X71xkznIeEGxLznSqnPD
+                                8mwowHN3StQFiMn+Xt66m+a+K3F3NlWYkzeZRPrEA0Wqv6K+z0MbB3JYv1CXuhb5
+                                kYEGEqsau395/yrn/MbU8+iWU7fNASlHBktwMXHm9NKcuLqiF8TuamZ/5XVBuPIe
+                                XwuTcdoOh2wxoH9hZDwerkBHJUOgLiUG4Rh6H332uBljkIESqe1eDEWbPNlHlTpt
+                                Kxjb5YcCAwEAAaNyMHAwCQYDVR0TBAIwADAOBgNVHQ8BAf8EBAMCBeAwEwYDVR0l
+                                BAwwCgYIKwYBBQUHAwIwHQYDVR0OBBYEFAPf9TzA6vwmsJlWTQY068Zjcks+MB8G
+                                A1UdIwQYMBaAFGogotBTFmhJkji5a7pAr+ggs75/MA0GCSqGSIb3DQEBCwUAA4IC
+                                AQAnJRyHZtCMukBtwJ6oEc776IVbnSijNP5y51U6V6FBGdq95RUGWsNqQIY6uC2R
+                                bWals1HlEE8RxoZICsqoY55tDn6/dcxc2Y+0DD2RkTplT1djenEXKDtqABeEBZTb
+                                EIrVIGTcJlMxQHBjP3B9xvel1Hl3QmY8sj6BUy2sQYlA6JX98ImCIGpw1yCCaNyR
+                                9bHSmW6O1Ndx5JtxXUYIePN9p3EHBggImZyYjPkftkaorIP8jWfSLOsFsRfgxFZI
+                                bhDHUhLhvtXZWs7GIBybPDGDDN0EqqLYs5oc4wHidsH8PJXv9FSxoMQWFv6u/KtL
+                                eFgOsHrDszUS9CoAvJpuNpmCOz9SSSBol5orsCPsz4PdlO3ElF4TstI+KHC+X2CH
+                                JCMXIR/mQAb023NMDoS9dcESs/4BMjKJJiXVVwCsfNHjQKM4GUMHM9OHuZdq6TUc
+                                /ajQjPNhMNNlngPpn54b5PKGb/m//g78ZwwsMiP9jn0gSHn3D8nKjs8R8sQhQxss
+                                XRgIIfmEsBIKEYLWj2Cbeh4SWG5e/5v2hSEM7Me4Xm97P5dSMj5+hPL91XSO6gIo
+                                sSz2k+xiS68vqhv9bnE+MnDXaGEFI4hdY/owJc1O/PpKNrbVB993F5+BYBvKYpCv
+                                Xr1tnZMMjwcmNAw5vHBJcrlMLBZyB9M+UwhO1K8WHcpkvA==</Certificate>
+                            <ServiceDescription>Old profile</ServiceDescription>
+                            <TechnicalContactUrl>sander at holodeck-b2b.org</TechnicalContactUrl>
+                        </Endpoint>
+                        <Endpoint transportProfile="bdxr-transport-ebms3-as4-v15p0">
+                            <EndpointReference xmlns="http://www.w3.org/2005/08/addressing">
+                                <Address>https://ap2.sample.holodeck-b2b.org/</Address>
+                            </EndpointReference>
+                            <RequireBusinessLevelSignature>false</RequireBusinessLevelSignature>
+                            <ServiceActivationDate>2022-03-01T00:00:00.000Z</ServiceActivationDate>
+                            <Certificate>MIIFvjCCA6agAwIBAgICEAswDQYJKoZIhvcNAQELBQAwZjELMAkGA1UEBhMCTkwx
+                                ETAPBgNVBAoMCENoYXNxdWlzMR0wGwYDVQQLDBRIb2xvZGVjayBCMkIgU3VwcG9y
+                                dDElMCMGA1UEAwwcY2EuZXhhbXBsZXMuaG9sb2RlY2stYjJiLm9yZzAeFw0yMTA1
+                                MjAxMTAzNDNaFw0yNDA1MTkxMTAzNDNaMGoxCzAJBgNVBAYTAk5MMREwDwYDVQQK
+                                DAhDaGFzcXVpczEdMBsGA1UECwwUSG9sb2RlY2sgQjJCIFN1cHBvcnQxKTAnBgNV
+                                BAMMIHBhcnR5YS5leGFtcGxlcy5ob2xvZGVjay1iMmIuY29tMIICIjANBgkqhkiG
+                                9w0BAQEFAAOCAg8AMIICCgKCAgEA4T98DsywFKLH6UYqV8N9P8gTbdCEPbb5Gm8n
+                                dnCWUwSFwVX4CCMwHHAIxxy2gdf4lb7XUzOD6WahQsdpM8Fwcj+SX2HJHtpt6JS6
+                                Cu9QlPxp5MXW0gWyYv7+RLE2Xj+KM2++b/stBC1I6kjUyevtGmea9ufOA3XEJ5jO
+                                iQ+afk34UAlN9Ta+qpwrtJKxRq6SIB8zaGlU0OsEVZPP2a1QpBVm/1axbG4XRp+Q
+                                F7mSh0PV1g2ICrE4xXPqqIWdiTKzTWl4xePnLCxdFQkXOjPxo+GAjNnNhXdtaZS+
+                                KUN2yLIw0Xay3I8HeLMGBHhAIOHBHvwng367RjO3zwbgvt5dcEKWVF57aOBoksGa
+                                fEfqhN6KNqZM9d8/Aq46GiqHw/2JtEHledKRW8+9S0ri9yAo7vr2RiHQt74Ey+K+
+                                +NxpHMmAEmnTwK1ki40Lmeih3oKRucUOOWF62K4T++u7X71xkznIeEGxLznSqnPD
+                                8mwowHN3StQFiMn+Xt66m+a+K3F3NlWYkzeZRPrEA0Wqv6K+z0MbB3JYv1CXuhb5
+                                kYEGEqsau395/yrn/MbU8+iWU7fNASlHBktwMXHm9NKcuLqiF8TuamZ/5XVBuPIe
+                                XwuTcdoOh2wxoH9hZDwerkBHJUOgLiUG4Rh6H332uBljkIESqe1eDEWbPNlHlTpt
+                                Kxjb5YcCAwEAAaNyMHAwCQYDVR0TBAIwADAOBgNVHQ8BAf8EBAMCBeAwEwYDVR0l
+                                BAwwCgYIKwYBBQUHAwIwHQYDVR0OBBYEFAPf9TzA6vwmsJlWTQY068Zjcks+MB8G
+                                A1UdIwQYMBaAFGogotBTFmhJkji5a7pAr+ggs75/MA0GCSqGSIb3DQEBCwUAA4IC
+                                AQAnJRyHZtCMukBtwJ6oEc776IVbnSijNP5y51U6V6FBGdq95RUGWsNqQIY6uC2R
+                                bWals1HlEE8RxoZICsqoY55tDn6/dcxc2Y+0DD2RkTplT1djenEXKDtqABeEBZTb
+                                EIrVIGTcJlMxQHBjP3B9xvel1Hl3QmY8sj6BUy2sQYlA6JX98ImCIGpw1yCCaNyR
+                                9bHSmW6O1Ndx5JtxXUYIePN9p3EHBggImZyYjPkftkaorIP8jWfSLOsFsRfgxFZI
+                                bhDHUhLhvtXZWs7GIBybPDGDDN0EqqLYs5oc4wHidsH8PJXv9FSxoMQWFv6u/KtL
+                                eFgOsHrDszUS9CoAvJpuNpmCOz9SSSBol5orsCPsz4PdlO3ElF4TstI+KHC+X2CH
+                                JCMXIR/mQAb023NMDoS9dcESs/4BMjKJJiXVVwCsfNHjQKM4GUMHM9OHuZdq6TUc
+                                /ajQjPNhMNNlngPpn54b5PKGb/m//g78ZwwsMiP9jn0gSHn3D8nKjs8R8sQhQxss
+                                XRgIIfmEsBIKEYLWj2Cbeh4SWG5e/5v2hSEM7Me4Xm97P5dSMj5+hPL91XSO6gIo
+                                sSz2k+xiS68vqhv9bnE+MnDXaGEFI4hdY/owJc1O/PpKNrbVB993F5+BYBvKYpCv
+                                Xr1tnZMMjwcmNAw5vHBJcrlMLBZyB9M+UwhO1K8WHcpkvA==</Certificate>
+                            <ServiceDescription>New profile</ServiceDescription>
+                            <TechnicalContactUrl>sander at holodeck-b2b.org</TechnicalContactUrl>
+                        </Endpoint>
+                    </ServiceEndpointList>
+                </Process>                
+            </ProcessList>
+        </ServiceInformation>
+    </ServiceMetadata>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <SignedInfo>
+            <CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+            <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+            <Reference>
+                <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                <DigestValue></DigestValue>
+            </Reference>            
+        </SignedInfo>
+        <SignatureValue></SignatureValue>
+        <KeyInfo>
+            <X509Data>
+                <X509Certificate>base64 encoded cert would go here</X509Certificate>
+            </X509Data>
+        </KeyInfo>
+    </Signature>
+</SignedServiceMetadata>

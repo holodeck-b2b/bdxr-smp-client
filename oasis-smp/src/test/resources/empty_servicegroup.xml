@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ServiceGroup xmlns="http://docs.oasis-open.org/bdxr/ns/SMP/2016/05"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/bdxr/ns/SMP/2016/05 ../../main/xsd/bdx-smp-201605.xsd">
+    <ParticipantIdentifier scheme="urn:oasis:tc:ebcore:partyid-type:unregistered">holodeckb2b-test</ParticipantIdentifier>
+    <ServiceMetadataReferenceCollection/>
+</ServiceGroup>

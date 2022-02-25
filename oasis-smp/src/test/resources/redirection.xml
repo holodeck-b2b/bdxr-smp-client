@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ServiceMetadata xmlns="http://docs.oasis-open.org/bdxr/ns/SMP/2016/05"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/bdxr/ns/SMP/2016/05 ../../main/resources/xsd/bdx-smp-201605.xsd">
+    <Redirect href="http://link.to.new.smp">
+        <CertificateUID>Will be ignored</CertificateUID>
+    </Redirect>
+</ServiceMetadata>

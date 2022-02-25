@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<se:ServiceGroup xmlns:sma="http://docs.oasis-open.org/bdxr/ns/SMP/2/AggregateComponents"
+ xmlns:smb="http://docs.oasis-open.org/bdxr/ns/SMP/2/BasicComponents"
+ xmlns:se="http://docs.oasis-open.org/bdxr/ns/SMP/2/ServiceGroup"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://docs.oasis-open.org/bdxr/ns/SMP/2/ServiceGroup file:/Users/safi/Development/bdxr-smp-client/oasis-smp2/src/main/resources/xsd/ServiceGroup-2.0.xsd">
+    <smb:ParticipantID schemeID="urn:oasis:tc:ebcore:partyid-type:unregistered">holodeckb2b-test</smb:ParticipantID>
+    <sma:ServiceReference>
+        <smb:ID schemeID="bdx-docid-qns">urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2023</smb:ID>
+        <sma:Process>
+            <smb:ID>urn:cen.eu:en16931:2023</smb:ID>
+            <smb:RoleID>Buyer</smb:RoleID>
+        </sma:Process>
+    </sma:ServiceReference>
+    <sma:ServiceReference>
+        <smb:ID schemeID="bdx-docid-qns">urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017</smb:ID>
+        <sma:Process>
+            <smb:ID>urn:cen.eu:en16931:2017</smb:ID>
+        </sma:Process>
+        <sma:Process>
+            <smb:ID>urn:cen.eu:en16931:2018</smb:ID>
+        </sma:Process>        
+    </sma:ServiceReference>
+</se:ServiceGroup>
