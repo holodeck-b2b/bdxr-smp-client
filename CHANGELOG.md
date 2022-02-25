@@ -2,10 +2,22 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## 2.0.0
+## 3.0.0
 ##### Unreleased
+* Methods on `ISMPClient` interface to get all _ServiceMetadata_ on a specific Service and _ServiceGroup_ of a
+  Participant
+* API for caching of query results, both locally and based on caching mechanism as defines in the OASIS SMP version 2.0
+  standard
+* Configurable number of maximum redirections to follow before throwing an exception
+* Test cases for the result processors
 
-**NOTE:** The code of this project was originally contained in the the [BDXR-Common](https://github.com/holodeck-b2b/bdxr-common) project. 
+##### Changed
+* Added _client_ to package names, i.e. `org.holodeckb2b.bdxr.smp.client`
+
+## 2.0.0
+##### 2021-04-15
+
+**NOTE:** The code of this project was originally contained in the the [BDXR-Common](https://github.com/holodeck-b2b/bdxr-common) project.
 To create a beter separation between generic and SMP client specific code however the SMP client code was split off into the current project.
 Therefore the initial version number for this project is set to the next major version of the original project and the change log also continues from the original project.
 
@@ -16,12 +28,12 @@ Therefore the initial version number for this project is set to the next major v
 * Test cases for the SMP Client
 
 ### Changed
+* Split SMP data model definition and default implementation into separate project
+  [BDXR-Common](https://github.com/holodeck-b2b/bdxr-common) project
 * BDXL lookup now follows NAPTR replacements and does directly use URL of regexp
 * Consistent typing of URL information elements.
-* Generalised `org.holodeckb2b.bdxr.smp.impl.BDXLLocator` by parameterising the 
-  NAPTR service name to use for finding the record holding the SMP URL. 
-* Refactored package structure to have a better separation between API and implementations. 
-  Moved reference implementations of locators to sub projects.
+* Generalised `org.holodeckb2b.bdxr.smp.impl.BDXLLocator` by parameterising the
+  NAPTR service name to use for finding the record holding the SMP URL.
 
 ### Fixed
 * Incorrect handling of redirect URL in the SMP Client.
@@ -39,10 +51,10 @@ Therefore the initial version number for this project is set to the next major v
 * Example client for looking up SMP registrations in the CEF connectivity test environment
 
 ### Fixed
-* Incorrect host name generation for executing request in the PEPPOL network   
+* Incorrect host name generation for executing request in the PEPPOL network
 
 ## 1.0.0
 ##### 2018-09-19
 ### Added
-* Initial release. 
+* Initial release.
 
