@@ -18,7 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ##### 2021-04-15
 
 **NOTE:** The code of this project was originally contained in the the [BDXR-Common](https://github.com/holodeck-b2b/bdxr-common) project.
-To create a beter separation between generic and SMP client specific code however the SMP client code was split off into the current project.
+To create a beter separation between generic and SMP client specific code, the SMP client code was split off into the current project.
 Therefore the initial version number for this project is set to the next major version of the original project and the change log also continues from the original project.
 
 ### Added
@@ -30,14 +30,14 @@ Therefore the initial version number for this project is set to the next major v
 ### Changed
 * Split SMP data model definition and default implementation into separate project
   [BDXR-Common](https://github.com/holodeck-b2b/bdxr-common) project
-* BDXL lookup now follows NAPTR replacements and does directly use URL of regexp
-* Consistent typing of URL information elements.
+* BDXL lookup now follows NAPTR replacements and directly uses URL of regexp
+* Consistent typing of URL information elements
 * Generalised `org.holodeckb2b.bdxr.smp.impl.BDXLLocator` by parameterising the
-  NAPTR service name to use for finding the record holding the SMP URL.
+  NAPTR service name to use for finding the record holding the SMP URL
 
 ### Fixed
-* Incorrect handling of redirect URL in the SMP Client.
-* Only verify the first signature on the SMP response document itself.
+* Incorrect handling of redirect URL in the SMP Client
+* Only verify the first signature on the SMP response document itself
 
 ### Removed
 * Generic datamodel classes are now located in the [BDXR-Common](https://github.com/holodeck-b2b/bdxr-common) project
