@@ -9,8 +9,8 @@
 	<packaging>pom</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.9</maven.compiler.source>
+		<maven.compiler.target>1.9</maven.compiler.target>
 	</properties>
 	<name>Holodeck SMP Client: Parent project</name>
 	<description>This is the parent project for creating an SMP Client based on the BDXL and SMP specifications
