@@ -4,13 +4,22 @@
  */
 package org.holodeckb2b.bdxr.smp.client.impl.oasis_smp2;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.FileInputStream;
 import java.net.URL;
 import java.security.cert.X509Certificate;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Set;
+
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
 import org.holodeckb2b.bdxr.smp.datamodel.Certificate;
 import org.holodeckb2b.bdxr.smp.datamodel.EndpointInfo;
@@ -25,12 +34,6 @@ import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessInfoImpl;
 import org.holodeckb2b.commons.security.CertificateUtils;
 import org.holodeckb2b.commons.testing.TestUtils;
 import org.holodeckb2b.commons.util.Utils;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -106,8 +109,8 @@ public class ServiceMetadataProcessorTest {
 		EndpointInfo ep = pg.getEndpoints().iterator().next();
 		assertEquals("bdxr-transport-ebms3-as4-v1p0", ep.getTransportProfile());
 		assertEquals(new URL("https://ap.sample.holodeck-b2b.org/"), ep.getEndpointURL());
-		assertEquals(Instant.parse("2022-02-24T00:00:00+01:00"), ep.getServiceActivationDate().toInstant());
-		assertEquals(Instant.parse("2024-01-01T00:00:00+01:00"), ep.getServiceExpirationDate().toInstant());
+		assertEquals(Instant.parse("2022-02-23T23:00:00Z"), ep.getServiceActivationDate().toInstant());
+		assertEquals(Instant.parse("2023-12-31T23:00:00Z"), ep.getServiceExpirationDate().toInstant());
 		assertEquals("Only defined for testing of SMP client" , ep.getDescription());
 		assertEquals("sander at holodeck-b2b.org" , ep.getContactInfo());
 		assertEquals(1, ep.getCertificates().size());
@@ -153,8 +156,8 @@ public class ServiceMetadataProcessorTest {
 				for(EndpointInfo ep : pg.getEndpoints()) {
 					if ("bdxr-transport-ebms3-as4-v1p0".equals(ep.getTransportProfile())) {
 						assertEquals(new URL("https://ap.sample.holodeck-b2b.org/"), ep.getEndpointURL());
-						assertEquals(Instant.parse("2022-02-24T00:00:00+01:00"), ep.getServiceActivationDate().toInstant());
-						assertEquals(Instant.parse("2024-01-01T00:00:00+01:00"), ep.getServiceExpirationDate().toInstant());
+						assertEquals(Instant.parse("2022-02-23T23:00:00Z"), ep.getServiceActivationDate().toInstant());
+						assertEquals(Instant.parse("2023-12-31T23:00:00Z"), ep.getServiceExpirationDate().toInstant());
 						assertEquals("Only defined for testing of SMP client" , ep.getDescription());
 						assertEquals("sander at holodeck-b2b.org" , ep.getContactInfo());
 						assertEquals(2, ep.getCertificates().size());
@@ -171,7 +174,7 @@ public class ServiceMetadataProcessorTest {
 						assertEquals("old-transport-protocol", ep.getTransportProfile());
 						assertEquals(new URL("https://ap.sample.holodeck-b2b.org/old"), ep.getEndpointURL());
 						assertNull(ep.getServiceActivationDate());
-						assertEquals(Instant.parse("2022-08-01T00:00:00+01:00"), ep.getServiceExpirationDate().toInstant());
+						assertEquals(Instant.parse("2022-07-31T23:00:00Z"), ep.getServiceExpirationDate().toInstant());
 						assertEquals("Only defined for testing of SMP client" , ep.getDescription());
 						assertEquals("sander at holodeck-b2b.org" , ep.getContactInfo());
 						assertEquals(1, ep.getCertificates().size());
@@ -189,7 +192,7 @@ public class ServiceMetadataProcessorTest {
 				assertEquals("old-transport-protocol", ep.getTransportProfile());
 				assertEquals(new URL("https://ap.sample.holodeck-b2b.org/old"), ep.getEndpointURL());
 				assertNull(ep.getServiceActivationDate());
-				assertEquals(Instant.parse("2022-05-01T00:00:00+01:00"), ep.getServiceExpirationDate().toInstant());
+				assertEquals(Instant.parse("2022-04-30T23:00:00Z"), ep.getServiceExpirationDate().toInstant());
 				assertEquals("Only defined for testing of SMP client" , ep.getDescription());
 				assertEquals("sander at holodeck-b2b.org" , ep.getContactInfo());
 				assertTrue(Utils.isNullOrEmpty(ep.getCertificates()));

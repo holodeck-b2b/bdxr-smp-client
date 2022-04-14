@@ -4,13 +4,24 @@
  */
 package org.holodeckb2b.bdxr.smp.client.impl.oasis_smp1;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.io.FileInputStream;
 import java.net.URL;
 import java.security.cert.X509Certificate;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.Iterator;
+
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
 import org.holodeckb2b.bdxr.smp.datamodel.EndpointInfo;
 import org.holodeckb2b.bdxr.smp.datamodel.EndpointInfoV1;
@@ -26,14 +37,6 @@ import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessIdentifierImpl;
 import org.holodeckb2b.commons.security.CertificateUtils;
 import org.holodeckb2b.commons.testing.TestUtils;
 import org.holodeckb2b.commons.util.Utils;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -78,7 +81,7 @@ public class OASISv1ResultProcessorTests {
 				assertFalse(ep.getBusinessLevelSignatureRequired());
 				assertEquals("none", ep.getMinimumAuthenticationLevel());
 				assertEquals(Instant.parse("2021-02-24T10:38:23.888Z"), ep.getServiceActivationDate().toInstant());
-				assertEquals(Instant.parse("2024-01-01T01:00:00.000+01:00"), ep.getServiceExpirationDate().toInstant());
+				assertEquals(Instant.parse("2024-01-01T00:00:00.000Z"), ep.getServiceExpirationDate().toInstant());
 				assertFalse(Utils.isNullOrEmpty(ep.getCertificates()));
 				assertEquals(cert, ep.getCertificates().iterator().next().getX509Cert());
 				assertEquals("Only defined for testing of SMP client", ep.getDescription());
@@ -95,7 +98,7 @@ public class OASISv1ResultProcessorTests {
 					if ("bdxr-transport-ebms3-as4-v14p0".equals(ep.getTransportProfile())) {
 						assertEquals(new URL("https://ap.sample.holodeck-b2b.org/"), ep.getEndpointURL());
 						assertNull(ep.getServiceActivationDate());
-						assertEquals(Instant.parse("2022-07-01T01:00:00.000+01:00"), ep.getServiceExpirationDate().toInstant());
+						assertEquals(Instant.parse("2022-07-01T00:00:00.000Z"), ep.getServiceExpirationDate().toInstant());
 						assertEquals("Old profile", ep.getDescription());
 					} else if ("bdxr-transport-ebms3-as4-v15p0".equals(ep.getTransportProfile())) {
 						assertEquals(new URL("https://ap2.sample.holodeck-b2b.org/"), ep.getEndpointURL());
