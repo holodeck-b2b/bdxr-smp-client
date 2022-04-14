@@ -35,7 +35,6 @@ import org.holodeckb2b.bdxr.smp.datamodel.ServiceMetadata;
 import org.holodeckb2b.bdxr.smp.datamodel.SignedQueryResult;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.IdentifierImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessIdentifierImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.util.Comparator;
 import org.holodeckb2b.commons.security.CertificateUtils;
 import org.holodeckb2b.commons.testing.TestUtils;
 import org.holodeckb2b.commons.util.Utils;
@@ -74,18 +73,16 @@ public class PEPPOLResultProcessorTests {
 
 		ServiceMetadata smd = (ServiceMetadata)qr;
 
-		assertTrue(Comparator.equalIDs(
-								new IdentifierImpl("holodeckb2b-test", "urn:oasis:tc:ebcore:partyid-type:unregistered"),
-								smd.getParticipantId()));
-		assertTrue(Comparator.equalIDs(
-								new IdentifierImpl("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017", "busdox-docid-qns"),
-								smd.getServiceId()));
+		assertEquals(new IdentifierImpl("holodeckb2b-test", "urn:oasis:tc:ebcore:partyid-type:unregistered"),
+					smd.getParticipantId());
+		assertEquals(new IdentifierImpl("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017", "busdox-docid-qns"),
+					smd.getServiceId());
 
 		assertEquals(2, smd.getProcessMetadata().size());
 		for (ProcessGroup pg : smd.getProcessMetadata()) {
 			assertFalse(Utils.isNullOrEmpty(pg.getProcessInfo()));
 			ProcessIdentifier procId = (ProcessIdentifier) pg.getProcessInfo().iterator().next().getProcessId();
-			if (Comparator.equalProcIDs(new ProcessIdentifierImpl("urn:cen.eu:en16931:2017"), procId)) {
+			if (procId.equals(new ProcessIdentifierImpl("urn:cen.eu:en16931:2017"))) {
 				assertEquals(1, pg.getEndpoints().size());
 				EndpointInfoV1 ep = (EndpointInfoV1) pg.getEndpoints().iterator().next();
 				assertEquals("bdxr-transport-ebms3-as4-v1p0", ep.getTransportProfile());
@@ -98,7 +95,7 @@ public class PEPPOLResultProcessorTests {
 				assertEquals(cert, ep.getCertificates().iterator().next().getX509Cert());
 				assertEquals("Only defined for testing of SMP client", ep.getDescription());
 				assertEquals("sander at holodeck-b2b.org", ep.getContactInfo());
-			} else if (Comparator.equalProcIDs(new ProcessIdentifierImpl("urn:cen.eu:en16931:2023"), procId)) {
+			} else if (procId.equals(new ProcessIdentifierImpl("urn:cen.eu:en16931:2023"))) {
 				assertEquals(2, pg.getEndpoints().size());
 				for(EndpointInfo ep : pg.getEndpoints()) {
 					assertTrue(ep instanceof EndpointInfoV1);
@@ -143,12 +140,10 @@ public class PEPPOLResultProcessorTests {
 
 		ServiceMetadata smd = (ServiceMetadata)qr;
 
-		assertTrue(Comparator.equalIDs(
-								new IdentifierImpl("holodeckb2b-test", "urn:oasis:tc:ebcore:partyid-type:unregistered"),
-								smd.getParticipantId()));
-		assertTrue(Comparator.equalIDs(
-								new IdentifierImpl("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017", "busdox-docid-qns"),
-								smd.getServiceId()));
+		assertEquals(new IdentifierImpl("holodeckb2b-test", "urn:oasis:tc:ebcore:partyid-type:unregistered"),
+					smd.getParticipantId());
+		assertEquals(new IdentifierImpl("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017", "busdox-docid-qns"),
+					smd.getServiceId());
 
 		assertEquals(1, smd.getProcessMetadata().size());
 		Iterator<? extends ProcessGroup> pgs = smd.getProcessMetadata().iterator();
@@ -156,7 +151,7 @@ public class PEPPOLResultProcessorTests {
 
 		assertFalse(Utils.isNullOrEmpty(pg.getProcessInfo()));
 		ProcessIdentifier procId = (ProcessIdentifier) pg.getProcessInfo().iterator().next().getProcessId();
-		assertTrue(Comparator.equalProcIDs(new ProcessIdentifierImpl("urn:cen.eu:en16931:2017"), procId));
+		assertEquals(new ProcessIdentifierImpl("urn:cen.eu:en16931:2017"), procId);
 		assertEquals(1, pg.getEndpoints().size());
 		EndpointInfoV1 ep = (EndpointInfoV1) pg.getEndpoints().iterator().next();
 		assertEquals("bdxr-transport-ebms3-as4-v1p0", ep.getTransportProfile());
@@ -185,12 +180,10 @@ public class PEPPOLResultProcessorTests {
 		assertTrue(qr instanceof ServiceMetadata);
 		ServiceMetadata smd = (ServiceMetadata)qr;
 
-		assertTrue(Comparator.equalIDs(
-								new IdentifierImpl("holodeckb2b-test", "urn:oasis:tc:ebcore:partyid-type:unregistered"),
-								smd.getParticipantId()));
-		assertTrue(Comparator.equalIDs(
-								new IdentifierImpl("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017", "busdox-docid-qns"),
-								smd.getServiceId()));
+		assertEquals(new IdentifierImpl("holodeckb2b-test", "urn:oasis:tc:ebcore:partyid-type:unregistered"),
+					smd.getParticipantId());
+		assertEquals(new IdentifierImpl("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017", "busdox-docid-qns"),
+					smd.getServiceId());
 
 		assertEquals(1, smd.getProcessMetadata().size());
 		Iterator<? extends ProcessGroup> pgs = smd.getProcessMetadata().iterator();
@@ -235,9 +228,8 @@ public class PEPPOLResultProcessorTests {
 		assertTrue(qr instanceof ServiceGroupV1);
 		ServiceGroupV1 sg = (ServiceGroupV1) qr;
 
-		assertTrue(Comparator.equalIDs(
-								new IdentifierImpl("holodeckb2b-test", "urn:oasis:tc:ebcore:partyid-type:unregistered"),
-								sg.getParticipantId()));
+		assertEquals(new IdentifierImpl("holodeckb2b-test", "urn:oasis:tc:ebcore:partyid-type:unregistered"),
+					sg.getParticipantId());
 
 		Collection<? extends URL> refs = sg.getServiceReferences();
 		assertEquals(3, refs.size());

@@ -4,7 +4,6 @@
  */
 package org.holodeckb2b.bdxr.smp.client.impl.oasis_smp2;
 
-import org.holodeckb2b.bdxr.smp.client.impl.oasis_smp2.ServiceMetadataProcessor;
 import java.io.FileInputStream;
 import java.net.URL;
 import java.security.cert.X509Certificate;
@@ -23,7 +22,6 @@ import org.holodeckb2b.bdxr.smp.datamodel.ServiceMetadata;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.IdentifierImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessIdentifierImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessInfoImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.util.Comparator;
 import org.holodeckb2b.commons.security.CertificateUtils;
 import org.holodeckb2b.commons.testing.TestUtils;
 import org.holodeckb2b.commons.util.Utils;
@@ -56,12 +54,10 @@ public class ServiceMetadataProcessorTest {
 
 		ServiceMetadata smd = (ServiceMetadata)qr;
 
-		assertTrue(Comparator.equalIDs(
-								new IdentifierImpl("holodeckb2b-test", "urn:oasis:tc:ebcore:partyid-type:unregistered"),
-								smd.getParticipantId()));
-		assertTrue(Comparator.equalIDs(
-								new IdentifierImpl("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017", "bdx-docid-qns"),
-								smd.getServiceId()));
+		assertEquals(new IdentifierImpl("holodeckb2b-test", "urn:oasis:tc:ebcore:partyid-type:unregistered"),
+					smd.getParticipantId());
+		assertEquals(new IdentifierImpl("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017", "bdx-docid-qns"),
+					smd.getServiceId());
 
 		assertEquals(1, smd.getProcessMetadata().size());
 		ProcessGroup pg = smd.getProcessMetadata().iterator().next();
@@ -92,21 +88,19 @@ public class ServiceMetadataProcessorTest {
 
 		ServiceMetadata smd = (ServiceMetadata)qr;
 
-		assertTrue(Comparator.equalIDs(
-								new IdentifierImpl("holodeckb2b-test", "urn:oasis:tc:ebcore:partyid-type:unregistered"),
-								smd.getParticipantId()));
-		assertTrue(Comparator.equalIDs(
-								new IdentifierImpl("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017", "bdx-docid-qns"),
-								smd.getServiceId()));
+		assertEquals(new IdentifierImpl("holodeckb2b-test", "urn:oasis:tc:ebcore:partyid-type:unregistered"),
+					smd.getParticipantId());
+		assertEquals(new IdentifierImpl("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017", "bdx-docid-qns"),
+					smd.getServiceId());
 
 		assertEquals(1, smd.getProcessMetadata().size());
 		ProcessGroup pg = smd.getProcessMetadata().iterator().next();
 
 		assertEquals(1, pg.getProcessInfo().size());
 		ProcessInfo pi = pg.getProcessInfo().iterator().next();
-		assertTrue(Comparator.equalProcIDs(new ProcessIdentifierImpl("urn:cen.eu:en16931:2017"), pi.getProcessId()));
+		assertEquals(new ProcessIdentifierImpl("urn:cen.eu:en16931:2017"), pi.getProcessId());
 		assertEquals(1, pi.getRoles().size());
-		assertTrue(Comparator.equalIDs(new IdentifierImpl("Buyer"), pi.getRoles().iterator().next()));
+		assertEquals(new IdentifierImpl("Buyer"), pi.getRoles().iterator().next());
 
 		assertEquals(1, pg.getEndpoints().size());
 		EndpointInfo ep = pg.getEndpoints().iterator().next();
@@ -140,12 +134,10 @@ public class ServiceMetadataProcessorTest {
 
 		ServiceMetadata smd = (ServiceMetadata)qr;
 
-		assertTrue(Comparator.equalIDs(
-								new IdentifierImpl("holodeckb2b-test", "urn:oasis:tc:ebcore:partyid-type:unregistered"),
-								smd.getParticipantId()));
-		assertTrue(Comparator.equalIDs(
-								new IdentifierImpl("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017", "bdx-docid-qns"),
-								smd.getServiceId()));
+		assertEquals(new IdentifierImpl("holodeckb2b-test", "urn:oasis:tc:ebcore:partyid-type:unregistered"),
+					smd.getParticipantId());
+		assertEquals(new IdentifierImpl("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017", "bdx-docid-qns"),
+					smd.getServiceId());
 
 		assertEquals(2, smd.getProcessMetadata().size());
 
@@ -154,9 +146,8 @@ public class ServiceMetadataProcessorTest {
 								.anyMatch(pi -> "urn:cen.eu:en16931:2017".equals(pi.getProcessId().getValue()))) {
 
 				assertEquals(2, pg.getProcessInfo().size());
-				assertTrue(pg.getProcessInfo().parallelStream().anyMatch(pi ->
-						Comparator.equalProcessInfos(new ProcessInfoImpl(new ProcessIdentifierImpl("urn:cen.eu:en16931:2023"), Set.of(new IdentifierImpl("Buyer")), null), pi)
-				));
+				assertTrue(pg.getProcessInfo().contains(
+						new ProcessInfoImpl(new ProcessIdentifierImpl("urn:cen.eu:en16931:2023"), Set.of(new IdentifierImpl("Buyer")), null)));
 
 				assertEquals(2, pg.getEndpoints().size());
 				for(EndpointInfo ep : pg.getEndpoints()) {
@@ -191,8 +182,8 @@ public class ServiceMetadataProcessorTest {
 				}
 			} else {
 				assertEquals(1, pg.getProcessInfo().size());
-				assertTrue(Comparator.equalProcessInfos(new ProcessInfoImpl(new ProcessIdentifierImpl("urn:cen.eu:en16931:2014"), null),
-														pg.getProcessInfo().iterator().next()));
+				assertEquals(new ProcessInfoImpl(new ProcessIdentifierImpl("urn:cen.eu:en16931:2014"), null),
+							 pg.getProcessInfo().iterator().next());
 				assertEquals(1, pg.getEndpoints().size());
 				EndpointInfo ep = pg.getEndpoints().iterator().next();
 				assertEquals("old-transport-protocol", ep.getTransportProfile());
@@ -219,12 +210,10 @@ public class ServiceMetadataProcessorTest {
 
 		ServiceMetadata smd = (ServiceMetadata)qr;
 
-		assertTrue(Comparator.equalIDs(
-								new IdentifierImpl("holodeckb2b-test", "urn:oasis:tc:ebcore:partyid-type:unregistered"),
-								smd.getParticipantId()));
-		assertTrue(Comparator.equalIDs(
-								new IdentifierImpl("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017", "bdx-docid-qns"),
-								smd.getServiceId()));
+		assertEquals(new IdentifierImpl("holodeckb2b-test", "urn:oasis:tc:ebcore:partyid-type:unregistered"),
+					smd.getParticipantId());
+		assertEquals(new IdentifierImpl("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017", "bdx-docid-qns"),
+					smd.getServiceId());
 
 		assertEquals(1, smd.getProcessMetadata().size());
 		ProcessGroup pg = smd.getProcessMetadata().iterator().next();
@@ -245,12 +234,10 @@ public class ServiceMetadataProcessorTest {
 		assertTrue(qr instanceof ServiceMetadata);
 		ServiceMetadata smd = (ServiceMetadata)qr;
 
-		assertTrue(Comparator.equalIDs(
-								new IdentifierImpl("holodeckb2b-test", "urn:oasis:tc:ebcore:partyid-type:unregistered"),
-								smd.getParticipantId()));
-		assertTrue(Comparator.equalIDs(
-								new IdentifierImpl("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017", "bdx-docid-qns"),
-								smd.getServiceId()));
+		assertEquals(new IdentifierImpl("holodeckb2b-test", "urn:oasis:tc:ebcore:partyid-type:unregistered"),
+					smd.getParticipantId());
+		assertEquals(new IdentifierImpl("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017", "bdx-docid-qns"),
+					smd.getServiceId());
 
 		assertEquals(2, smd.getProcessMetadata().size());
 

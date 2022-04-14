@@ -35,7 +35,6 @@ import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessIdentifierImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessInfoImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.RedirectionV2Impl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ServiceMetadataImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.util.Comparator;
 import org.holodeckb2b.brdx.smp.testhelpers.MockRequestExecutor;
 import org.holodeckb2b.brdx.smp.testhelpers.MockResultProcessor;
 import org.holodeckb2b.commons.util.Utils;
@@ -74,8 +73,7 @@ class SMPClientGetEndpointTests {
 
 		assertFalse(Utils.isNullOrEmpty(endpoints));
 		assertEquals(2, endpoints.size());
-		assertTrue(endpoints.stream().allMatch(ep -> Comparator.equalEndpoints(ep, ep1)
-													 || Comparator.equalEndpoints(ep, ep2)));
+		assertTrue(endpoints.stream().allMatch(ep -> ep.equals(ep1) || ep.equals(ep2)));
 	}
 
 	@Test
@@ -101,7 +99,7 @@ class SMPClientGetEndpointTests {
 
 		assertFalse(Utils.isNullOrEmpty(endpoints));
 		assertEquals(1, endpoints.size());
-		assertTrue(Comparator.equalEndpoints(endpoints.iterator().next(), ep2));
+		assertTrue(endpoints.iterator().next().equals(ep2));
 	}
 
 	@Test
@@ -131,7 +129,7 @@ class SMPClientGetEndpointTests {
 
 		assertFalse(Utils.isNullOrEmpty(endpoints));
 		assertEquals(1, endpoints.size());
-		assertTrue(Comparator.equalEndpoints(endpoints.iterator().next(), ep2));
+		assertTrue(endpoints.iterator().next().equals(ep2));
 	}
 
 	@Test
@@ -161,7 +159,7 @@ class SMPClientGetEndpointTests {
 
 		assertFalse(Utils.isNullOrEmpty(endpoints));
 		assertEquals(1, endpoints.size());
-		assertTrue(Comparator.equalEndpoints(endpoints.iterator().next(), ep1));
+		assertTrue(endpoints.iterator().next().equals(ep1));
 	}
 
 	@Test
@@ -307,8 +305,7 @@ class SMPClientGetEndpointTests {
 
 		assertFalse(Utils.isNullOrEmpty(endpoints));
 		assertEquals(2, endpoints.size());
-		assertTrue(endpoints.stream().allMatch(ep -> Comparator.equalEndpoints(ep, ep1)
-													 || Comparator.equalEndpoints(ep, ep2)));
+		assertTrue(endpoints.stream().allMatch(ep -> ep.equals(ep1) || ep.equals(ep2)));
 	}
 
 	@Test
@@ -353,8 +350,7 @@ class SMPClientGetEndpointTests {
 
 		assertFalse(Utils.isNullOrEmpty(endpoints));
 		assertEquals(2, endpoints.size());
-		assertTrue(endpoints.stream().allMatch(ep -> Comparator.equalEndpoints(ep, ep1)
-													 || Comparator.equalEndpoints(ep, ep2)));
+		assertTrue(endpoints.stream().allMatch(ep -> ep.equals(ep1) || ep.equals(ep2)));
 	}
 
 

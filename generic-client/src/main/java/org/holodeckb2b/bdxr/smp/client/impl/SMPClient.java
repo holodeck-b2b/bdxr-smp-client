@@ -26,6 +26,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.holodeckb2b.bdxr.smp.client.api.ICachedResult;
@@ -45,7 +46,6 @@ import org.holodeckb2b.bdxr.smp.datamodel.RedirectionV2;
 import org.holodeckb2b.bdxr.smp.datamodel.ServiceGroup;
 import org.holodeckb2b.bdxr.smp.datamodel.ServiceMetadata;
 import org.holodeckb2b.bdxr.smp.datamodel.SignedQueryResult;
-import org.holodeckb2b.bdxr.smp.datamodel.util.Comparator;
 import org.holodeckb2b.commons.Pair;
 import org.holodeckb2b.commons.util.Utils;
 
@@ -161,25 +161,25 @@ public class SMPClient implements ISMPClient {
 			List<? extends ProcessGroup> pg = smd.getProcessMetadata().parallelStream()
 								.filter(pl -> Utils.isNullOrEmpty(pl.getProcessInfo())
 										|| pl.getProcessInfo().parallelStream()
-												.anyMatch(pi -> Comparator.equalProcIDs(pi.getProcessId(), processId)
+												.anyMatch(pi -> pi.getProcessId().equals(processId)
 														&& (role == null || Utils.isNullOrEmpty(pi.getRoles())
-																|| pi.getRoles().stream()
-																		.anyMatch(r -> Comparator.equalIDs(r, role)))))
-								.toList();
+															|| pi.getRoles().stream()
+																		.anyMatch(r -> r.equals(role)))))
+								.collect(Collectors.toList());
 			/* The list can still include multiple elements because some of them could map to all processes and/or have
 			 * different roles. Now we filter out the specific ones that match to the given process and role identifiers.
 			 */
 			if (pg.size() > 1) {
-				pg = pg.parallelStream().filter(g -> !Utils.isNullOrEmpty(g.getProcessInfo())).toList();
+				pg = pg.parallelStream().filter(g -> !Utils.isNullOrEmpty(g.getProcessInfo())).collect(Collectors.toList());
 				if (pg.size() > 1 && role != null)
 					pg = pg.parallelStream()
 						   .filter(g -> g.getProcessInfo().parallelStream()
-												.anyMatch(pi -> Comparator.equalProcIDs(pi.getProcessId(), processId)
+												.anyMatch(pi -> pi.getProcessId().equals(processId)
 															&& !Utils.isNullOrEmpty(pi.getRoles())
 															&& pi.getRoles().stream()
-																		.anyMatch(r -> Comparator.equalIDs(r, role)))
+																		.anyMatch(r -> r.equals(role)))
 															)
-							.toList();
+							.collect(Collectors.toList());
 			}
 			if (pg.isEmpty()) {
 				log.warn("Requested (participant, service, process, role) is not supported; ({},{},{},{})",

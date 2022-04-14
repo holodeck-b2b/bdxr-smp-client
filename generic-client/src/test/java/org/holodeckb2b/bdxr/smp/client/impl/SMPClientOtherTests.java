@@ -35,7 +35,6 @@ import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessInfoImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.RedirectionV2Impl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ServiceGroupV1Impl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ServiceMetadataImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.util.Comparator;
 import org.holodeckb2b.brdx.smp.testhelpers.MockRequestExecutor;
 import org.holodeckb2b.brdx.smp.testhelpers.MockResultProcessor;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -73,7 +72,7 @@ public class SMPClientOtherTests {
 										.getServiceMetadata(P_ID, SVC1_ID));
 
 		assertNotNull(rSmd);
-		assertTrue(Comparator.equalSvcMetadata(smd, rSmd));
+		assertEquals(smd, rSmd);
 
 		assertEquals("/" + P_ID.getURLEncoded() + "/services/" + SVC1_ID.getURLEncoded(),
 						reqExecutor.getRequestURLs().get(0).getPath());
@@ -121,7 +120,7 @@ public class SMPClientOtherTests {
 		assertTrue(reqExecutor.getRequestURLs().get(1).toString().startsWith(r.getNewSMPURL().toString()));
 
 		assertNotNull(rSmd);
-		assertTrue(Comparator.equalSvcMetadata(smd2, rSmd));
+		assertEquals(smd2, rSmd);
 	}
 
 	@Test
@@ -172,7 +171,7 @@ public class SMPClientOtherTests {
 												.getServiceGroup(P_ID));
 
 		assertNotNull(sg);
-		assertTrue(Comparator.equalSvcGroups(svcGrp, sg));
+		assertEquals(svcGrp, sg);
 
 		assertEquals("/" + P_ID.getURLEncoded(), reqExecutor.getRequestURLs().get(0).getPath());
 	}

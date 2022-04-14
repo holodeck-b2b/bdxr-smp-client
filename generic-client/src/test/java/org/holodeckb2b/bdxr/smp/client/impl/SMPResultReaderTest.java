@@ -27,10 +27,10 @@ import org.holodeckb2b.bdxr.smp.datamodel.ServiceMetadata;
 import org.holodeckb2b.bdxr.smp.datamodel.SignedQueryResult;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.IdentifierImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ServiceMetadataImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.util.Comparator;
 import org.holodeckb2b.brdx.smp.testhelpers.MockResultProcessor;
 import org.holodeckb2b.commons.testing.TestUtils;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -53,7 +53,7 @@ class SMPResultReaderTest {
 
 			assertFalse(smpData instanceof SignedQueryResult);
 			assertTrue(smpData instanceof ServiceMetadata);
-			assertTrue(Comparator.equalSvcMetadata(smd, (ServiceMetadata) smpData));
+			assertEquals(smd, (ServiceMetadata) smpData);
 		}
 	}
 
@@ -70,7 +70,7 @@ class SMPResultReaderTest {
 
 			assertTrue(smpData instanceof SignedQueryResult);
 			assertTrue(smpData instanceof ServiceMetadata);
-			assertTrue(Comparator.equalSvcMetadata(smd, (ServiceMetadata) smpData));
+			assertEquals(smd, (ServiceMetadata) smpData);
 		}
 	}
 
