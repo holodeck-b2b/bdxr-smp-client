@@ -64,8 +64,8 @@ public class PEPPOLSMPClient {
 		}
 
 		final Identifier participantId = new IdentifierImpl(args[0], "iso6523-actorid-upis");
-		final Identifier serviceId = new IdentifierImpl(args[1], "busdox-docid-qns");
-		final ProcessIdentifier processId = new ProcessIdentifierImpl(args[2], "cenbii-procid-ubl");
+		final Identifier serviceId = new DocumentID(args[1]);
+		final ProcessIdentifier processId = new ProcessID(args[2]);
 		String transportId = null;
 		if ("as2".equalsIgnoreCase(args[3]))
 			transportId = OPENPEPPOL_AS2_TRANSPORT_ID;

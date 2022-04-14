@@ -21,6 +21,7 @@ import java.net.URL;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.List;
+
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -29,6 +30,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.busdox.servicemetadata.publishing._1.EndpointType;
@@ -44,7 +46,9 @@ import org.holodeckb2b.bdxr.smp.client.api.ISMPResultProcessor;
 import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
 import org.holodeckb2b.bdxr.smp.datamodel.EndpointInfo;
 import org.holodeckb2b.bdxr.smp.datamodel.Extension;
+import org.holodeckb2b.bdxr.smp.datamodel.Identifier;
 import org.holodeckb2b.bdxr.smp.datamodel.ProcessGroup;
+import org.holodeckb2b.bdxr.smp.datamodel.ProcessIdentifier;
 import org.holodeckb2b.bdxr.smp.datamodel.QueryResult;
 import org.holodeckb2b.bdxr.smp.datamodel.Redirection;
 import org.holodeckb2b.bdxr.smp.datamodel.ServiceMetadata;
@@ -59,6 +63,8 @@ import org.holodeckb2b.bdxr.smp.datamodel.impl.RedirectionV1Impl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ServiceGroupV1Impl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ServiceMetadataImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.SignedServiceMetadataImpl;
+import org.holodeckb2b.bdxr.smp.peppol.DocumentID;
+import org.holodeckb2b.bdxr.smp.peppol.ProcessID;
 import org.holodeckb2b.commons.security.CertificateUtils;
 import org.holodeckb2b.commons.util.Utils;
 import org.w3c.dom.Document;
@@ -168,8 +174,13 @@ public class PEPPOLResultProcessor implements ISMPResultProcessor {
 			ServiceInformationType siXML = smdXML.getServiceInformation();
 			smd.setParticipantId(new IdentifierImpl(siXML.getParticipantIdentifier().getValue(),
 													siXML.getParticipantIdentifier().getScheme()));
-			smd.setServiceId(new IdentifierImpl(siXML.getDocumentIdentifier().getValue(),
-												siXML.getDocumentIdentifier().getScheme()));
+			Identifier svcId;
+			String scheme = siXML.getDocumentIdentifier().getScheme();
+			if (DocumentID.BUSDOX_QNS.getSchemeId().equals(scheme)) 
+				svcId = new DocumentID(siXML.getDocumentIdentifier().getValue());
+			else 
+				svcId = new IdentifierImpl(siXML.getDocumentIdentifier().getValue(), scheme);
+			smd.setServiceId(svcId);
 			/* Convert the list of ProcessList/Process elements. Because in the PEPPOL spec each process in which the
 			 * service/document is used has its own list of endpoint it must be added as a ProcessGroup
 			 */
@@ -229,8 +240,16 @@ public class PEPPOLResultProcessor implements ISMPResultProcessor {
         final String procID = procInfoXML.getProcessIdentifier().getValue();
         if (NO_PROCESS_ID.equals(procID))
         	procInfo.setProcessId(new ProcessIdentifierImpl());
-        else
-        	procInfo.setProcessId(new ProcessIdentifierImpl(procID, procInfoXML.getProcessIdentifier().getScheme()));
+        else {
+			ProcessIdentifier procId;
+			String scheme = procInfoXML.getProcessIdentifier().getScheme();
+			if (ProcessID.CENBII.getSchemeId().equals(scheme)) 
+				procId = new ProcessID(procID);
+			else 
+				procId = new ProcessIdentifierImpl(procID, scheme);
+
+        	procInfo.setProcessId(procId);
+        }
         pg.addProcessInfo(procInfo);
 
         // Convert the Endpoint elements into object model
