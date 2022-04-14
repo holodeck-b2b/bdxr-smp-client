@@ -14,10 +14,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.holodeckb2b.bdxr.client.impl.peppol;
+package org.holodeckb2b.bdxr.smp.client.impl.peppol;
 
 
-import org.holodeckb2b.bdxr.client.impl.peppol.PEPPOLHostNameGenerator;
+import org.holodeckb2b.bdxr.smp.client.impl.peppol.PEPPOLHostNameGenerator;
 import org.holodeckb2b.bdxr.smp.client.api.IHostNameGenerator;
 import org.holodeckb2b.bdxr.smp.datamodel.Identifier;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.IdentifierImpl;

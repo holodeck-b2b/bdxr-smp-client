@@ -17,17 +17,18 @@
 package org.holodeckb2b.bdxr.smp.examples;
 
 import java.security.cert.X509Certificate;
-import org.holodeckb2b.bdxr.client.impl.peppol.PEPPOLHostNameGenerator;
-import org.holodeckb2b.bdxr.client.impl.peppol.PEPPOLResultProcessor;
-import org.holodeckb2b.bdxr.client.impl.peppol.SMLLocator;
 import org.holodeckb2b.bdxr.smp.client.api.ISMPClient;
 import org.holodeckb2b.bdxr.smp.client.api.SMPClientBuilder;
 import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
+import org.holodeckb2b.bdxr.smp.client.impl.peppol.PEPPOLHostNameGenerator;
+import org.holodeckb2b.bdxr.smp.client.impl.peppol.PEPPOLResultProcessor;
+import org.holodeckb2b.bdxr.smp.client.impl.peppol.SMLLocator;
 import org.holodeckb2b.bdxr.smp.datamodel.EndpointInfo;
 import org.holodeckb2b.bdxr.smp.datamodel.Identifier;
 import org.holodeckb2b.bdxr.smp.datamodel.ProcessIdentifier;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.IdentifierImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessIdentifierImpl;
+import org.holodeckb2b.bdxr.smp.peppol.DocumentID;
+import org.holodeckb2b.bdxr.smp.peppol.ProcessID;
 import org.holodeckb2b.commons.security.CertificateUtils;
 
 /**

@@ -14,9 +14,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.holodeckb2b.bdxr.client.impl.peppol;
+package org.holodeckb2b.bdxr.smp.client.impl.peppol;
 
-import org.holodeckb2b.bdxr.client.impl.peppol.PEPPOLResultProcessor;
 import java.io.FileInputStream;
 import java.net.URL;
 import java.security.cert.X509Certificate;
