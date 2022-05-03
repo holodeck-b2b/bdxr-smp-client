@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 3.0.0
 ##### Unreleased
+### Added
 * Methods on `ISMPClient` interface to get all _ServiceMetadata_ on a specific Service and _ServiceGroup_ of a
   Participant
 * API for caching of query results, both locally and based on caching mechanism as defines in the OASIS SMP version 2.0
@@ -11,7 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 * Configurable number of maximum redirections to follow before throwing an exception
 * Test cases for the result processors
 
-##### Changed
+### Changed
 * Added _client_ to package names, i.e. `org.holodeckb2b.bdxr.smp.client`
 
 ## 2.0.0
