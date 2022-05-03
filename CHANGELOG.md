@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 3.0.0
-##### Unreleased
+##### 2022-05-03
 ### Added
 * Methods on `ISMPClient` interface to get all _ServiceMetadata_ on a specific Service and _ServiceGroup_ of a
   Participant
