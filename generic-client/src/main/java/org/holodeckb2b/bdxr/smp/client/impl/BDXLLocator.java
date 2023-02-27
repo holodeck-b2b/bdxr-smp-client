@@ -1,16 +1,16 @@
 /*
  * Copyright (C) 2018 The Holodeck B2B Team
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -18,7 +18,6 @@ package org.holodeckb2b.bdxr.smp.client.impl;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.holodeckb2b.bdxr.smp.client.api.IHostNameGenerator;
@@ -27,7 +26,6 @@ import org.holodeckb2b.bdxr.smp.client.api.SMPLocatorException;
 import org.holodeckb2b.bdxr.smp.datamodel.Identifier;
 import org.xbill.DNS.Lookup;
 import org.xbill.DNS.NAPTRRecord;
-import org.xbill.DNS.Record;
 import org.xbill.DNS.TextParseException;
 import org.xbill.DNS.Type;
 
@@ -81,7 +79,7 @@ public class BDXLLocator implements ISMPLocator {
         	log.error("Could not retrieve SMP registration for participant ({}) due to DNS error: {}",
         			  participant.toString(), queryError.getMessage());
         	throw queryError;
-        }        
+        }
         if (smpURL == null) {
         	log.warn("Participant with identifier {}::{} not registered.", participant.getScheme(),
         			participant.getValue());
@@ -90,12 +88,12 @@ public class BDXLLocator implements ISMPLocator {
         log.debug("Found SMP URL for participant ({}) = {}", participant.toString(), smpURL.toString());
         return smpURL;
     }
-    
+
     /**
      * Retrieves the URL of the SMP registered from the U-NAPTR record of the given host name. As specified
-     * in <a href="https://tools.ietf.org/html/rfc4848">RFC4848</a> the U-NAPTR record can include a 
-     * "redirection" to another host name.  
-     * 
+     * in <a href="https://tools.ietf.org/html/rfc4848">RFC4848</a> the U-NAPTR record can include a
+     * "redirection" to another host name.
+     *
      * @param hostname initial host name to query for the SMP URL
      * @return	the SMP URL retrieved from the U-NAPTR record for the given host name or its replacement
      * @throws SMPLocatorException if the retrieved U-NAPTR record contains an invalid regexp
@@ -103,7 +101,7 @@ public class BDXLLocator implements ISMPLocator {
     private URL retrieveURL(final String hostname) throws SMPLocatorException {
         // Fetch all records of type NAPTR registered on hostname.
 		log.trace("Retrieving all NAPTR records for {}", hostname);
-        Record[] records = null;
+        org.xbill.DNS.Record[] records = null;
 		try {
 			records = new Lookup(hostname, Type.NAPTR).run();
 		} catch (TextParseException dnsQueryError) {
@@ -115,27 +113,27 @@ public class BDXLLocator implements ISMPLocator {
         	return null;
         }
         // Loop records found.
-        for (Record record : records) {
+        for (org.xbill.DNS.Record record : records) {
             // Simple cast possible because we only retrieved NAPTR records
             NAPTRRecord naptrRecord = (NAPTRRecord) record;
-            /* Handle those having the requested service: for BDXL we support only the records 
+            /* Handle those having the requested service: for BDXL we support only the records
              * with U flag which should contain a URL to the service or ones without flag which
-             * should redirect to another DNS entry that should queried for the service URL    
+             * should redirect to another DNS entry that should queried for the service URL
              */
             if (!naptrService.equals(naptrRecord.getService()))
             	continue;
-            
+
         	if ("U".equalsIgnoreCase(naptrRecord.getFlags())) {
                 log.trace("Found U-NAPTR record, retrieving URL");
                 /*
                  * As BDXL is based on U-NAPTR the regular expression in the NAPTR record must always
                  * be in the format "!.*!<URL>!" there is no need for evaluation and the URL part of
                  * the expression can be directly used.
-                 */ 
-                final String regexp = naptrRecord.getRegexp();                    
+                 */
+                final String regexp = naptrRecord.getRegexp();
                 final String[] parts = regexp != null ? regexp.split("!") : null;
                 try {
-                	return new URL(parts != null && parts.length > 2 ? parts[2] : null); 							
+                	return new URL(parts != null && parts.length > 2 ? parts[2] : null);
 				} catch (MalformedURLException e) {
 					log.error("Invalid U-NAPTR record: {}", regexp);
 					throw new SMPLocatorException("Invalid U-NAPTR record");
@@ -143,10 +141,10 @@ public class BDXLLocator implements ISMPLocator {
         	} else if ("".equalsIgnoreCase(naptrRecord.getFlags())) {
         		log.trace("Found replacement NAPTR record, requery with replacement");
         		return retrieveURL(naptrRecord.getReplacement().toString());
-        	}        
+        	}
         }
         // No U-NAPTR records found
     	log.debug("No U-NAPTR records for {} service found for {}", naptrService, hostname);
-    	return null;        
+    	return null;
     }
 }

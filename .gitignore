@@ -32,6 +32,7 @@ db/
 # IDE Config files   #
 ######################
 nb-configuration.xml
+nbactions.xml
 .project
 .settings/
 nbproject/

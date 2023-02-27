@@ -22,7 +22,7 @@
 	<parent>
 		<groupId>org.holodeckb2b.bdxr</groupId>
 		<artifactId>smp-client-parent</artifactId>
-		<version>3.0.0</version>
+		<version>3.0.1</version>
 	</parent>
 	<artifactId>generic-smp-client</artifactId>
 	<packaging>jar</packaging>
