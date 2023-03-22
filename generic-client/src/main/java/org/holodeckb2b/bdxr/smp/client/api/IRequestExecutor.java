@@ -1,14 +1,13 @@
 package org.holodeckb2b.bdxr.smp.client.api;
 
-import java.net.URI;
 import java.net.URL;
 
 /**
  * Defines the interface for the component responsible for executing the HTTP(S) request to the SMP server.
  * <p>Implementations can optimise the handling of connections, for example by using connection pooling, or implement
  * a specific authentication and/or trust mechanism. Implementations should ensure that they are thread safe, i.e.
- * the {@link #executeRequest(URI)} can be called multiple time, in parallel. Any initialisation that is needed should
- * be done before the executor is provided to the {@link SMPClientBuilder}.
+ * the {@link #executeRequest(java.net.URL, java.lang.String)} can be called multiple time, in parallel. Any
+ * initialisation that is needed should be done before the executor is provided to the {@link SMPClientBuilder}.
  *
  * @author Sander Fieten (sander at holodeck-b2b.org)
  */

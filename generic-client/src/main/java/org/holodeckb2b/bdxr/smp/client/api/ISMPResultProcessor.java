@@ -23,7 +23,7 @@ import org.w3c.dom.Document;
 
 /**
  * Defines the interface of the component responsible for processing an XML document that was received as a result of a
- * SMP request and transforming it into the object model defined in {@link oeg.holodeckb2b.bdxr.smp.datamodel}.
+ * SMP request and transforming it into the object model defined in {@link org.holodeckb2b.bdxr.smp.datamodel}.
  *
  * @author Sander Fieten (sander at holodeck-b2b.org)
  */

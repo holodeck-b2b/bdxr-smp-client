@@ -103,7 +103,7 @@ public class SMPClientBuilder {
 	 *
 	 * @param max the new maximum number of redirections
 	 * @return this builder
-	 * @since NEXT_VERSION
+	 * @since 3.0.0
 	 */
 	public SMPClientBuilder setMaxRedirections(int max) {
 		newClientConfig.setMaxRedirections(max);
@@ -116,7 +116,7 @@ public class SMPClientBuilder {
 	 *
 	 * @param cache the result cache implementation to use
 	 * @return this builder
-	 * @since NEXT_VERSION
+	 * @since 3.0.0
 	 */
 	public SMPClientBuilder setResultCache(IResultCache cache) {
 		newClientConfig.setResultCache(cache);
@@ -130,7 +130,7 @@ public class SMPClientBuilder {
 	 * the cache.
 	 *
 	 * @return this builder
-	 * @since NEXT_VERSION
+	 * @since 3.0.0
 	 */
 	public SMPClientBuilder enableLocalCaching() {
 		newClientConfig.useLocalCaching(true);
@@ -142,7 +142,7 @@ public class SMPClientBuilder {
 	 * <p>NOTE: As local caching is disabled by default this method is a bit redundant and only added for completeness.
 	 *
 	 * @return this builder
-	 * @since NEXT_VERSION
+	 * @since 3.0.0
 	 */
 	public SMPClientBuilder disableLocalCaching() {
 		newClientConfig.useLocalCaching(false);
@@ -153,11 +153,11 @@ public class SMPClientBuilder {
 	 * Sets the number of minutes that a query result from the local cache may be used before the server should be
 	 * queried again.
 	 * <p>NOTE: This method does not enable the local caching of results. That must be enabled explicitly by calling
-	 * {@link #useLocalCaching(boolean)}.
+	 * {@link #enableLocalCaching()}.
 	 *
 	 * @param maxTime number of minutes a cached result can be re-used, must be at least 1
 	 * @return this builder
-	 * @since NEXT_VERSION
+	 * @since 3.0.0
 	 */
 	public SMPClientBuilder setMaxLocalCacheTime(int maxTime) {
 		newClientConfig.setMaxLocalCacheTime(maxTime);

@@ -62,7 +62,7 @@ import org.xml.sax.SAXException;
  * Handles the processing of the <i>ServiceMetadata</i> XML as defined in the OASIS SMP version 2.0 specification.
  *
  * @author Sander Fieten (sander at holodeck-b2b.org)
- * @since  NEXT_VERSION
+ * @since  3.0.0
  */
 class ServiceMetadataProcessor {
     private static final Logger	log = LogManager.getLogger(ServiceMetadataProcessor.class);

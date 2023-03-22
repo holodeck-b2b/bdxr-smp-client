@@ -67,7 +67,7 @@ public interface ISMPClient {
      * @return	The endpoint meta-data if there exist endpoints for this participant, service and process,
      * 			an empty collection otherwise.
      * @throws SMPQueryException 	When an error occurs in the lookup of the SMP location or querying the SMP server
-	 * @since NEXT_VERSION	Result type is now a more generic collection of endpoints.
+	 * @since 3.0.0	Result type is now a more generic collection of endpoints.
      */
     Collection<? extends EndpointInfo> getEndpoints(final Identifier participantId,
 													final Identifier serviceId,
@@ -120,7 +120,7 @@ public interface ISMPClient {
 	 * 			an empty collection otherwise.
 	 * @throws SMPQueryException 	When an error occurs in the lookup of the SMP location or querying the SMP server
 	 * @since 2.0.0
-	 * @since NEXT_VERSION	Result type is now a more generic collection of endpoints.
+	 * @since 3.0.0	Result type is now a more generic collection of endpoints.
 	 */
 	Collection<? extends EndpointInfo> getEndpoints(final Identifier participantId,
 													final Identifier role,
@@ -134,7 +134,7 @@ public interface ISMPClient {
      * @param serviceId			Service Id
 	 * @return	The service meta-data returned by the SMP server, <code>null</code> if no result was available
 	 * @throws SMPQueryException	When an error occurs in the lookup of the SMP location or querying the SMP server
-	 * @since NEXT_VERSION
+	 * @since 3.0.0
 	 */
 	ServiceMetadata getServiceMetadata(final Identifier participantId, final Identifier serviceId)
 																							throws SMPQueryException;
@@ -145,7 +145,7 @@ public interface ISMPClient {
 	 * @param participantId		Participant's Id
 	 * @return	The service group meta-data returned by the SMP server, <code>null</code> if no result was available
 	 * @throws SMPQueryException	When an error occurs in the lookup of the SMP location or querying the SMP server
-	 * @since NEXT_VERSION
+	 * @since 3.0.0
 	 */
 	ServiceGroup getServiceGroup(final Identifier participantId) throws SMPQueryException;
 }

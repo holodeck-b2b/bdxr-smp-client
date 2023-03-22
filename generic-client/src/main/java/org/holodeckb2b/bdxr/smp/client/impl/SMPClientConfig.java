@@ -58,23 +58,23 @@ public class SMPClientConfig {
 	List<ISMPResultProcessor> processors;
 	/**
 	 * The maximum number of redirections that the SMP client should follow before ending the query process.
-	 * @since NEXT_VERSION
+	 * @since 3.0.0
 	 */
 	int	maxRedirects;
 	/**
 	 * The {@link IResultCache} implementation that should be used to temporarily store query results for re-use.
-	 * @since NEXT_VERSION
+	 * @since 3.0.0
 	 */
 	IResultCache	resultCache;
 	/**
 	 * Indicates whether the client should use local caching to reduce the number of HTTP requests.
-	 * @since NEXT_VERSION
+	 * @since 3.0.0
 	 */
 	boolean useLocalCaching;
 	/**
 	 * The number of minutes that a query result from the local cache may be used before the server should be queried
 	 * again.
-	 * @since NEXT_VERSION
+	 * @since 3.0.0
 	 */
 	int		maxLocalCacheTime;
 
@@ -114,7 +114,6 @@ public class SMPClientConfig {
 	 * the SMP queries.
 	 *
 	 * @param executor	The request executor implementation
-	 * @return this builder
 	 */
 	public void setRequestExecutor(IRequestExecutor executor) {
 		this.requestExecutor = executor;
@@ -187,10 +186,8 @@ public class SMPClientConfig {
 	}
 
 	/**
-	 * Sets the {@link ISMPResultProcessor} implementation that should be used for the given result namespace URI.
-	 * When there already exists a mapping for the given name space URI it will be replaced.
+	 * Adds a {@link ISMPResultProcessor} implementation.
 	 *
-	 * @param namespaceURI	String containing the name space URI
 	 * @param processor		The {@link ISMPResultProcessor} to use for result with the given namespace
 	 */
 	public void addProcessor(ISMPResultProcessor processor) {
@@ -215,7 +212,7 @@ public class SMPClientConfig {
 	 * Sets the maximum number of redirections that the SMP client should follow before ending the query process.
 	 *
 	 * @param max the new maximum number of redirections
-	 * @since NEXT_VERSION
+	 * @since 3.0.0
 	 */
 	public void setMaxRedirections(int max) {
 		this.maxRedirects = max;
@@ -224,8 +221,8 @@ public class SMPClientConfig {
 	/**
 	 * Gets the maximum number of redirections that the SMP client should follow before ending the query process.
 	 *
-	 * @returns the maximum number of redirections
-	 * @since NEXT_VERSION
+	 * @return the maximum number of redirections
+	 * @since 3.0.0
 	 */
 	public int getMaxRedirections() {
 		return this.maxRedirects;
@@ -236,7 +233,7 @@ public class SMPClientConfig {
 	 * The cache must already be configured and initialised.
 	 *
 	 * @param cache the result cache implementation to use
-	 * @since NEXT_VERSION
+	 * @since 3.0.0
 	 */
 	public void setResultCache(IResultCache cache) {
 		this.resultCache = cache;
@@ -246,7 +243,7 @@ public class SMPClientConfig {
 	 * Gets the {@link IResultCache} implementation that should be used to temporarily store query results for re-use.
 	 *
 	 * @return the result cache implementation to use
-	 * @since NEXT_VERSION
+	 * @since 3.0.0
 	 */
 	public IResultCache getResultCache() {
 		return this.resultCache;
@@ -257,7 +254,7 @@ public class SMPClientConfig {
 	 * enabled and if not set already, sets the maximum time a result may be cached to the default value of 15 minutes.
 	 *
 	 * @param cacheLocally <code>true</code> when the client should use local caching, <code>false</code> if not
-	 * @since NEXT_VERSION
+	 * @since 3.0.0
 	 */
 	public void useLocalCaching(boolean cacheLocally) {
 		this.useLocalCaching = cacheLocally;
@@ -272,7 +269,7 @@ public class SMPClientConfig {
 	 * {@link #useLocalCaching(boolean)}
 	 *
 	 * @param maxTime number of minutes a cached result can be re-used, must be at least 1
-	 * @since NEXT_VERSION
+	 * @since 3.0.0
 	 */
 	public void setMaxLocalCacheTime(int maxTime) {
 		if (maxTime < 1)

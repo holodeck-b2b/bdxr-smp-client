@@ -28,8 +28,8 @@ import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
 import org.holodeckb2b.commons.util.Utils;
 
 /**
- * Is the default implementation of {@link IRequestExecutor} and uses a standard {@link HTTPConnection} to execute the
- * SMP request.
+ * Is the default implementation of {@link IRequestExecutor} and uses a standard {@link HttpURLConnection} to execute
+ * the SMP request.
  *
  * @author Sander Fieten (sander at holodeck-b2b.org)
  */
