@@ -20,8 +20,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.holodeckb2b.bdxr</groupId>
-		<artifactId>smp-client-parent</artifactId>
+		<groupId>org.holodeckb2b.bdxr.smp.client</groupId>
+		<artifactId>parent</artifactId>
 		<version>3.0.1</version>
 	</parent>
 	<artifactId>generic-smp-client</artifactId>
@@ -30,7 +30,7 @@
 	<description>This project contains generic implementations to create SMP clients that use the SML/BDXL to locate the correct SMP server.</description>
     <dependencies>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>org.holodeckb2b.bdxr</groupId>
 			<artifactId>bdxr-common</artifactId>
 		</dependency>
 		<dependency>

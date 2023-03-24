@@ -2,16 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.holodeckb2b.bdxr</groupId>
-        <artifactId>smp-client-parent</artifactId>
+        <groupId>org.holodeckb2b.bdxr.smp.client</groupId>
+        <artifactId>parent</artifactId>
         <version>3.0.1</version>
     </parent>
-    <artifactId>peppol-smp</artifactId>
+    <artifactId>peppol-smp-client</artifactId>
     <packaging>jar</packaging>
     <name>Holodeck SMP Client: PEPPOL SMP</name>
     <description>
-        This project is used to create Java classes for processing the XML documents defined by the PEPPOL SMP
-        specification's XSD.
+        This project contains the Java classes needed to create a SMP client that can be used in the Peppol network.
+		It supports the lookup Participants in the Peppol SML and processing of the SMP response XML documents as
+		defined by the PEPPOL SMP specification's XSD.
     </description>
 	<dependencies>
 		<dependency>

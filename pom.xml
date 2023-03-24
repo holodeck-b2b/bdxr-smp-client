@@ -3,8 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.holodeckb2b.bdxr</groupId>
-	<artifactId>smp-client-parent</artifactId>
+	<groupId>org.holodeckb2b.bdxr.smp.client</groupId>
+	<artifactId>parent</artifactId>
 	<version>3.0.1</version>
 	<packaging>pom</packaging>
 	<properties>
@@ -14,7 +14,10 @@
 	</properties>
 	<name>Holodeck SMP Client: Parent project</name>
 	<description>This is the parent project for creating an SMP Client based on the BDXL and SMP specifications
-    developed by the OASIS BDXR Technical Committee and its predecessors developed within PEPPOL.</description>
+    developed by the OASIS BDXR Technical Committee and its predecessors developed within PEPPOL.
+	</description>
+	<inceptionYear>2018</inceptionYear>
+	<url>https://www.holodeck-b2b.org/</url>
 	<scm>
 		<url>https://github.com/holodeck-b2b/bdxr-smp-client</url>
 		<connection>scm:git:https://github.com/holodeck-b2b/bdxr-smp-client.git</connection>
@@ -52,14 +55,14 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>${project.groupId}</groupId>
+				<groupId>org.holodeckb2b.bdxr</groupId>
 				<artifactId>bdxr-common</artifactId>
 				<version>4.0.0</version>
 			</dependency>
  			<dependency>
 				<groupId>org.holodeckb2b.commons</groupId>
 				<artifactId>generic-utils</artifactId>
-				<version>1.1.1</version>
+				<version>1.2.1</version>
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
@@ -111,7 +114,7 @@
 			<dependency>
 				<groupId>org.holodeckb2b.commons</groupId>
 				<artifactId>generic-utils</artifactId>
-				<version>1.1.0</version>
+				<version>1.2.1</version>
 	            <type>test-jar</type>
 				<scope>test</scope>
 			</dependency>

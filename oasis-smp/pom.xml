@@ -4,16 +4,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.holodeckb2b.bdxr</groupId>
-		<artifactId>smp-client-parent</artifactId>
+		<groupId>org.holodeckb2b.bdxr.smp.client</groupId>
+		<artifactId>parent</artifactId>
 		<version>3.0.1</version>
 	</parent>
-	<artifactId>oasis-smp</artifactId>
+	<artifactId>oasis-smp-client</artifactId>
 	<packaging>jar</packaging>
 	<name>Holodeck SMP Client: OASIS v1 SMP</name>
 	<description>
-        This project is used to create Java classes for processing the XML documents defined by the OASIS SMP
-        specification's XSD.
+        This project contains the Java classes for processing of the SMP response XML documents as defined by the XSDs
+		from the OASIS SMP Standard verion 1.
     </description>
 	<dependencies>
 		<dependency>
