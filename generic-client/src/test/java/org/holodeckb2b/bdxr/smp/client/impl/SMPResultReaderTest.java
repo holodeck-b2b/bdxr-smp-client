@@ -20,7 +20,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.security.cert.X509Certificate;
-import org.holodeckb2b.bdxr.smp.client.api.ITrustValidator;
 import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
 import org.holodeckb2b.bdxr.smp.datamodel.QueryResult;
 import org.holodeckb2b.bdxr.smp.datamodel.ServiceMetadata;
@@ -96,12 +95,7 @@ class SMPResultReaderTest {
 
 		SMPClientConfig cfg = new SMPClientConfig();
 		cfg.addProcessor(new MockResultProcessor(TEST_XML_NS, respDoc, smd));
-		cfg.setTrustValidator(new ITrustValidator() {
-			@Override
-			public boolean isTrusted(X509Certificate certificate) throws SMPQueryException {
-				return false;
-			}
-		});
+		cfg.setTrustValidator((X509Certificate certificate) -> false);
 
 		try (FileInputStream fis = new FileInputStream(respDoc.toFile())) {
 			SMPQueryException ex = assertThrows(SMPQueryException.class,

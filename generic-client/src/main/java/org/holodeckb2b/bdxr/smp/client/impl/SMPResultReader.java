@@ -18,7 +18,7 @@ package org.holodeckb2b.bdxr.smp.client.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.Key;
+import java.security.Security;
 import java.security.cert.X509Certificate;
 import java.util.Optional;
 import javax.xml.crypto.AlgorithmMethod;
@@ -176,6 +176,7 @@ public class SMPResultReader {
             CertificateKeySelector keySelector = new CertificateKeySelector();
             log.debug("Preparing context for signature verification");
             DOMValidateContext valContext = new DOMValidateContext(keySelector, signatureElement);
+			Security.setProperty("jdk.xml.dsig.secureValidationPolicy", "disallowAlg http://www.w3.org/TR/1999/REC-xslt-19991116,disallowAlg http://www.w3.org/2001/04/xmldsig-more#rsa-md5,disallowAlg http://www.w3.org/2001/04/xmldsig-more#hmac-md5,disallowAlg http://www.w3.org/2001/04/xmldsig-more#md5,maxTransforms 5,maxReferences 30,disallowReferenceUriSchemes file http https,minKeySize RSA 1024,minKeySize DSA 1024,minKeySize EC 224,noDuplicateIds,noRetrievalMethodLoops");
             XMLSignatureFactory xmlSignatureFactory = XMLSignatureFactory.getInstance("DOM");
             XMLSignature signature = xmlSignatureFactory.unmarshalXMLSignature(valContext);
             log.debug("Verifying the signature...");
@@ -234,12 +235,7 @@ public class SMPResultReader {
         	if (this.certificate == null)
         		throw new KeySelectorException("No (usable) Certificate found!");
         	else
-                return new KeySelectorResult() {
-        											@Override
-        											public Key getKey() {
-    								                            return certificate.getPublicKey();
-    								                };
-                    							};
+                return () -> certificate.getPublicKey();
         }
 
         /**
