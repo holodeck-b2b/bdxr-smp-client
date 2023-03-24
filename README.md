@@ -10,8 +10,34 @@ Issue tracker https://github.com/holodeck-b2b/bdxr-smp-client/issues
 An example of a basic SMP client, suitable for use in the PEPPOL network, can be found in `/peppol-smp/src/test/java/org/holodeckb2b/bdxr/smp/example/`
 The example is a simple application that can query for meta-data in the PEPPOL acceptance environment. As shown in the example you need to configure the client so it fits to your specific setup.
 
+The library is available on Maven Central. You just need to include the dependency/dependencies for the version of the SMP specification you need to support. The artificats are:
 
+_OASIS SMP Version 2.0_
+```xml
+<dependency>
+    <groupId>org.holodeckb2b.bdxr.smp.client</groupId>
+    <artifactId>oasis-smp2-client</artifactId>
+    <version>3.0.1</version>
+</dependency>
+```
 
+_OASIS SMP Version 1.0_
+```xml
+<dependency>
+    <groupId>org.holodeckb2b.bdxr.smp.client</groupId>
+    <artifactId>oasis-smp-client</artifactId>
+    <version>3.0.1</version>
+</dependency>
+```
+
+_PEPPOL SMP_
+```xml
+<dependency>
+    <groupId>org.holodeckb2b.bdxr.smp.client</groupId>
+    <artifactId>peppol-smp-client</artifactId>
+    <version>3.0.1</version>
+</dependency>
+```
 
 ## Contributing
 We are using the simplified Github workflow to accept modifications which means you should:
