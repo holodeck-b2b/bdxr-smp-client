@@ -18,9 +18,9 @@ package org.holodeckb2b.bdxr.smp.client.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.Security;
 import java.security.cert.X509Certificate;
 import java.util.Optional;
+
 import javax.xml.crypto.AlgorithmMethod;
 import javax.xml.crypto.KeySelector;
 import javax.xml.crypto.KeySelectorException;
@@ -35,6 +35,7 @@ import javax.xml.crypto.dsig.keyinfo.KeyInfo;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.holodeckb2b.bdxr.smp.client.api.ICertificateFinder;
@@ -176,7 +177,10 @@ public class SMPResultReader {
             CertificateKeySelector keySelector = new CertificateKeySelector();
             log.debug("Preparing context for signature verification");
             DOMValidateContext valContext = new DOMValidateContext(keySelector, signatureElement);
-			Security.setProperty("jdk.xml.dsig.secureValidationPolicy", "disallowAlg http://www.w3.org/TR/1999/REC-xslt-19991116,disallowAlg http://www.w3.org/2001/04/xmldsig-more#rsa-md5,disallowAlg http://www.w3.org/2001/04/xmldsig-more#hmac-md5,disallowAlg http://www.w3.org/2001/04/xmldsig-more#md5,maxTransforms 5,maxReferences 30,disallowReferenceUriSchemes file http https,minKeySize RSA 1024,minKeySize DSA 1024,minKeySize EC 224,noDuplicateIds,noRetrievalMethodLoops");
+            // Apache Santuario uses different property name for setting secure validation, so use both to make sure
+            // always set 
+            valContext.setProperty("org.jcp.xml.dsig.secureValidation", clientConfig.useSecureSignatureValidation());
+            valContext.setProperty("org.apache.jcp.xml.dsig.secureValidation", clientConfig.useSecureSignatureValidation());
             XMLSignatureFactory xmlSignatureFactory = XMLSignatureFactory.getInstance("DOM");
             XMLSignature signature = xmlSignatureFactory.unmarshalXMLSignature(valContext);
             log.debug("Verifying the signature...");

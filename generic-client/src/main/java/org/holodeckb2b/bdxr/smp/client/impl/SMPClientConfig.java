@@ -18,6 +18,7 @@ package org.holodeckb2b.bdxr.smp.client.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.holodeckb2b.bdxr.smp.client.api.ICertificateFinder;
 import org.holodeckb2b.bdxr.smp.client.api.IRequestExecutor;
 import org.holodeckb2b.bdxr.smp.client.api.IResultCache;
@@ -77,6 +78,12 @@ public class SMPClientConfig {
 	 * @since 3.0.0
 	 */
 	int		maxLocalCacheTime;
+	/**
+	 * Indicates whether <i>secure validation</i> should be used by the SMP client when validating the XML signature of 
+	 * the response.
+	 * @since 3.1.0  
+	 */
+	Boolean secureSignatureValidation;
 
 	/**
 	 * Create a new SMP Client configuration with the default request executor and certificate finder, one allowed
@@ -87,6 +94,7 @@ public class SMPClientConfig {
         certFinder = new DefaultCertFinder();
 		maxRedirects = 1;
 		useLocalCaching = false;
+		secureSignatureValidation = true;
     }
 
 	/**
@@ -250,23 +258,34 @@ public class SMPClientConfig {
 	}
 
 	/**
-	 * Indicates whether the client should use local caching to reduce the number of HTTP requests. If local caching is
-	 * enabled and if not set already, sets the maximum time a result may be cached to the default value of 15 minutes.
+	 * Sets the indicator whether the client should use local caching to reduce the number of HTTP requests. If local 
+	 * caching is enabled and if not set already, sets the maximum time a result may be cached to the default value of 
+	 * 15 minutes.
 	 *
 	 * @param cacheLocally <code>true</code> when the client should use local caching, <code>false</code> if not
 	 * @since 3.0.0
 	 */
-	public void useLocalCaching(boolean cacheLocally) {
+	public void setLocalCaching(boolean cacheLocally) {
 		this.useLocalCaching = cacheLocally;
 		if (this.maxLocalCacheTime <= 0)
 			this.maxLocalCacheTime = 15;
 	}
 
 	/**
+	 * Indicates whether the client should use local caching to reduce the number of HTTP requests.
+	 *  
+	 * @return <code>true</code> when the client should use local caching, <code>false</code> if not
+	 * @since 3.1.0
+	 */
+	public boolean useLocalCaching() {
+		return useLocalCaching;
+	}
+	
+	/**
 	 * Sets the number of minutes that a query result from the local cache may be used before the server should be
 	 * queried again.
 	 * <p>NOTE: This method does not enable the local caching of results. That must be enabled explicitly by calling
-	 * {@link #useLocalCaching(boolean)}
+	 * {@link #setLocalCaching(boolean)}
 	 *
 	 * @param maxTime number of minutes a cached result can be re-used, must be at least 1
 	 * @since 3.0.0
@@ -275,5 +294,39 @@ public class SMPClientConfig {
 		if (maxTime < 1)
 			throw new IllegalArgumentException("Max time for local cache must be at least 1");
 		this.maxLocalCacheTime = maxTime;
+	}
+	
+	/**
+	 * Sets the number of minutes that a query result from the local cache may be used before the server should be
+	 * queried again.
+	 * 
+	 * @return number of minutes a cached result can be re-used, must be at least 1
+	 * @since 3.1.0
+	 */
+	public int getMaxLocalCacheTime() {
+		return maxLocalCacheTime;
+	}
+	
+	/**
+	 * Sets the indicator whether <i>secure validation</i> should be used by the SMP client when validating the XML 
+	 * signature of the response.
+	 * 
+	 * @param enable	<code>true</code> when secure validation should be used, 
+	 * 					<code>false</code> if secure validation should be disabled
+	 * @since 3.1.0
+	 */
+	public void setSecureSignatureValidation(boolean enable) {
+		this.secureSignatureValidation = enable;
+	}
+	
+	/**
+	 * Indicates whether <i>secure validation</i> should be used by the SMP client when validating the XML signature of 
+	 * the response.
+	 * 
+	 * @return <code>true</code> when secure validation should be used, <code>false</code> if not
+	 * @since 3.1.0
+	 */
+	public Boolean useSecureSignatureValidation() {
+		return secureSignatureValidation;
 	}
 }

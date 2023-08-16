@@ -1,6 +1,7 @@
 package org.holodeckb2b.bdxr.smp.client.api;
 
 import java.util.List;
+
 import org.holodeckb2b.bdxr.smp.client.impl.DefaultRequestExecutor;
 import org.holodeckb2b.bdxr.smp.client.impl.SMPClient;
 import org.holodeckb2b.bdxr.smp.client.impl.SMPClientConfig;
@@ -133,7 +134,7 @@ public class SMPClientBuilder {
 	 * @since 3.0.0
 	 */
 	public SMPClientBuilder enableLocalCaching() {
-		newClientConfig.useLocalCaching(true);
+		newClientConfig.setLocalCaching(true);
 		return this;
 	}
 
@@ -145,7 +146,7 @@ public class SMPClientBuilder {
 	 * @since 3.0.0
 	 */
 	public SMPClientBuilder disableLocalCaching() {
-		newClientConfig.useLocalCaching(false);
+		newClientConfig.setLocalCaching(false);
 		return this;
 	}
 
@@ -164,6 +165,32 @@ public class SMPClientBuilder {
 		return this;
 	}
 
+	/**
+	 * Disables the <i>secure validation</i> of the XML signature of a received SMP response.
+	 * <p>NOTE: It is NOT RECOMMENDED to disable secure validation of the signatures, but as secure validation restricts
+	 * the allowed algorithms used in the signature of the response it may be needed to allow processing of responses.  
+	 * 
+	 * @return this builder
+	 * @since 3.1.0
+	 */
+	public SMPClientBuilder disableSecureSignatureValidation() {
+		newClientConfig.setSecureSignatureValidation(false);
+		return this;
+	}
+	
+	/**
+	 * Enables the <i>secure validation</i> of the XML signature of a received SMP response.
+	 * <p>NOTE: As secure validation is enabled by default this method is a bit redundant and only added for 
+	 * completeness.
+	 *
+	 * @return this builder
+	 * @since 3.1.0
+	 */
+	public SMPClientBuilder enableSecureSignatureValidation() {
+		newClientConfig.setSecureSignatureValidation(true);
+		return this;
+	}	
+	
 	/**
 	 * Builds a new {@link ISMPClient} instance configured according to the settings provided to the builder.
 	 *
