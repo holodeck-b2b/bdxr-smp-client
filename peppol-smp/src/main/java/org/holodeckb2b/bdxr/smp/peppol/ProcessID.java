@@ -33,7 +33,30 @@ public class ProcessID extends ProcessIdentifierImpl {
 	 */
 	public static final IDScheme	CENBII = new IDSchemeImpl("cenbii-procid-ubl", true);
 
+	/**
+	 * Create a new ProcessID in the default "cenbii-procid-ubl" scheme.
+	 * 
+	 * @param procId		the process identifier value
+	 */
 	public ProcessID(String procId) {
 		super(procId, CENBII);
+	}
+	
+	/**
+	 * Creates a new ProcessID in the specified scheme.
+	 * <p>NOTE: Although the scheme must the cenbii scheme these constructor was added to be consistent with  
+	 * {@link DocumentID} and allow for additional schemes that may be added in future versions of the Peppol specs. 
+	 * 
+	 * @param procId		the process identifier value
+	 * @param schemeId		the scheme identifier
+	 * @throws IllegalArgumentException if the given scheme identifier does not represent the cenbii-procid-ubl scheme
+	 * @since 3.1.0
+	 */	
+	public ProcessID(String procId, String schemeId) {
+		super();
+		if (!CENBII.getSchemeId().equals(schemeId))
+			throw new IllegalArgumentException("The identifier scheme for a Peppol Process ID must be CENBII");		
+		
+		setValue(procId, CENBII);
 	}
 }
