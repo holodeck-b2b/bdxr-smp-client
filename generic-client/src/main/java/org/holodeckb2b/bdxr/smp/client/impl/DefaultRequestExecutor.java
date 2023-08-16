@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.holodeckb2b.bdxr.smp.client.api.IRequestExecutor;
@@ -99,12 +100,12 @@ public class DefaultRequestExecutor implements IRequestExecutor {
 	 * Is the {@link ISMPResponse} implementation for this default request executor implementation. Since
 	 * there is no connection pooling the handling is very simple, just a proxy of the connection's input stream.
 	 */
-	class SMPResponseConnection implements ISMPResponse {
+	public static class SMPResponseConnection implements ISMPResponse {
 		private int				status;
 		private String			lastModified;
 		private InputStream		contentStream;
 
-		SMPResponseConnection(final int status, final String lm, final InputStream is) {
+		public SMPResponseConnection(final int status, final String lm, final InputStream is) {
 			this.status = status;
 			this.lastModified = lm;
 			this.contentStream = is;
