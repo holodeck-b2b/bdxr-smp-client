@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.1.0
+##### 2023-08-16
+### Added
+* Support for the Peppol wildcard identifier scheme in `org.holodeckb2b.bdxr.smp.peppol.DocumentID`
+* Constructors in `org.holodeckb2b.bdxr.smp.peppol.DocumentID` and `org.holodeckb2b.bdxr.smp.peppol.ProcessID` that allow 
+  setting of the scheme identifier.
+* Add option to disable the _secure validation_ of the XML signature in the SMP response. 
+
 ## 3.0.1
 ##### 2023-02-27
 ### Changed
