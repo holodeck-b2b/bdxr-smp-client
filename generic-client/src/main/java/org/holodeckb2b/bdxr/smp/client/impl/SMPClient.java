@@ -27,6 +27,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.holodeckb2b.bdxr.smp.client.api.ICachedResult;
@@ -78,18 +79,11 @@ public class SMPClient implements ISMPClient {
 
     @Override
 	public EndpointInfo getEndpoint(final Identifier participantId,
-    								final Identifier serviceId,
-    								final ProcessIdentifier processId,
-    								final String     transportProfile) throws SMPQueryException {
-    	return getEndpoint(participantId, null, serviceId, processId, transportProfile);
-    }
-
-    @Override
-	public EndpointInfo getEndpoint(final Identifier participantId,
 									final Identifier role,
 		    						final Identifier serviceId,
 		    						final ProcessIdentifier processId,
-		    						final String     transportProfile) throws SMPQueryException  {
+		    						final String     transportProfile,
+		    						final boolean    overrideCache) throws SMPQueryException  {
         if (Utils.isNullOrEmpty(transportProfile))
         	throw new IllegalArgumentException("No transport profile identifier provided");
 
@@ -125,17 +119,10 @@ public class SMPClient implements ISMPClient {
 
     @Override
 	public Collection<? extends EndpointInfo> getEndpoints(final Identifier participantId,
-														   final Identifier serviceId,
-														   final ProcessIdentifier processId) throws SMPQueryException {
-    	return getEndpoints(participantId, null, serviceId, processId);
-    }
-
-
-    @Override
-	public Collection<? extends EndpointInfo> getEndpoints(final Identifier participantId,
 														   final Identifier role,
 														   final Identifier serviceId,
-														   final ProcessIdentifier processId) throws SMPQueryException  {
+														   final ProcessIdentifier processId,
+														   final boolean overrideCache) throws SMPQueryException  {
 
 		if (participantId == null || serviceId == null || processId == null)
         	throw new IllegalArgumentException("Missing either participant, service or process ID argument");
@@ -146,7 +133,8 @@ public class SMPClient implements ISMPClient {
 		int redirections = 0;
 		Redirection redirect = null;
 		do {
-			Pair<ServiceMetadata, Integer> rSmd = _getServiceMetadata(participantId, serviceId, redirect, redirections);
+			Pair<ServiceMetadata, Integer> rSmd = _getServiceMetadata(participantId, serviceId, redirect, overrideCache, 
+																	  redirections);
 			ServiceMetadata smd = rSmd.value1();
 
 			if (smd == null) {
@@ -206,13 +194,13 @@ public class SMPClient implements ISMPClient {
 	}
 
 	@Override
-	public ServiceMetadata getServiceMetadata(final Identifier participantId, final Identifier serviceId)
-																							throws SMPQueryException {
+	public ServiceMetadata getServiceMetadata(final Identifier participantId, final Identifier serviceId,
+											  final boolean overrideCache) throws SMPQueryException {
 		if (participantId == null || serviceId == null)
         	throw new IllegalArgumentException("Missing either participant or service ID argument");
 
     	log.debug("Retrieve ServiceMetadata for (participant, service) = ({},{})", participantId, serviceId);
-		ServiceMetadata smd = _getServiceMetadata(participantId, serviceId, null, 0).value1();
+		ServiceMetadata smd = _getServiceMetadata(participantId, serviceId, null, overrideCache, 0).value1();
 		log.info("{} ServiceMetadata found for (participant, service) = ({},{})", smd != null ? "Returning" : "No",
 				participantId, serviceId);
 		return smd;
@@ -230,7 +218,7 @@ public class SMPClient implements ISMPClient {
 			if (!baseURL.endsWith("/"))
 				baseURL += "/";
 
-			ServiceGroup sg = (ServiceGroup) retrieveMetadata(new URL(baseURL + participantId.getURLEncoded()));
+			ServiceGroup sg = (ServiceGroup) retrieveMetadata(new URL(baseURL + participantId.getURLEncoded()), false);
 
 			log.info("{} ServiceGroup for participant {}", sg != null ? "Returning" : "No", participantId);
 			return sg;
@@ -259,6 +247,8 @@ public class SMPClient implements ISMPClient {
 	 * @param participantId		participant identifier
 	 * @param serviceId			service identifier
 	 * @param redirection		redirection info, <code>null</code> on initial call
+	 * @param overrideCache		<code>true</code> when the cached result should be ignored and the SMP server should 
+	 * 							always be queried. <code>false</code> if a cached result can be used. 
 	 * @param redirections		the number of already followed redirections
 	 * @return	the found meta-data, or <code>null</code> if not found
 	 * @throws SMPQueryException	when an error occurs retrieving the meta-data. This may be caused by a communication
@@ -268,6 +258,7 @@ public class SMPClient implements ISMPClient {
     private Pair<ServiceMetadata, Integer> _getServiceMetadata(final Identifier participantId,
 															   final Identifier serviceId,
 															   final Redirection redirection,
+															   final boolean overrideCache,
 															   final int redirections) throws SMPQueryException {
 		if (redirections > cfg.maxRedirects) {
 			log.error("Exceeded the number of allowed redirections");
@@ -299,7 +290,7 @@ public class SMPClient implements ISMPClient {
 			throw new SMPQueryException("Could not construct valid query URL");
 		}
 
-		ServiceMetadata metadata = (ServiceMetadata) retrieveMetadata(queryURL);
+		ServiceMetadata metadata = (ServiceMetadata) retrieveMetadata(queryURL, overrideCache);
 		if (metadata != null) {
 			if (redirection != null) {
 				if (redirection instanceof RedirectionV2) {
@@ -337,7 +328,7 @@ public class SMPClient implements ISMPClient {
 				Redirection r = pg.getRedirection();
 				if (r != null && Utils.isNullOrEmpty(pg.getProcessInfo())) {
 					log.debug("Following redirection to {}", r.getNewSMPURL().toString());
-					return _getServiceMetadata(participantId, serviceId, r, redirections + 1);
+					return _getServiceMetadata(participantId, serviceId, r, overrideCache, redirections + 1);
 				}
 			}
 		}
@@ -348,12 +339,15 @@ public class SMPClient implements ISMPClient {
 	 * Helper method to execute the query to the SMP server. Handles caching of the results.
 	 *
 	 * @param queryURL	the URL to retrieve the request meta data from the server
+	 * @param overrideCache		<code>true</code> when the cached result should be ignored and the SMP server should 
+	 * 							always be queried. <code>false</code> if a cached result can be used. 
 	 * @return	the retrieved meta-data if available, <code>null</code> if the requested meta-data are not found
 	 * @throws SMPQueryException	when an error occurs retrieving the meta-data from the SMP server.
 	 */
-	private QueryResult retrieveMetadata(final URL queryURL) throws SMPQueryException {
-		// If caching is used, check if there is a cached result
-		ICachedResult cached =  cfg.resultCache != null ? cfg.resultCache.getCachedResult(queryURL) : null;
+	private QueryResult retrieveMetadata(final URL queryURL, final boolean overrideCache) throws SMPQueryException {
+		// If caching is used and not overridden, check if there is a cached result
+		ICachedResult cached = !overrideCache && cfg.resultCache != null ? cfg.resultCache.getCachedResult(queryURL) 
+																		 : null;
 
 		// If local caching is enabled and a result for this query was cached, check if it can be re-used
 		if (cached != null && cfg.useLocalCaching

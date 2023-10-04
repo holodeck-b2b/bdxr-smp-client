@@ -17,6 +17,7 @@
 package org.holodeckb2b.bdxr.smp.client.api;
 
 import java.util.Collection;
+
 import org.holodeckb2b.bdxr.smp.datamodel.EndpointInfo;
 import org.holodeckb2b.bdxr.smp.datamodel.Identifier;
 import org.holodeckb2b.bdxr.smp.datamodel.ProcessIdentifier;
@@ -49,10 +50,36 @@ public interface ISMPClient {
 	 *			which supports the requested transport profile, <code>null</code> otherwise.
      * @throws SMPQueryException 	When an error occurs in the lookup of the SMP location or querying the SMP server
      */
-	EndpointInfo getEndpoint(final Identifier participantId,
+	default EndpointInfo getEndpoint(final Identifier participantId,
     						 final Identifier serviceId,
     						 final ProcessIdentifier processId,
-    						 final String     transportProfile) throws SMPQueryException;
+    						 final String     transportProfile) throws SMPQueryException {
+		return getEndpoint(participantId, null, serviceId, processId, transportProfile, false);
+	}
+	
+	/**
+	 * Gets the meta-data of the currently active endpoint for the given participant, service and process and that
+	 * supports the requested transport profile with the option to override the result stored in the cache.
+	 *
+	 * @param participantId		Participant's Id
+	 * @param serviceId			Service Id
+	 * @param processId			Process Id
+	 * @param transportProfile	Requested transport profile name
+	 * @param overrideCache		<code>true</code> when the cached result should be ignored and the SMP server should 
+	 * 							always be queried. <code>false</code> if a cached result can be used. 
+	 * @return	The endpoint meta-data if there exists an active endpoint for this participant, service and process and
+	 *			which supports the requested transport profile, <code>null</code> otherwise.
+	 * @throws SMPQueryException 	When an error occurs in the lookup of the SMP location or querying the SMP server
+	 * @since 3.2.0
+	 * @see #getEndpoint(Identifier, Identifier, ProcessIdentifier, String)
+	 */
+	default EndpointInfo getEndpoint(final Identifier participantId,
+									 final Identifier serviceId,
+									 final ProcessIdentifier processId,
+									 final String     transportProfile,
+									 final boolean    overrideCache) throws SMPQueryException {
+		return getEndpoint(participantId, null, serviceId, processId, transportProfile, overrideCache);
+	}
 
     /**
      * Gets the meta-data of all endpoints for the given participant, service and process.
@@ -69,9 +96,33 @@ public interface ISMPClient {
      * @throws SMPQueryException 	When an error occurs in the lookup of the SMP location or querying the SMP server
 	 * @since 3.0.0	Result type is now a more generic collection of endpoints.
      */
-    Collection<? extends EndpointInfo> getEndpoints(final Identifier participantId,
+    default Collection<? extends EndpointInfo> getEndpoints(final Identifier participantId,
 													final Identifier serviceId,
-													final ProcessIdentifier processId) throws SMPQueryException;
+													final ProcessIdentifier processId) throws SMPQueryException {
+    	return getEndpoints(participantId, null, serviceId, processId, false);
+    }
+    
+    /**
+     * Gets the meta-data of all endpoints for the given participant, service and process with the option to override 
+     * the result stored in the cache.
+     *
+     * @param participantId		Participant's Id
+     * @param serviceId			Service Id
+     * @param processId			Process Id
+	 * @param overrideCache		<code>true</code> when the cached result should be ignored and the SMP server should 
+	 * 							always be queried. <code>false</code> if a cached result can be used. 
+     * @return	The endpoint meta-data if there exist endpoints for this participant, service and process,
+     * 			an empty collection otherwise.
+     * @throws SMPQueryException 	When an error occurs in the lookup of the SMP location or querying the SMP server
+     * @since 3.2.0
+     * @see #getEndpoints(Identifier, Identifier, ProcessIdentifier) 
+     */
+    default Collection<? extends EndpointInfo> getEndpoints(final Identifier participantId,
+												    		final Identifier serviceId,
+												    		final ProcessIdentifier processId,
+												    		final boolean overrideCache) throws SMPQueryException {
+    	return getEndpoints(participantId, null, serviceId, processId, overrideCache);
+    }
 
 	/**
      * Gets the meta-data of the currently active endpoint for the given participant acting in the specified role for
@@ -95,11 +146,38 @@ public interface ISMPClient {
      * @throws SMPQueryException 	When an error occurs in the lookup of the SMP location or querying the SMP server
      * @since 2.0.0
      */
-	EndpointInfo getEndpoint(final Identifier participantId,
+	default EndpointInfo getEndpoint(final Identifier participantId,
 							 final Identifier role,
     						 final Identifier serviceId,
     						 final ProcessIdentifier processId,
-    						 final String     transportProfile) throws SMPQueryException;
+    						 final String     transportProfile) throws SMPQueryException {
+		return getEndpoint(participantId, role, serviceId, processId, transportProfile, false);
+	}
+
+	/**
+	 * Gets the meta-data of the currently active endpoint for the given participant acting in the specified role for
+	 * the given service and process and that supports the requested transport profile with the option to override the 
+	 * result stored in the cache.
+	 *
+	 * @param participantId		Participant's Id
+	 * @param role				Role of the participant
+	 * @param serviceId			Service Id
+	 * @param processId			Process Id
+	 * @param transportProfile	Requested transport profile name
+	 * @param overrideCache		<code>true</code> when the cached result should be ignored and the SMP server should 
+	 * 							always be queried. <code>false</code> if a cached result can be used. 
+	 * @return	The endpoint meta-data if there exists an active endpoint for this participant, service and process and
+	 *			which supports the requested transport profile, <code>null</code> otherwise.
+	 * @throws SMPQueryException 	When an error occurs in the lookup of the SMP location or querying the SMP server
+	 * @since 3.2.0
+	 * @see #getEndpoint(Identifier, Identifier, Identifier, ProcessIdentifier, String)
+	 */
+	EndpointInfo getEndpoint(final Identifier participantId,
+			final Identifier role,
+			final Identifier serviceId,
+			final ProcessIdentifier processId,
+			final String     transportProfile,
+			final boolean 	 overrideCache) throws SMPQueryException;
 
 	/**
 	 * Gets the meta-data of all endpoints for the given participant acting in the specified role for the given service
@@ -122,11 +200,35 @@ public interface ISMPClient {
 	 * @since 2.0.0
 	 * @since 3.0.0	Result type is now a more generic collection of endpoints.
 	 */
-	Collection<? extends EndpointInfo> getEndpoints(final Identifier participantId,
+	default Collection<? extends EndpointInfo> getEndpoints(final Identifier participantId,
 													final Identifier role,
 													final Identifier serviceId,
-													final ProcessIdentifier processId) throws SMPQueryException;
+													final ProcessIdentifier processId) throws SMPQueryException {
+		return getEndpoints(participantId, role, serviceId, processId, false);
+	}
 
+	/**
+	 * Gets the meta-data of all endpoints for the given participant acting in the specified role for the given service
+	 * and process and that supports the requested transport profile with the option to override a cached result.
+	 *
+	 * @param participantId		Participant's Id
+	 * @param role				Role of the participant
+	 * @param serviceId			Service Id
+	 * @param processId			Process Id
+	 * @param overrideCache		<code>true</code> when the cached result should be ignored and the SMP server should 
+	 * 							always be queried. <code>false</code> if a cached result can be used. 
+	 * @return	The endpoint meta-data if there exist endpoints for this participant, role, service and process,
+	 * 			an empty collection otherwise.
+	 * @throws SMPQueryException 	When an error occurs in the lookup of the SMP location or querying the SMP server
+	 * @since 3.2.0
+	 * @see #getEndpoints(Identifier, Identifier, Identifier, ProcessIdentifier)	
+	 */
+	Collection<? extends EndpointInfo> getEndpoints(final Identifier participantId,
+			final Identifier role,
+			final Identifier serviceId,
+			final ProcessIdentifier processId,
+			final boolean overrideCache) throws SMPQueryException;
+	
 	/**
 	 * Gets all meta-data of a Service provided by a Participant.
 	 *
@@ -136,8 +238,26 @@ public interface ISMPClient {
 	 * @throws SMPQueryException	When an error occurs in the lookup of the SMP location or querying the SMP server
 	 * @since 3.0.0
 	 */
-	ServiceMetadata getServiceMetadata(final Identifier participantId, final Identifier serviceId)
-																							throws SMPQueryException;
+	default ServiceMetadata getServiceMetadata(final Identifier participantId, final Identifier serviceId)
+																							throws SMPQueryException {
+		return getServiceMetadata(participantId, serviceId, false);
+	}
+	
+	/**
+	 * Gets all meta-data of a Service provided by a Participant with the option to override the result stored in the
+	 * cache. Overriding the cached result may be useful when a problem occurs in processing based on the current
+	 * result, for example when the published certificate has been revoked. 
+	 *
+	 * @param participantId		Participant's Id
+	 * @param serviceId			Service Id
+	 * @param overrideCache		<code>true</code> when the cached result should be ignored and the SMP server should 
+	 * 							always be queried. <code>false</code> if a cached result can be used. 
+	 * @return	The service meta-data returned by the SMP server, <code>null</code> if no result was available
+	 * @throws SMPQueryException	When an error occurs in the lookup of the SMP location or querying the SMP server
+	 * @since 3.2.0
+	 */
+	ServiceMetadata getServiceMetadata(final Identifier participantId, final Identifier serviceId, 
+									   final boolean overrideCache) throws SMPQueryException;
 
 	/**
 	 * Gets the service group for a participant, i.e. the overview of all registered services for that participant.
