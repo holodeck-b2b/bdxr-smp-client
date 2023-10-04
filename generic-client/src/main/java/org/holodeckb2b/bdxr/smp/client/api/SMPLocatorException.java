@@ -21,7 +21,7 @@ package org.holodeckb2b.bdxr.smp.client.api;
  *
  * @author Sander Fieten (sander at holodeck-b2b.org)
  */
-public class SMPLocatorException extends Exception {
+public class SMPLocatorException extends SMPQueryException {
 
     public SMPLocatorException(final String errorMessage) {
         super(errorMessage);
