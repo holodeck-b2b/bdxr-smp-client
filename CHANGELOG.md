@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.2.0
+##### 2023-10-04
+### Added
+* Option to override the cached query result and query the server for latest version of the meta-data
+
+### Changed
+* `SMPLocatorException` now extends `SMPQueryException` to indicate that it's a problem in the query process
+
 ## 3.1.0
 ##### 2023-08-16
 ### Added
