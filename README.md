@@ -17,7 +17,7 @@ _OASIS SMP Version 2.0_
 <dependency>
     <groupId>org.holodeckb2b.bdxr.smp.client</groupId>
     <artifactId>oasis-smp2-client</artifactId>
-    <version>3.1.0</version>
+    <version>3.2.0</version>
 </dependency>
 ```
 
@@ -26,7 +26,7 @@ _OASIS SMP Version 1.0_
 <dependency>
     <groupId>org.holodeckb2b.bdxr.smp.client</groupId>
     <artifactId>oasis-smp-client</artifactId>
-    <version>3.1.0</version>
+    <version>3.2.0</version>
 </dependency>
 ```
 
@@ -35,7 +35,7 @@ _PEPPOL SMP_
 <dependency>
     <groupId>org.holodeckb2b.bdxr.smp.client</groupId>
     <artifactId>peppol-smp-client</artifactId>
-    <version>3.1.0</version>
+    <version>3.2.0</version>
 </dependency>
 ```
 
