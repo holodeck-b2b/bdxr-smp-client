@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.0.0
+##### 
+### Changed
+* Version of Holodeck B2B BDXR Common dependency to 5.0.0
+* Refactored classes to new naming of common classes introduced in HB2B BDXR Common 5.0.0
 ## 3.2.0
 ##### 2023-10-04
 ### Added

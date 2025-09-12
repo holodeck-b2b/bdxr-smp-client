@@ -30,6 +30,8 @@ import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.holodeckb2b.bdxr.common.datamodel.Identifier;
+import org.holodeckb2b.bdxr.common.datamodel.ProcessIdentifier;
 import org.holodeckb2b.bdxr.smp.client.api.ICachedResult;
 import org.holodeckb2b.bdxr.smp.client.api.ISMPClient;
 import org.holodeckb2b.bdxr.smp.client.api.ISMPResponse;
@@ -37,9 +39,7 @@ import org.holodeckb2b.bdxr.smp.client.api.SMPClientBuilder;
 import org.holodeckb2b.bdxr.smp.client.api.SMPLocatorException;
 import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
 import org.holodeckb2b.bdxr.smp.datamodel.EndpointInfo;
-import org.holodeckb2b.bdxr.smp.datamodel.Identifier;
 import org.holodeckb2b.bdxr.smp.datamodel.ProcessGroup;
-import org.holodeckb2b.bdxr.smp.datamodel.ProcessIdentifier;
 import org.holodeckb2b.bdxr.smp.datamodel.QueryResult;
 import org.holodeckb2b.bdxr.smp.datamodel.Redirection;
 import org.holodeckb2b.bdxr.smp.datamodel.RedirectionV1;
@@ -82,19 +82,19 @@ public class SMPClient implements ISMPClient {
 									final Identifier role,
 		    						final Identifier serviceId,
 		    						final ProcessIdentifier processId,
-		    						final String     transportProfile,
+		    						final Identifier     transportProfile,
 		    						final boolean    overrideCache) throws SMPQueryException  {
-        if (Utils.isNullOrEmpty(transportProfile))
+        if (transportProfile == null || Utils.isNullOrEmpty(transportProfile.getValue()))
         	throw new IllegalArgumentException("No transport profile identifier provided");
 
     	log.debug("Lookup requested; (participant, service, process, role, transport) = ({},{},{},{}, {})",
-                	participantId, serviceId, processId, role, transportProfile);
+                	participantId, serviceId, processId, role, transportProfile.toString());
 
 		// First get all endpoints for the participant, role, serviceId and processId, then filter the result
 		Collection<? extends EndpointInfo> endpoints = getEndpoints(participantId, role, serviceId, processId);
 
     	Optional<? extends EndpointInfo> findEP = endpoints.parallelStream()
-									                .filter(ep -> transportProfile.equals(ep.getTransportProfile())
+									                .filter(ep -> transportProfile.equals(ep.getTransportProfileId())
 																  && isActive(ep))
 									                .findFirst();
 

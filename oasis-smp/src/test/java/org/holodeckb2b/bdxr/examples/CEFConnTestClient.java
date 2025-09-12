@@ -17,19 +17,20 @@
 package org.holodeckb2b.bdxr.examples;
 
 import java.security.cert.X509Certificate;
+
 import org.apache.commons.codec.binary.Base32;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.holodeckb2b.bdxr.smp.client.impl.oasis_smp1.OASISv1ResultProcessor;
+import org.holodeckb2b.bdxr.common.datamodel.Identifier;
+import org.holodeckb2b.bdxr.common.datamodel.ProcessIdentifier;
+import org.holodeckb2b.bdxr.common.datamodel.impl.IdentifierImpl;
+import org.holodeckb2b.bdxr.common.datamodel.impl.ProcessIdentifierImpl;
 import org.holodeckb2b.bdxr.smp.client.api.IHostNameGenerator;
 import org.holodeckb2b.bdxr.smp.client.api.ISMPClient;
 import org.holodeckb2b.bdxr.smp.client.api.SMPClientBuilder;
 import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
 import org.holodeckb2b.bdxr.smp.client.impl.BDXLLocator;
+import org.holodeckb2b.bdxr.smp.client.impl.oasis_smp1.OASISv1ResultProcessor;
 import org.holodeckb2b.bdxr.smp.datamodel.EndpointInfo;
-import org.holodeckb2b.bdxr.smp.datamodel.Identifier;
-import org.holodeckb2b.bdxr.smp.datamodel.ProcessIdentifier;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.IdentifierImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessIdentifierImpl;
 
 /**
  * Is a simple example application that shows how the {@link ISMPClient} can be used for querying the CEF Connectivity
@@ -45,7 +46,7 @@ public class CEFConnTestClient {
     /**
      * The transport protocol identifier used for AS4
      */
-	private static final String AS4_TRANSPORT_ID = "bdxr-transport-ebms3-as4-v1p0";
+	private static final Identifier AS4_TRANSPORT_ID = new IdentifierImpl("bdxr-transport-ebms3-as4-v1p0");
 
 
 	public static void main(String[] args) {
@@ -65,13 +66,12 @@ public class CEFConnTestClient {
 		final Identifier participantId = new IdentifierImpl(args[0], "connectivity-partid-qns");
 		final Identifier serviceId = new IdentifierImpl(args[1], "connectivity-docid-qns");
 		final ProcessIdentifier processId = new ProcessIdentifierImpl(args[2], "connectivity-procid-qns");
-		final String transportId = AS4_TRANSPORT_ID;
 
 		System.out.println("Performing SMP query using parameters:");
 		System.out.println("- Participant identifier: " + participantId.toString());
 		System.out.println("- Document identifier   : " + serviceId.toString());
 		System.out.println("- Process identifier    : " + processId.toString());
-		System.out.println("- Transport profile 	: " + transportId);
+		System.out.println("- Transport profile 	: " + AS4_TRANSPORT_ID);
 
 		final ISMPClient lookupClient = new SMPClientBuilder().setSMPLocator(new BDXLLocator(
 																					new CEFHostNameGenerator(),
@@ -80,12 +80,12 @@ public class CEFConnTestClient {
 															  .build();
 		try {
 			System.out.println("Executing SMP query...");
-			EndpointInfo endpointInfo = lookupClient.getEndpoint(participantId, serviceId, processId, transportId);
+			EndpointInfo endpointInfo = lookupClient.getEndpoint(participantId, serviceId, processId, AS4_TRANSPORT_ID);
 			System.out.println("Executed SMP query!");
 
 			System.out.print("The participant can receive the given document for the specified process through ");
 			System.out.println("the AP available at " + endpointInfo.getEndpointURL());
-			if (AS4_TRANSPORT_ID.equals(endpointInfo.getTransportProfile())) {
+			if (AS4_TRANSPORT_ID.equals(endpointInfo.getTransportProfileId())) {
 				System.out.println("AS4 Messages send to the AP should be encrypted using Certificate:");
 				X509Certificate cert = endpointInfo.getCertificates().iterator().next().getX509Cert();
 				System.out.println("\tSubject         : " + cert.getSubjectDN().getName());

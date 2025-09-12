@@ -16,7 +16,7 @@
  */
 package org.holodeckb2b.bdxr.smp.client.api;
 
-import org.holodeckb2b.bdxr.smp.datamodel.Identifier;
+import org.holodeckb2b.bdxr.common.datamodel.Identifier;
 
 /**
  * Defines the interface for <i>host name generators</i> which based on the participant identifier generate a host name

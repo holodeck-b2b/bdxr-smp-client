@@ -17,16 +17,17 @@
 package org.holodeckb2b.bdxr.smp.examples;
 
 import java.security.cert.X509Certificate;
+
+import org.holodeckb2b.bdxr.common.datamodel.Identifier;
+import org.holodeckb2b.bdxr.common.datamodel.ProcessIdentifier;
+import org.holodeckb2b.bdxr.common.datamodel.impl.IdentifierImpl;
 import org.holodeckb2b.bdxr.smp.client.api.ISMPClient;
 import org.holodeckb2b.bdxr.smp.client.api.SMPClientBuilder;
 import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
+import org.holodeckb2b.bdxr.smp.client.impl.BDXLLocator;
 import org.holodeckb2b.bdxr.smp.client.impl.peppol.PEPPOLHostNameGenerator;
 import org.holodeckb2b.bdxr.smp.client.impl.peppol.PEPPOLResultProcessor;
-import org.holodeckb2b.bdxr.smp.client.impl.peppol.SMLLocator;
 import org.holodeckb2b.bdxr.smp.datamodel.EndpointInfo;
-import org.holodeckb2b.bdxr.smp.datamodel.Identifier;
-import org.holodeckb2b.bdxr.smp.datamodel.ProcessIdentifier;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.IdentifierImpl;
 import org.holodeckb2b.bdxr.smp.peppol.DocumentID;
 import org.holodeckb2b.bdxr.smp.peppol.ProcessID;
 import org.holodeckb2b.commons.security.CertificateUtils;
@@ -45,11 +46,11 @@ public class PEPPOLSMPClient {
     /**
      * The transport protocol identifier used in OpenPEPPOL for AS2
      */
-    private static final String OPENPEPPOL_AS2_TRANSPORT_ID = "busdox-transport-as2-ver1p0";
+    private static final Identifier OPENPEPPOL_AS2_TRANSPORT_ID = new IdentifierImpl("busdox-transport-as2-ver1p0");
     /**
      * The transport protocol identifier used in OpenPEPPOL for AS4
      */
-	private static final String OPENPEPPOL_AS4_TRANSPORT_ID = "peppol-transport-as4-v2_0";
+	private static final Identifier OPENPEPPOL_AS4_TRANSPORT_ID = new IdentifierImpl("peppol-transport-as4-v2_0");
 
 	public static void main(String[] args) {
 
@@ -66,7 +67,7 @@ public class PEPPOLSMPClient {
 		final Identifier participantId = new IdentifierImpl(args[0], "iso6523-actorid-upis");
 		final Identifier serviceId = new DocumentID(args[1]);
 		final ProcessIdentifier processId = new ProcessID(args[2]);
-		String transportId = null;
+		Identifier transportId = null;
 		if ("as2".equalsIgnoreCase(args[3]))
 			transportId = OPENPEPPOL_AS2_TRANSPORT_ID;
 		else if ("as4".equalsIgnoreCase(args[3]))

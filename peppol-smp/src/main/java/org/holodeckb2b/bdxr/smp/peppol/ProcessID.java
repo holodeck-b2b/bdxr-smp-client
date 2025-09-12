@@ -16,9 +16,9 @@
  */
 package org.holodeckb2b.bdxr.smp.peppol;
 
+import org.holodeckb2b.bdxr.common.datamodel.impl.ProcessIdentifierImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.IDScheme;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.IDSchemeImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessIdentifierImpl;
 
 /**
  * Represents a Peppol Process Identifier.
@@ -26,7 +26,8 @@ import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessIdentifierImpl;
  * @author Sander Fieten (sander at holodeck-b2b.org)
  */
 public class ProcessID extends ProcessIdentifierImpl {
-
+	private static final long serialVersionUID = -2028512758224367184L;
+	
 	/**
 	 * The required identifier scheme for process identifiers as specified in Policy 24 of
 	 * the Peppol "Policy for use of identifiers"

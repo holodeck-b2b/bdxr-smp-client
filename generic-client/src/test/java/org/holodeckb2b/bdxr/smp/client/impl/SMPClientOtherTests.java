@@ -19,18 +19,19 @@ package org.holodeckb2b.bdxr.smp.client.impl;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Set;
+
+import org.holodeckb2b.bdxr.common.datamodel.Identifier;
+import org.holodeckb2b.bdxr.common.datamodel.impl.IdentifierImpl;
+import org.holodeckb2b.bdxr.common.datamodel.impl.ProcessIdentifierImpl;
 import org.holodeckb2b.bdxr.smp.client.api.SMPClientBuilder;
 import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
 import org.holodeckb2b.bdxr.smp.datamodel.EndpointInfo;
-import org.holodeckb2b.bdxr.smp.datamodel.Identifier;
 import org.holodeckb2b.bdxr.smp.datamodel.ProcessInfo;
 import org.holodeckb2b.bdxr.smp.datamodel.Redirection;
 import org.holodeckb2b.bdxr.smp.datamodel.ServiceGroup;
 import org.holodeckb2b.bdxr.smp.datamodel.ServiceMetadata;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.EndpointInfoImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.IdentifierImpl;
+import org.holodeckb2b.bdxr.smp.datamodel.impl.EndpointInfoV1Impl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessGroupImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessIdentifierImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessInfoImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.RedirectionV2Impl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ServiceGroupV1Impl;
@@ -48,14 +49,13 @@ import org.junit.jupiter.api.Test;
 public class SMPClientOtherTests {
 	private static final Identifier P_ID = new IdentifierImpl("PARTID_1", "test:scheme");
 	private static final Identifier SVC1_ID = new IdentifierImpl("SVCID_1");
-	private static final Identifier SVC2_ID = new IdentifierImpl("SVCID_2");
 
 	@Test
 	void testGetSMD() throws MalformedURLException {
 		ProcessInfo proc = new ProcessInfoImpl(new ProcessIdentifierImpl("PROCID_1"), null);
 
-		EndpointInfo ep1 = new EndpointInfoImpl("test-1", new URL("http://this.is.a.result"));
-		EndpointInfo ep2 = new EndpointInfoImpl("test-2", new URL("http://this.is.another.result"));
+		EndpointInfo ep1 = new EndpointInfoV1Impl("test-1", new URL("http://this.is.a.result"));
+		EndpointInfo ep2 = new EndpointInfoV1Impl("test-2", new URL("http://this.is.another.result"));
 
 		ServiceMetadata smd = new ServiceMetadataImpl(P_ID, SVC1_ID,
 										Set.of(new ProcessGroupImpl(Set.of(proc), Set.of(ep1, ep2), null))
@@ -93,7 +93,7 @@ public class SMPClientOtherTests {
 		ProcessInfo proc = new ProcessInfoImpl(new ProcessIdentifierImpl("PROCID_1"), null);
 
 		Redirection  r = new RedirectionV2Impl(new URL("http://this.is.another.smp"));
-		EndpointInfo ep1 = new EndpointInfoImpl("test-1", new URL("http://this.is.a.result"));
+		EndpointInfo ep1 = new EndpointInfoV1Impl("test-1", new URL("http://this.is.a.result"));
 
 		ServiceMetadata smd1 = new ServiceMetadataImpl(P_ID, SVC1_ID,
 										Set.of(new ProcessGroupImpl(null, r, null))
@@ -163,7 +163,7 @@ public class SMPClientOtherTests {
 		String docNS = "http://test.holodeck-b2b.org/smp/serviceGroup";
 
 		MockRequestExecutor reqExecutor = new MockRequestExecutor();
-		ServiceGroup sg = assertDoesNotThrow(() ->
+		ServiceGroup<?> sg = assertDoesNotThrow(() ->
 										new SMPClientBuilder().setSMPLocator(new StaticLocator("http://localhost"))
 												.setRequestExecutor(reqExecutor.addResponse(200, null, docNS))
 												.addProcessor(new MockResultProcessor(docNS, svcGrp))

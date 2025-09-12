@@ -80,8 +80,8 @@ public class OASISv2ResultProcessor implements ISMPResultProcessor {
 	public SignedQueryResult processResult(Document xmlDocument, X509Certificate signingCert) throws SMPQueryException {
 		final String docNS = xmlDocument.getDocumentElement().getNamespaceURI();
 		if (SVC_METADATA_NS_URI.equals(docNS))
-			return new SignedServiceMetadataImpl((ServiceMetadata) smdProcessor.processServiceMetadata(xmlDocument));
+			return new SignedServiceMetadataImpl((ServiceMetadata) smdProcessor.processServiceMetadata(xmlDocument), signingCert);
 		else // SVC_GROUP_NS_URI.equals(docNS)
-			return new SignedServiceGroupImpl((ServiceGroupV2) sgProcessor.processServiceGroup(xmlDocument));
+			return new SignedServiceGroupImpl((ServiceGroupV2) sgProcessor.processServiceGroup(xmlDocument), signingCert);
 	}
 }

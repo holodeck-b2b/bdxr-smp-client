@@ -17,12 +17,12 @@
 package org.holodeckb2b.bdxr.smp.client.impl.peppol;
 
 
-import org.holodeckb2b.bdxr.smp.client.impl.peppol.PEPPOLHostNameGenerator;
-import org.holodeckb2b.bdxr.smp.client.api.IHostNameGenerator;
-import org.holodeckb2b.bdxr.smp.datamodel.Identifier;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.IdentifierImpl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.holodeckb2b.bdxr.common.datamodel.Identifier;
+import org.holodeckb2b.bdxr.common.datamodel.impl.IdentifierImpl;
+import org.holodeckb2b.bdxr.smp.client.api.IHostNameGenerator;
 import org.junit.jupiter.api.Test;
 
 /**

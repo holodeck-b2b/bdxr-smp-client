@@ -18,12 +18,13 @@ package org.holodeckb2b.bdxr.smp.client.impl;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.holodeckb2b.bdxr.common.datamodel.Identifier;
 import org.holodeckb2b.bdxr.smp.client.api.IHostNameGenerator;
 import org.holodeckb2b.bdxr.smp.client.api.ISMPLocator;
 import org.holodeckb2b.bdxr.smp.client.api.SMPLocatorException;
-import org.holodeckb2b.bdxr.smp.datamodel.Identifier;
 import org.xbill.DNS.Lookup;
 import org.xbill.DNS.NAPTRRecord;
 import org.xbill.DNS.TextParseException;
