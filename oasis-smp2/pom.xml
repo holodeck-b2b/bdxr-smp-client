@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.holodeckb2b.bdxr.smp.client</groupId>
 		<artifactId>parent</artifactId>
-		<version>3.2.0</version>
+		<version>4.0.0</version>
 	</parent>
     <artifactId>oasis-smp2-client</artifactId>
     <packaging>jar</packaging>
