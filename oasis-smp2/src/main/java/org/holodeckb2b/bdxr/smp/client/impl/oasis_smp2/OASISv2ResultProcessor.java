@@ -18,8 +18,7 @@ package org.holodeckb2b.bdxr.smp.client.impl.oasis_smp2;
 
 
 import java.security.cert.X509Certificate;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 import org.holodeckb2b.bdxr.smp.client.api.ISMPResultProcessor;
 import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
 import org.holodeckb2b.bdxr.smp.datamodel.QueryResult;
@@ -38,8 +37,7 @@ import org.w3c.dom.Document;
  * @since  2.0.0
  */
 public class OASISv2ResultProcessor implements ISMPResultProcessor {
-    private static final Logger	log = LogManager.getLogger(OASISv2ResultProcessor.class);
-
+    
     /**
      * The special process identifier used to indicate that the document id is not assigned to a specific process.
      */

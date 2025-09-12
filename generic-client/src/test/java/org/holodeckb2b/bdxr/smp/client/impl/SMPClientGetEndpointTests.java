@@ -16,6 +16,14 @@
  */
 package org.holodeckb2b.bdxr.smp.client.impl;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.ZonedDateTime;
@@ -39,13 +47,6 @@ import org.holodeckb2b.bdxr.smp.datamodel.impl.ServiceMetadataImpl;
 import org.holodeckb2b.brdx.smp.testhelpers.MockRequestExecutor;
 import org.holodeckb2b.brdx.smp.testhelpers.MockResultProcessor;
 import org.holodeckb2b.commons.util.Utils;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 class SMPClientGetEndpointTests {
@@ -56,8 +57,8 @@ class SMPClientGetEndpointTests {
 	void testOneMatchingPg() throws MalformedURLException {
 		ProcessInfo proc = new ProcessInfoImpl(new ProcessIdentifierImpl("PROCID_1"), null);
 
-		EndpointInfo ep1 = new EndpointInfoImpl("test-1", new URL("http://this.is.a.result"));
-		EndpointInfo ep2 = new EndpointInfoImpl("test-2", new URL("http://this.is.another.result"));
+		EndpointInfo ep1 = new EndpointInfoV1Impl("test-1", new URL("http://this.is.a.result"));
+		EndpointInfo ep2 = new EndpointInfoV1Impl("test-2", new URL("http://this.is.another.result"));
 
 		ServiceMetadata smd = new ServiceMetadataImpl(P_ID, SVC_ID,
 										Set.of(new ProcessGroupImpl(Set.of(proc), Set.of(ep1, ep2), null))
@@ -81,8 +82,8 @@ class SMPClientGetEndpointTests {
 	void testMatchOnDefaultProc() throws MalformedURLException {
 		ProcessInfo proc1 = new ProcessInfoImpl(new ProcessIdentifierImpl("PROCID_1"), null);
 
-		EndpointInfo ep1 = new EndpointInfoImpl("test-1", new URL("http://this.is.a.result"));
-		EndpointInfo ep2 = new EndpointInfoImpl("test-2", new URL("http://this.is.another.result"));
+		EndpointInfo ep1 = new EndpointInfoV1Impl("test-1", new URL("http://this.is.a.result"));
+		EndpointInfo ep2 = new EndpointInfoV1Impl("test-2", new URL("http://this.is.another.result"));
 
 		ServiceMetadata smd = new ServiceMetadataImpl(P_ID, SVC_ID,
 										Set.of(new ProcessGroupImpl(Set.of(proc1), Set.of(ep1), null),
@@ -111,8 +112,8 @@ class SMPClientGetEndpointTests {
 		ProcessInfo proc3 = new ProcessInfoImpl(new ProcessIdentifierImpl("PROCID_1"),
 												Set.of(new IdentifierImpl("AnotherRole")),null);
 
-		EndpointInfo ep1 = new EndpointInfoImpl("test-1", new URL("http://this.is.a.result"));
-		EndpointInfo ep2 = new EndpointInfoImpl("test-2", new URL("http://this.is.another.result"));
+		EndpointInfo ep1 = new EndpointInfoV1Impl("test-1", new URL("http://this.is.a.result"));
+		EndpointInfo ep2 = new EndpointInfoV1Impl("test-2", new URL("http://this.is.another.result"));
 
 		ServiceMetadata smd = new ServiceMetadataImpl(P_ID, SVC_ID,
 										Set.of(new ProcessGroupImpl(Set.of(proc1, proc3), Set.of(ep1), null),
@@ -141,8 +142,8 @@ class SMPClientGetEndpointTests {
 		ProcessInfo proc3 = new ProcessInfoImpl(new ProcessIdentifierImpl("PROCID_2"),
 												Set.of(new IdentifierImpl("AnotherRole")),null);
 
-		EndpointInfo ep1 = new EndpointInfoImpl("test-1", new URL("http://this.is.a.result"));
-		EndpointInfo ep2 = new EndpointInfoImpl("test-2", new URL("http://this.is.another.result"));
+		EndpointInfo ep1 = new EndpointInfoV1Impl("test-1", new URL("http://this.is.a.result"));
+		EndpointInfo ep2 = new EndpointInfoV1Impl("test-2", new URL("http://this.is.another.result"));
 
 		ServiceMetadata smd = new ServiceMetadataImpl(P_ID, SVC_ID,
 										Set.of(new ProcessGroupImpl(Set.of(proc1, proc3), Set.of(ep1), null),
@@ -167,8 +168,8 @@ class SMPClientGetEndpointTests {
 	void testOnTransportProfile() throws MalformedURLException {
 		ProcessInfo proc = new ProcessInfoImpl(new ProcessIdentifierImpl("PROCID_1"), null);
 
-		EndpointInfo ep1 = new EndpointInfoImpl("test-1", new URL("http://this.is.a.result"));
-		EndpointInfo ep2 = new EndpointInfoImpl("test-2", new URL("http://this.is.another.result"));
+		EndpointInfo ep1 = new EndpointInfoV1Impl("test-1", new URL("http://this.is.a.result"));
+		EndpointInfo ep2 = new EndpointInfoV1Impl("test-2", new URL("http://this.is.another.result"));
 
 		ServiceMetadata smd = new ServiceMetadataImpl(P_ID, SVC_ID,
 										Set.of(new ProcessGroupImpl(Set.of(proc), Set.of(ep1, ep2), null)), null);
@@ -180,7 +181,7 @@ class SMPClientGetEndpointTests {
 										.setRequestExecutor(new MockRequestExecutor().addResponse(200, null, docNS))
 										.addProcessor(new MockResultProcessor(docNS, smd))
 										.build()
-										.getEndpoint(P_ID, SVC_ID, proc.getProcessId(), ep1.getTransportProfile()));
+										.getEndpoint(P_ID, SVC_ID, proc.getProcessId(), ep1.getTransportProfileId()));
 
 		assertNotNull(endpoint);
 		assertEquals(ep1.getEndpointURL(), endpoint.getEndpointURL());
@@ -190,10 +191,10 @@ class SMPClientGetEndpointTests {
 	void testActive() throws MalformedURLException {
 		ProcessInfo proc = new ProcessInfoImpl(new ProcessIdentifierImpl("PROCID_1"), null);
 
-		EndpointInfoImpl ep1 = new EndpointInfoImpl("test-1", new URL("http://this.is.a.result"));
+		EndpointInfoV1Impl ep1 = new EndpointInfoV1Impl("test-1", new URL("http://this.is.a.result"));
 		ep1.setServiceActivationDate(ZonedDateTime.now().minusMonths(2));
 		ep1.setServiceExpirationDate(ZonedDateTime.now().plusMonths(2));
-		EndpointInfoImpl ep2 = new EndpointInfoImpl("test-1", new URL("http://this.is.another.result"));
+		EndpointInfoV1Impl ep2 = new EndpointInfoV1Impl("test-1", new URL("http://this.is.another.result"));
 		ep2.setServiceActivationDate(ZonedDateTime.now().plusMonths(2));
 
 		ServiceMetadata smd = new ServiceMetadataImpl(P_ID, SVC_ID,
@@ -206,7 +207,7 @@ class SMPClientGetEndpointTests {
 										.setRequestExecutor(new MockRequestExecutor().addResponse(200, null, docNS))
 										.addProcessor(new MockResultProcessor(docNS, smd))
 										.build()
-										.getEndpoint(P_ID, SVC_ID, proc.getProcessId(), "test-1"));
+										.getEndpoint(P_ID, SVC_ID, proc.getProcessId(), new IdentifierImpl("test-1")));
 
 		assertNotNull(endpoint);
 		assertEquals(ep1.getEndpointURL(), endpoint.getEndpointURL());
@@ -216,8 +217,8 @@ class SMPClientGetEndpointTests {
 	void testNoMatchTransportProfile() throws MalformedURLException {
 		ProcessInfo proc = new ProcessInfoImpl(new ProcessIdentifierImpl("PROCID_1"), null);
 
-		EndpointInfo ep1 = new EndpointInfoImpl("test-1", new URL("http://this.is.a.result"));
-		EndpointInfo ep2 = new EndpointInfoImpl("test-2", new URL("http://this.is.another.result"));
+		EndpointInfo ep1 = new EndpointInfoV1Impl("test-1", new URL("http://this.is.a.result"));
+		EndpointInfo ep2 = new EndpointInfoV1Impl("test-2", new URL("http://this.is.another.result"));
 
 		ServiceMetadata smd = new ServiceMetadataImpl(P_ID, SVC_ID,
 										Set.of(new ProcessGroupImpl(Set.of(proc), Set.of(ep1, ep2), null)), null);
@@ -229,7 +230,7 @@ class SMPClientGetEndpointTests {
 										.setRequestExecutor(new MockRequestExecutor().addResponse(200, null, docNS))
 										.addProcessor(new MockResultProcessor(docNS, smd))
 										.build()
-										.getEndpoint(P_ID, SVC_ID, proc.getProcessId(), "profile-3"));
+										.getEndpoint(P_ID, SVC_ID, proc.getProcessId(), new IdentifierImpl("profile-3")));
 
 		assertNull(endpoint);
 	}
@@ -253,8 +254,8 @@ class SMPClientGetEndpointTests {
 		ProcessInfo proc3 = new ProcessInfoImpl(new ProcessIdentifierImpl("PROCID_2"),
 												Set.of(new IdentifierImpl("AnotherRole")),null);
 
-		EndpointInfo ep1 = new EndpointInfoImpl("test-1", new URL("http://this.is.a.result"));
-		EndpointInfo ep2 = new EndpointInfoImpl("test-2", new URL("http://this.is.another.result"));
+		EndpointInfo ep1 = new EndpointInfoV1Impl("test-1", new URL("http://this.is.a.result"));
+		EndpointInfo ep2 = new EndpointInfoV1Impl("test-2", new URL("http://this.is.another.result"));
 
 		ServiceMetadata smd = new ServiceMetadataImpl(P_ID, SVC_ID,
 										Set.of(new ProcessGroupImpl(Set.of(proc1, proc3), Set.of(ep1), null),
@@ -277,8 +278,8 @@ class SMPClientGetEndpointTests {
 		ProcessInfo proc = new ProcessInfoImpl(new ProcessIdentifierImpl("PROCID_1"), null);
 
 		Redirection  r = new RedirectionV2Impl(new URL("http://this.is.another.smp"));
-		EndpointInfo ep1 = new EndpointInfoImpl("test-1", new URL("http://this.is.a.result"));
-		EndpointInfo ep2 = new EndpointInfoImpl("test-2", new URL("http://this.is.another.result"));
+		EndpointInfo ep1 = new EndpointInfoV1Impl("test-1", new URL("http://this.is.a.result"));
+		EndpointInfo ep2 = new EndpointInfoV1Impl("test-2", new URL("http://this.is.another.result"));
 
 		ServiceMetadata smd1 = new ServiceMetadataImpl(P_ID, SVC_ID,
 										Set.of(new ProcessGroupImpl(Set.of(proc), r, null))
@@ -315,8 +316,8 @@ class SMPClientGetEndpointTests {
 
 		Redirection  r1 = new RedirectionV2Impl(new URL("http://this.is.another.smp"));
 		Redirection  r2 = new RedirectionV2Impl(new URL("http://this.is.yet.another.smp"));
-		EndpointInfo ep1 = new EndpointInfoImpl("test-1", new URL("http://this.is.a.result"));
-		EndpointInfo ep2 = new EndpointInfoImpl("test-2", new URL("http://this.is.another.result"));
+		EndpointInfo ep1 = new EndpointInfoV1Impl("test-1", new URL("http://this.is.a.result"));
+		EndpointInfo ep2 = new EndpointInfoV1Impl("test-2", new URL("http://this.is.another.result"));
 
 		ServiceMetadata smd1 = new ServiceMetadataImpl(P_ID, SVC_ID,
 										Set.of(new ProcessGroupImpl(null, r1, null))
@@ -360,8 +361,8 @@ class SMPClientGetEndpointTests {
 		ProcessInfo proc = new ProcessInfoImpl(new ProcessIdentifierImpl("PROCID_1"), null);
 
 		Redirection  r = new RedirectionV2Impl(new URL("http://this.is.another.smp"));
-		EndpointInfo ep1 = new EndpointInfoImpl("test-1", new URL("http://this.is.a.result"));
-		EndpointInfo ep2 = new EndpointInfoImpl("test-2", new URL("http://this.is.another.result"));
+		EndpointInfo ep1 = new EndpointInfoV1Impl("test-1", new URL("http://this.is.a.result"));
+		EndpointInfo ep2 = new EndpointInfoV1Impl("test-2", new URL("http://this.is.another.result"));
 
 		ServiceMetadata smd1 = new ServiceMetadataImpl(P_ID, SVC_ID,
 										Set.of(new ProcessGroupImpl(Set.of(proc), r, null))
@@ -392,8 +393,8 @@ class SMPClientGetEndpointTests {
 		ProcessInfo proc = new ProcessInfoImpl(new ProcessIdentifierImpl("PROCID_1"), null);
 
 		Redirection  r = new RedirectionV2Impl(new URL("http://this.is.another.smp"));
-		EndpointInfo ep1 = new EndpointInfoImpl("test-1", new URL("http://this.is.a.result"));
-		EndpointInfo ep2 = new EndpointInfoImpl("test-2", new URL("http://this.is.another.result"));
+		EndpointInfo ep1 = new EndpointInfoV1Impl("test-1", new URL("http://this.is.a.result"));
+		EndpointInfo ep2 = new EndpointInfoV1Impl("test-2", new URL("http://this.is.another.result"));
 
 		ServiceMetadata smd1 = new ServiceMetadataImpl(P_ID, SVC_ID,
 										Set.of(new ProcessGroupImpl(null, r, null))

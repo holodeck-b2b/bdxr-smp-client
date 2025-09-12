@@ -16,6 +16,12 @@
  */
 package org.holodeckb2b.bdxr.smp.client.impl;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -29,11 +35,6 @@ import org.holodeckb2b.bdxr.smp.datamodel.SignedQueryResult;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ServiceMetadataImpl;
 import org.holodeckb2b.brdx.smp.testhelpers.MockResultProcessor;
 import org.holodeckb2b.commons.testing.TestUtils;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 class SMPResultReaderTest {

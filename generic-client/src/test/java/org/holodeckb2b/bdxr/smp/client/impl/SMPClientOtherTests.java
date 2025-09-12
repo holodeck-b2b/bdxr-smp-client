@@ -16,6 +16,13 @@
  */
 package org.holodeckb2b.bdxr.smp.client.impl;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Set;
@@ -38,12 +45,6 @@ import org.holodeckb2b.bdxr.smp.datamodel.impl.ServiceGroupV1Impl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ServiceMetadataImpl;
 import org.holodeckb2b.brdx.smp.testhelpers.MockRequestExecutor;
 import org.holodeckb2b.brdx.smp.testhelpers.MockResultProcessor;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class SMPClientOtherTests {
@@ -125,8 +126,6 @@ public class SMPClientOtherTests {
 
 	@Test
 	void testTooManyRedirects() throws MalformedURLException {
-		ProcessInfo proc = new ProcessInfoImpl(new ProcessIdentifierImpl("PROCID_1"), null);
-
 		Redirection  r2 = new RedirectionV2Impl(new URL("http://this.is.yet.another.smp"));
 		Redirection  r1 = new RedirectionV2Impl(new URL("http://this.is.another.smp"));
 

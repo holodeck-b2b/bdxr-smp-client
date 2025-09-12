@@ -20,6 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.cert.CertificateException;
 import java.util.List;
+
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -53,6 +54,7 @@ import org.oasis_open.docs.bdxr.ns.smp._2.aggregatecomponents.ProcessMetadataTyp
 import org.oasis_open.docs.bdxr.ns.smp._2.aggregatecomponents.ProcessType;
 import org.oasis_open.docs.bdxr.ns.smp._2.aggregatecomponents.RedirectType;
 import org.oasis_open.docs.bdxr.ns.smp._2.basiccomponents.RoleIDType;
+import org.oasis_open.docs.bdxr.ns.smp._2.basiccomponents.TransportProfileIDType;
 import org.oasis_open.docs.bdxr.ns.smp._2.basiccomponents.TypeCodeType;
 import org.oasis_open.docs.bdxr.ns.smp._2.extensioncomponents.SMPExtensionsType;
 import org.oasis_open.docs.bdxr.ns.smp._2.servicemetadata.ServiceMetadataType;

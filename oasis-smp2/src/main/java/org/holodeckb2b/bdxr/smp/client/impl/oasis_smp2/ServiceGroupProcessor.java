@@ -17,6 +17,7 @@
 package org.holodeckb2b.bdxr.smp.client.impl.oasis_smp2;
 
 import java.util.List;
+
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

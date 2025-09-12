@@ -139,7 +139,7 @@ public class SMPClient implements ISMPClient {
 
 			if (smd == null) {
 				log.info("No ServiceMetadata found for (participant, service) = ({},{})", participantId, serviceId);
-				return Collections.EMPTY_LIST;
+				return Collections.emptyList();
 			}
 			log.trace("Check support for requested process and role");
 			redirections = rSmd.value2();
@@ -172,7 +172,7 @@ public class SMPClient implements ISMPClient {
 			if (pg.isEmpty()) {
 				log.warn("Requested (participant, service, process, role) is not supported; ({},{},{},{})",
 						 participantId, serviceId, processId, role);
-				return Collections.EMPTY_LIST;
+				return Collections.emptyList();
 			}
 			if (pg.size() != 1) {
 				log.error("Unable to determine unique process meta-data from SMP result!");
