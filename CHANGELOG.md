@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## 4.0.0
 ##### 
 ### Added
+* `org.holodeckb2b.bdxr.smp.peppol.DocumentID.from(String)` to create a `DocumentID` by parsing the provided URL encoded 
+  string representation
+* Methods in `org.holodeckb2b.bdxr.smp.peppol.DocumentID` to retrieve the parts of the Peppol Document Identifier, i.e. the
+  SyntaxID, CustomizationID and VersionID.
 * Option to override the cached _Service Group_ query result and always query the server for latest version
 
 ### Changed
@@ -15,6 +19,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   of HB2B BDXR Common
 * Version of Holodeck B2B BDXR Common dependency to 5.0.0
 * Refactored classes to new naming of common classes introduced in HB2B BDXR Common 5.0.0
+* Version of Holodeck B2B Commons dependency to 1.6.0
+* Version of Apache Log4j2 dependency to 2.25.1
+* Version of Apache Commons Codec dependency to 1.17.1
+* Version of DNS Java dependency to 3.6.3
 
 ### Removed
 * `org.holodeckb2b.bdxr.smp.client.impl.peppol.SMLLocator` as the standard `org.holodeckb2b.bdxr.smp.client.impl.BDXLLocator`
