@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 4.0.0
 ##### 
+### Added
+* Option to override the cached _Service Group_ query result and always query the server for latest version
+
 ### Changed
 * Version of Holodeck B2B BDXR Common dependency to 5.0.0
 * Refactored classes to new naming of common classes introduced in HB2B BDXR Common 5.0.0

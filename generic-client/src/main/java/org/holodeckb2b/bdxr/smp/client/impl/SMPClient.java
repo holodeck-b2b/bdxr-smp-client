@@ -207,7 +207,7 @@ public class SMPClient implements ISMPClient {
 	}
 
 	@Override
-	public ServiceGroup getServiceGroup(Identifier participantId) throws SMPQueryException {
+	public ServiceGroup<?> getServiceGroup(Identifier participantId, boolean overrideCache) throws SMPQueryException {
 		if (participantId == null)
         	throw new IllegalArgumentException("Missing participant ID argument");
 
@@ -218,7 +218,8 @@ public class SMPClient implements ISMPClient {
 			if (!baseURL.endsWith("/"))
 				baseURL += "/";
 
-			ServiceGroup sg = (ServiceGroup) retrieveMetadata(new URL(baseURL + participantId.getURLEncoded()), false);
+			ServiceGroup<?> sg = (ServiceGroup<?>) 
+									retrieveMetadata(new URL(baseURL + participantId.getURLEncoded()), overrideCache);
 
 			log.info("{} ServiceGroup for participant {}", sg != null ? "Returning" : "No", participantId);
 			return sg;

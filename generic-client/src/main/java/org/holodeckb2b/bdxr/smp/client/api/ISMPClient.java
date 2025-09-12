@@ -267,5 +267,20 @@ public interface ISMPClient {
 	 * @throws SMPQueryException	When an error occurs in the lookup of the SMP location or querying the SMP server
 	 * @since 3.0.0
 	 */
-	ServiceGroup getServiceGroup(final Identifier participantId) throws SMPQueryException;
+	default ServiceGroup<?> getServiceGroup(final Identifier participantId) throws SMPQueryException {
+		return getServiceGroup(participantId, false);
+	}
+	
+	/**
+	 * Gets the service group for a participant with the option to override the result stored in the cache.
+	 *
+	 * @param participantId		Participant's Id
+	 * @param overrideCache		<code>true</code> when the cached result should be ignored and the SMP server should 
+	 * 							always be queried. <code>false</code> if a cached result can be used. 
+	 * @return	The service group meta-data returned by the SMP server, <code>null</code> if no result was available
+	 * @throws SMPQueryException	When an error occurs in the lookup of the SMP location or querying the SMP server
+	 * @since 4.0.0
+	 */
+	ServiceGroup<?> getServiceGroup(final Identifier participantId, final boolean overrideCache) 
+																							throws SMPQueryException;
 }
