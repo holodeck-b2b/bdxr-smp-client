@@ -20,17 +20,25 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.holodeckb2b.bdxr.common.datamodel.Identifier;
 import org.holodeckb2b.bdxr.smp.client.api.IHostNameGenerator;
 import org.holodeckb2b.commons.util.Utils;
+import org.xbill.DNS.utils.base32;
 
 /**
- * Is a {@link IHostNameGenerator} that generates the host name according to the rules specified by the PEPPOL eDelivery
- * Network. These specify that the host name must be constructed as follows:<br>
- * <code><i>"B-"</i> + «MD5 hash of the <b>lower case</b> participant identifier» + "." + «identifier scheme» + "." + «SML Domain»</code>
+ * Is a {@link IHostNameGenerator} that generates the host name according to the rules specified the PEPPOL eDelivery 
+ * Network's SML specification version 1.3.0 and Policy for use of Identifiers version 4.4.0. These specify that the 
+ * host name must be constructed as follows:<br>
+ * <code>«Base32 encoding of the SHA-256 hash of the <b>lower case</b> participant identifier with trailing '=' removed» 
+ * 		+ "." + «identifier scheme» + "." + «SML Domain»</code>
  * <br>The SML domain to append should be provided to the generator upon creation.
  *
  * @author Sander Fieten (sander at holodeck-b2b.org)
  */
 public class PEPPOLHostNameGenerator implements IHostNameGenerator {
-    /**
+	/**
+	 * The base32 encoder configured according to the PEPPOL specification, i.e. no padding
+	 */
+	private static final base32 BASE32 = new base32(base32.Alphabet.BASE32, false, false);
+		
+	/**
      * The SML domain to append to the generated host names
      */
     private final String  smlDomain;
@@ -52,7 +60,7 @@ public class PEPPOLHostNameGenerator implements IHostNameGenerator {
         if (Utils.isNullOrEmpty(schemeId))
             throw new IllegalArgumentException("The participant identifier scheme must be set");
 
-        return "B-" + DigestUtils.md5Hex(participantId.getValue().toLowerCase()) + "." + schemeId + "." + smlDomain;
+        return BASE32.toString(DigestUtils.sha256(participantId.getValue().toLowerCase())) + "." + schemeId + "." + smlDomain;
     }
 
 }

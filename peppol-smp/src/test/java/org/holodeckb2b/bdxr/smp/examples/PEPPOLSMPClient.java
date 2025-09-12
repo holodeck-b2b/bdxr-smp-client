@@ -84,8 +84,9 @@ public class PEPPOLSMPClient {
 		System.out.println("- Transport protocol 	: " + args[3]);
 
 		final ISMPClient lookupClient = new SMPClientBuilder()
-											.setSMPLocator(new SMLLocator(
-															new PEPPOLHostNameGenerator(OPENPEPPOL_TEST_SML_DOMAIN)))
+											.setSMPLocator(new BDXLLocator(
+															new PEPPOLHostNameGenerator(OPENPEPPOL_TEST_SML_DOMAIN),
+															"Meta:SMP"))
 											.addProcessor(new PEPPOLResultProcessor())
 											.build();
 		try {
@@ -95,7 +96,7 @@ public class PEPPOLSMPClient {
 
 			System.out.print("The participant can receive the given document for the specified process through ");
 			System.out.println("the AP available at " + endpointInfo.getEndpointURL());
-			if (OPENPEPPOL_AS4_TRANSPORT_ID.equals(endpointInfo.getTransportProfile())) {
+			if (OPENPEPPOL_AS4_TRANSPORT_ID.equals(endpointInfo.getTransportProfileId())) {
 				System.out.println("AS4 Messages send to the AP should be encrypted using Certificate:");
 				X509Certificate cert = endpointInfo.getCertificates().iterator().next().getX509Cert();
 				System.out.println("\tSubject         : " + CertificateUtils.getSubjectName(cert));

@@ -33,14 +33,14 @@ import org.junit.jupiter.api.Test;
 public class PEPPOLHostNameGeneratorTest {
 
     private static final String     VALID_SML_DOMAIN = "test-sml.holodeck-b2b.com";
-    private static final Identifier VALID_ID = new IdentifierImpl("0088:9999", "iso6523-actorid-upis");
-    private static final String     MD5_HASH = "626eb8aec73e5a0cf24c96e35be8ed08";
+    private static final Identifier VALID_ID = new IdentifierImpl("0088:9999-HelloWorld", "iso6523-actorid-upis");
+    private static final String     B32ENC_SHA256_HASH = "NPWDUZFFTGHLPMJ2FY3BUO6MPZZNQIYO4NBG2Q7OMRJZQ6FW77NQ";
     private static final Identifier NO_SCHEME_ID = new IdentifierImpl("0000:xxxx");
 
     @Test
     public void testGenerateForValidParticipantID() {
         IHostNameGenerator peppolGenerator = new PEPPOLHostNameGenerator(VALID_SML_DOMAIN);
-        assertEquals("B-"+ MD5_HASH + "." + VALID_ID.getScheme().getSchemeId() + "." + VALID_SML_DOMAIN,
+        assertEquals(B32ENC_SHA256_HASH + "." + VALID_ID.getScheme().getSchemeId() + "." + VALID_SML_DOMAIN,
                      peppolGenerator.getHostNameForParticipant(VALID_ID));
     }
 
