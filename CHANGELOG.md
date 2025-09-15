@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.2.1
+##### 2025-09-15
+### Fixed
+* Validation on Endpoint/TechnicalInfoUrl too strict [#2](https://github.com/holodeck-b2b/bdxr-smp-client/issues/2)
+
 ## 3.2.0
 ##### 2023-10-04
 ### Added

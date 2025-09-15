@@ -17,10 +17,13 @@
 package org.holodeckb2b.bdxr.smp.client.impl.oasis_smp1;
 
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.List;
+
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -29,6 +32,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.holodeckb2b.bdxr.smp.client.api.ISMPResultProcessor;
@@ -294,10 +298,10 @@ public class OASISv1ResultProcessor implements ISMPResultProcessor {
 		String techInfoURL = epInfoXML.getTechnicalInformationUrl();
 		if (!Utils.isNullOrEmpty(techInfoURL))
 			try {
-				epInfo.setTechnicalInformationURL(new URL(techInfoURL));
-			} catch (MalformedURLException ex) {
+				epInfo.setTechnicalInformationURL(new URI(techInfoURL));
+			} catch (URISyntaxException ex) {
 				log.error("Invalid URL specified for technical information! Value={}",
-							epInfoXML.getTechnicalContactUrl());
+							epInfoXML.getTechnicalInformationUrl());
 				throw new SMPQueryException("Invalid endpoint meta-data");
 			}
         epInfo.setExtensions(handleEndpointInfoExtensions(epInfoXML.getExtension()));

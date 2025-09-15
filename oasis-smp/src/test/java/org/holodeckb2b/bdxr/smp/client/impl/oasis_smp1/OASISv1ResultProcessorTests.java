@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.FileInputStream;
+import java.net.URI;
 import java.net.URL;
 import java.security.cert.X509Certificate;
 import java.time.Instant;
@@ -153,7 +154,7 @@ public class OASISv1ResultProcessorTests {
 		assertTrue(Utils.isNullOrEmpty(ep.getCertificates()));
 		assertEquals("Only defined for testing of SMP client", ep.getDescription());
 		assertEquals("sander at holodeck-b2b.org", ep.getContactInfo());
-		assertEquals(new URL("http://doc.test.holodeck-b2b.org/smp-test"), ep.getTechnicalInformationURL());
+		assertEquals(new URI("http://doc.test.holodeck-b2b.org/smp-test"), ep.getTechnicalInformationURL());
 	}
 
 	@Test
