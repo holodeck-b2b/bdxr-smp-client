@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.holodeckb2b.bdxr.smp.client</groupId>
 	<artifactId>parent</artifactId>
-	<version>3.2.0</version>
+	<version>3.2.1</version>
 	<packaging>pom</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -57,7 +57,7 @@
 			<dependency>
 				<groupId>org.holodeckb2b.bdxr</groupId>
 				<artifactId>bdxr-common</artifactId>
-				<version>4.0.0</version>
+				<version>4.0.1</version>
 			</dependency>
  			<dependency>
 				<groupId>org.holodeckb2b.commons</groupId>
@@ -197,18 +197,19 @@
 								<goals>
 									<goal>jar</goal>
 								</goals>
+								<configuration>
+									<failOnError>false</failOnError>
+								</configuration>
 							</execution>
 						</executions>
 					</plugin>
 					<plugin>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>1.6.13</version>
+						<groupId>org.sonatype.central</groupId>
+						<artifactId>central-publishing-maven-plugin</artifactId>
+						<version>0.8.0</version>
 						<extensions>true</extensions>
 						<configuration>
-							<serverId>ossrh</serverId>
-							<nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-							<autoReleaseAfterClose>false</autoReleaseAfterClose>
+							<publishingServerId>central</publishingServerId>
 						</configuration>
 					</plugin>
 				</plugins>
