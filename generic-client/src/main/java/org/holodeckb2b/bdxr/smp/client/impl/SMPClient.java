@@ -30,6 +30,8 @@ import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.holodeckb2b.bdxr.common.datamodel.Identifier;
+import org.holodeckb2b.bdxr.common.datamodel.ProcessIdentifier;
 import org.holodeckb2b.bdxr.smp.client.api.ICachedResult;
 import org.holodeckb2b.bdxr.smp.client.api.ISMPClient;
 import org.holodeckb2b.bdxr.smp.client.api.ISMPResponse;
@@ -37,9 +39,7 @@ import org.holodeckb2b.bdxr.smp.client.api.SMPClientBuilder;
 import org.holodeckb2b.bdxr.smp.client.api.SMPLocatorException;
 import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
 import org.holodeckb2b.bdxr.smp.datamodel.EndpointInfo;
-import org.holodeckb2b.bdxr.smp.datamodel.Identifier;
 import org.holodeckb2b.bdxr.smp.datamodel.ProcessGroup;
-import org.holodeckb2b.bdxr.smp.datamodel.ProcessIdentifier;
 import org.holodeckb2b.bdxr.smp.datamodel.QueryResult;
 import org.holodeckb2b.bdxr.smp.datamodel.Redirection;
 import org.holodeckb2b.bdxr.smp.datamodel.RedirectionV1;
@@ -82,19 +82,19 @@ public class SMPClient implements ISMPClient {
 									final Identifier role,
 		    						final Identifier serviceId,
 		    						final ProcessIdentifier processId,
-		    						final String     transportProfile,
+		    						final Identifier     transportProfile,
 		    						final boolean    overrideCache) throws SMPQueryException  {
-        if (Utils.isNullOrEmpty(transportProfile))
+        if (transportProfile == null || Utils.isNullOrEmpty(transportProfile.getValue()))
         	throw new IllegalArgumentException("No transport profile identifier provided");
 
     	log.debug("Lookup requested; (participant, service, process, role, transport) = ({},{},{},{}, {})",
-                	participantId, serviceId, processId, role, transportProfile);
+                	participantId, serviceId, processId, role, transportProfile.toString());
 
 		// First get all endpoints for the participant, role, serviceId and processId, then filter the result
 		Collection<? extends EndpointInfo> endpoints = getEndpoints(participantId, role, serviceId, processId);
 
     	Optional<? extends EndpointInfo> findEP = endpoints.parallelStream()
-									                .filter(ep -> transportProfile.equals(ep.getTransportProfile())
+									                .filter(ep -> transportProfile.equals(ep.getTransportProfileId())
 																  && isActive(ep))
 									                .findFirst();
 
@@ -139,7 +139,7 @@ public class SMPClient implements ISMPClient {
 
 			if (smd == null) {
 				log.info("No ServiceMetadata found for (participant, service) = ({},{})", participantId, serviceId);
-				return Collections.EMPTY_LIST;
+				return Collections.emptyList();
 			}
 			log.trace("Check support for requested process and role");
 			redirections = rSmd.value2();
@@ -172,7 +172,7 @@ public class SMPClient implements ISMPClient {
 			if (pg.isEmpty()) {
 				log.warn("Requested (participant, service, process, role) is not supported; ({},{},{},{})",
 						 participantId, serviceId, processId, role);
-				return Collections.EMPTY_LIST;
+				return Collections.emptyList();
 			}
 			if (pg.size() != 1) {
 				log.error("Unable to determine unique process meta-data from SMP result!");
@@ -207,7 +207,7 @@ public class SMPClient implements ISMPClient {
 	}
 
 	@Override
-	public ServiceGroup getServiceGroup(Identifier participantId) throws SMPQueryException {
+	public ServiceGroup<?> getServiceGroup(Identifier participantId, boolean overrideCache) throws SMPQueryException {
 		if (participantId == null)
         	throw new IllegalArgumentException("Missing participant ID argument");
 
@@ -218,7 +218,8 @@ public class SMPClient implements ISMPClient {
 			if (!baseURL.endsWith("/"))
 				baseURL += "/";
 
-			ServiceGroup sg = (ServiceGroup) retrieveMetadata(new URL(baseURL + participantId.getURLEncoded()), false);
+			ServiceGroup<?> sg = (ServiceGroup<?>) 
+									retrieveMetadata(new URL(baseURL + participantId.getURLEncoded()), overrideCache);
 
 			log.info("{} ServiceGroup for participant {}", sg != null ? "Returning" : "No", participantId);
 			return sg;

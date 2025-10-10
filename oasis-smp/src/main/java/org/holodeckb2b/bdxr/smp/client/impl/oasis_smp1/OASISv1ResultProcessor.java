@@ -35,10 +35,12 @@ import javax.xml.validation.SchemaFactory;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.holodeckb2b.bdxr.common.datamodel.Extension;
+import org.holodeckb2b.bdxr.common.datamodel.impl.IdentifierImpl;
+import org.holodeckb2b.bdxr.common.datamodel.impl.ProcessIdentifierImpl;
 import org.holodeckb2b.bdxr.smp.client.api.ISMPResultProcessor;
 import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
 import org.holodeckb2b.bdxr.smp.datamodel.EndpointInfo;
-import org.holodeckb2b.bdxr.smp.datamodel.Extension;
 import org.holodeckb2b.bdxr.smp.datamodel.ProcessGroup;
 import org.holodeckb2b.bdxr.smp.datamodel.QueryResult;
 import org.holodeckb2b.bdxr.smp.datamodel.Redirection;
@@ -46,9 +48,7 @@ import org.holodeckb2b.bdxr.smp.datamodel.ServiceMetadata;
 import org.holodeckb2b.bdxr.smp.datamodel.SignedQueryResult;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.CertificateImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.EndpointInfoV1Impl;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.IdentifierImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessGroupImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessIdentifierImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessInfoImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.RedirectionV1Impl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ServiceGroupV1Impl;
@@ -121,7 +121,8 @@ public class OASISv1ResultProcessor implements ISMPResultProcessor {
     	return NAMESPACE_URI.equals(namespaceURI);
     }
 
-    @Override
+    @SuppressWarnings("rawtypes")
+	@Override
     public QueryResult processResult(Document xmlDocument) throws SMPQueryException {
         JAXBElement jaxbDoc;
         try {
@@ -213,7 +214,7 @@ public class OASISv1ResultProcessor implements ISMPResultProcessor {
 	 * @param extensions	The extension included with the <code>Redirection</code> element
 	 * @return				The object representation of the extensions
 	 */
-	protected List<Extension> handleRedirectionExtensions(List<ExtensionType> extensions) {
+	protected List<Extension<?>> handleRedirectionExtensions(List<ExtensionType> extensions) {
 		return null;
 	}
 
@@ -227,7 +228,7 @@ public class OASISv1ResultProcessor implements ISMPResultProcessor {
 	 * @param extensions	The extension included with the <code>ServiceInformation</code> element
 	 * @return				The object representation of the extensions
 	 */
-	protected List<Extension> handleServiceInfoExtensions(List<ExtensionType> extensions) {
+	protected List<Extension<?>> handleServiceInfoExtensions(List<ExtensionType> extensions) {
 		return null;
 	}
 
@@ -261,7 +262,7 @@ public class OASISv1ResultProcessor implements ISMPResultProcessor {
 	 * @param extensions	The extension included with the <code>Process</code> element
 	 * @return				The object representation of the extensions
 	 */
-	protected List<Extension> handleProcessInfoExtensions(List<ExtensionType> extensions) {
+	protected List<Extension<?>> handleProcessInfoExtensions(List<ExtensionType> extensions) {
 		return null;
 	}
 
@@ -319,7 +320,7 @@ public class OASISv1ResultProcessor implements ISMPResultProcessor {
 	 * @param extensions	The extension included with the <code>Endpoint</code> element
 	 * @return				The object representation of the extensions
 	 */
-	protected List<Extension> handleEndpointInfoExtensions(List<ExtensionType> extensions) {
+	protected List<Extension<?>> handleEndpointInfoExtensions(List<ExtensionType> extensions) {
 		return null;
 	}
 
@@ -354,7 +355,7 @@ public class OASISv1ResultProcessor implements ISMPResultProcessor {
 	 * @param extensions	The extension included with the <code>ServiceGroup</code> element
 	 * @return				The object representation of the extensions
 	 */
-	private List<Extension> handleServiceGroupExtensions(List<ExtensionType> extension) {
+	private List<Extension<?>> handleServiceGroupExtensions(List<ExtensionType> extension) {
 		return null;
 	}
 }

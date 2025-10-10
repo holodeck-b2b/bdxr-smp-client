@@ -35,18 +35,18 @@ import java.util.Iterator;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.holodeckb2b.bdxr.common.datamodel.ProcessIdentifier;
+import org.holodeckb2b.bdxr.common.datamodel.impl.IdentifierImpl;
+import org.holodeckb2b.bdxr.common.datamodel.impl.ProcessIdentifierImpl;
 import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
 import org.holodeckb2b.bdxr.smp.datamodel.EndpointInfo;
 import org.holodeckb2b.bdxr.smp.datamodel.EndpointInfoV1;
 import org.holodeckb2b.bdxr.smp.datamodel.ProcessGroup;
-import org.holodeckb2b.bdxr.smp.datamodel.ProcessIdentifier;
 import org.holodeckb2b.bdxr.smp.datamodel.QueryResult;
 import org.holodeckb2b.bdxr.smp.datamodel.Redirection;
 import org.holodeckb2b.bdxr.smp.datamodel.ServiceGroupV1;
 import org.holodeckb2b.bdxr.smp.datamodel.ServiceMetadata;
 import org.holodeckb2b.bdxr.smp.datamodel.SignedQueryResult;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.IdentifierImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessIdentifierImpl;
 import org.holodeckb2b.commons.security.CertificateUtils;
 import org.holodeckb2b.commons.testing.TestUtils;
 import org.holodeckb2b.commons.util.Utils;
@@ -89,7 +89,7 @@ public class PEPPOLResultProcessorTests {
 			if (procId.equals(new ProcessIdentifierImpl("urn:cen.eu:en16931:2017"))) {
 				assertEquals(1, pg.getEndpoints().size());
 				EndpointInfoV1 ep = (EndpointInfoV1) pg.getEndpoints().iterator().next();
-				assertEquals("bdxr-transport-ebms3-as4-v1p0", ep.getTransportProfile());
+				assertEquals("bdxr-transport-ebms3-as4-v1p0", ep.getTransportProfileId().getValue());
 				assertEquals(new URL("https://ap.sample.holodeck-b2b.org/"), ep.getEndpointURL());
 				assertFalse(ep.getBusinessLevelSignatureRequired());
 				assertEquals("none", ep.getMinimumAuthenticationLevel());
@@ -107,13 +107,13 @@ public class PEPPOLResultProcessorTests {
 					assertFalse(Utils.isNullOrEmpty(ep.getCertificates()));
 					assertEquals(cert, ep.getCertificates().iterator().next().getX509Cert());
 					assertEquals("sander at holodeck-b2b.org", ep.getContactInfo());
-					if ("bdxr-transport-ebms3-as4-v14p0".equals(ep.getTransportProfile())) {
+					if ("bdxr-transport-ebms3-as4-v14p0".equals(ep.getTransportProfileId().getValue())) {
 						assertEquals(new URL("https://ap.sample.holodeck-b2b.org/"), ep.getEndpointURL());
 						assertTrue(((EndpointInfoV1) ep).getBusinessLevelSignatureRequired());
 						assertNull(ep.getServiceActivationDate());
 						assertEquals(Instant.parse("2022-07-01T00:00:00.000Z"), ep.getServiceExpirationDate().toInstant());
 						assertEquals("Old profile", ep.getDescription());
-					} else if ("bdxr-transport-ebms3-as4-v15p0".equals(ep.getTransportProfile())) {
+					} else if ("bdxr-transport-ebms3-as4-v15p0".equals(ep.getTransportProfileId().getValue())) {
 						assertEquals(new URL("https://ap2.sample.holodeck-b2b.org/"), ep.getEndpointURL());
 						assertFalse(((EndpointInfoV1) ep).getBusinessLevelSignatureRequired());
 						assertEquals(Instant.parse("2022-03-01T00:00:00.000Z"), ep.getServiceActivationDate().toInstant());
@@ -158,7 +158,7 @@ public class PEPPOLResultProcessorTests {
 		assertEquals(new ProcessIdentifierImpl("urn:cen.eu:en16931:2017"), procId);
 		assertEquals(1, pg.getEndpoints().size());
 		EndpointInfoV1 ep = (EndpointInfoV1) pg.getEndpoints().iterator().next();
-		assertEquals("bdxr-transport-ebms3-as4-v1p0", ep.getTransportProfile());
+		assertEquals("bdxr-transport-ebms3-as4-v1p0", ep.getTransportProfileId().getValue());
 		assertEquals(new URL("https://ap.sample.holodeck-b2b.org/"), ep.getEndpointURL());
 		assertFalse(ep.getBusinessLevelSignatureRequired());
 		assertNull(ep.getMinimumAuthenticationLevel());

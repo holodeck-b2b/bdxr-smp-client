@@ -22,8 +22,9 @@ package org.holodeckb2b.bdxr.smp.client.api;
  * 
  * @author Sander Fieten (sander at holodeck-b2b.org)
  */
-public class SMPQueryException extends Exception {
-    
+public class SMPQueryException extends Exception {   
+	private static final long serialVersionUID = -1922891729904044252L;
+
 	public SMPQueryException(final String errorMessage) {
         super(errorMessage);
     }

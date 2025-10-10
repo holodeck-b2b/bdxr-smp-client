@@ -4,23 +4,26 @@
  */
 package org.holodeckb2b.bdxr.smp.client.impl.oasis_smp2;
 
-import java.io.FileInputStream;
-import java.util.Set;
-import javax.xml.parsers.DocumentBuilderFactory;
-import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
-import org.holodeckb2b.bdxr.smp.datamodel.QueryResult;
-import org.holodeckb2b.bdxr.smp.datamodel.ServiceGroupV2;
-import org.holodeckb2b.bdxr.smp.datamodel.ServiceReference;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.IdentifierImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessIdentifierImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessInfoImpl;
-import org.holodeckb2b.commons.testing.TestUtils;
-import org.holodeckb2b.commons.util.Utils;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.FileInputStream;
+import java.util.Set;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.holodeckb2b.bdxr.common.datamodel.impl.IdentifierImpl;
+import org.holodeckb2b.bdxr.common.datamodel.impl.ProcessIdentifierImpl;
+import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
+import org.holodeckb2b.bdxr.smp.datamodel.QueryResult;
+import org.holodeckb2b.bdxr.smp.datamodel.ServiceGroupV2;
+import org.holodeckb2b.bdxr.smp.datamodel.ServiceReference;
+import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessInfoImpl;
+import org.holodeckb2b.commons.testing.TestUtils;
+import org.holodeckb2b.commons.util.Utils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

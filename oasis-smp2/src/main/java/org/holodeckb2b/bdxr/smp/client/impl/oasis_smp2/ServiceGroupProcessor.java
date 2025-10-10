@@ -17,20 +17,22 @@
 package org.holodeckb2b.bdxr.smp.client.impl.oasis_smp2;
 
 import java.util.List;
+
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.holodeckb2b.bdxr.common.datamodel.Extension;
+import org.holodeckb2b.bdxr.common.datamodel.impl.IdentifierImpl;
+import org.holodeckb2b.bdxr.common.datamodel.impl.ProcessIdentifierImpl;
 import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
-import org.holodeckb2b.bdxr.smp.datamodel.Extension;
 import org.holodeckb2b.bdxr.smp.datamodel.QueryResult;
 import org.holodeckb2b.bdxr.smp.datamodel.ServiceReference;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.IdentifierImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessIdentifierImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessInfoImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ServiceGroupV2Impl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ServiceReferenceImpl;
@@ -139,7 +141,7 @@ class ServiceGroupProcessor {
 	 * @param extensions	The extension included with the <code>ServiceGroup</code> element
 	 * @return				The object representation of the extensions
 	 */
-	protected List<Extension> handleServiceGroupExtensions(SMPExtensionsType extensions) {
+	protected List<Extension<?>> handleServiceGroupExtensions(SMPExtensionsType extensions) {
 		return null;
 	}
 
@@ -153,7 +155,7 @@ class ServiceGroupProcessor {
 	 * @param extensions	The extension included with the <code>ServiceReference</code> element
 	 * @return				The object representation of the extensions
 	 */
-	protected List<Extension> handleServiceReferenceExtensions(SMPExtensionsType extensions) {
+	protected List<Extension<?>> handleServiceReferenceExtensions(SMPExtensionsType extensions) {
 		return null;
 	}
 
@@ -167,7 +169,7 @@ class ServiceGroupProcessor {
 	 * @param extensions	The extension included with the <code>Process</code> element
 	 * @return				The object representation of the extensions
 	 */
-	protected List<Extension> handleProcessInfoExtensions(SMPExtensionsType extensions) {
+	protected List<Extension<?>> handleProcessInfoExtensions(SMPExtensionsType extensions) {
 		return null;
 	}
 }

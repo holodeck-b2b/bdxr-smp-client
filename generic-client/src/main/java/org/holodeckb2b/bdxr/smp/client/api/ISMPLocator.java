@@ -18,7 +18,7 @@ package org.holodeckb2b.bdxr.smp.client.api;
 
 import java.net.URL;
 
-import org.holodeckb2b.bdxr.smp.datamodel.Identifier;
+import org.holodeckb2b.bdxr.common.datamodel.Identifier;
 import org.holodeckb2b.bdxr.smp.client.impl.SMPClient;
 
 /**

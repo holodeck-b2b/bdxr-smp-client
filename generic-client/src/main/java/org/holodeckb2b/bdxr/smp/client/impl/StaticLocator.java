@@ -19,9 +19,9 @@ package org.holodeckb2b.bdxr.smp.client.impl;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.holodeckb2b.bdxr.common.datamodel.Identifier;
 import org.holodeckb2b.bdxr.smp.client.api.ISMPLocator;
 import org.holodeckb2b.bdxr.smp.client.api.SMPLocatorException;
-import org.holodeckb2b.bdxr.smp.datamodel.Identifier;
 
 /**
  * Is an implementation of the {@link ISMPLocator} interface that returns a single SMP server for all participants.

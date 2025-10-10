@@ -16,23 +16,25 @@
  */
 package org.holodeckb2b.bdxr.smp.client.impl;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.security.cert.X509Certificate;
-import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
-import org.holodeckb2b.bdxr.smp.datamodel.QueryResult;
-import org.holodeckb2b.bdxr.smp.datamodel.ServiceMetadata;
-import org.holodeckb2b.bdxr.smp.datamodel.SignedQueryResult;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.IdentifierImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.ServiceMetadataImpl;
-import org.holodeckb2b.brdx.smp.testhelpers.MockResultProcessor;
-import org.holodeckb2b.commons.testing.TestUtils;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.security.cert.X509Certificate;
+
+import org.holodeckb2b.bdxr.common.datamodel.impl.IdentifierImpl;
+import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
+import org.holodeckb2b.bdxr.smp.datamodel.QueryResult;
+import org.holodeckb2b.bdxr.smp.datamodel.ServiceMetadata;
+import org.holodeckb2b.bdxr.smp.datamodel.SignedQueryResult;
+import org.holodeckb2b.bdxr.smp.datamodel.impl.ServiceMetadataImpl;
+import org.holodeckb2b.brdx.smp.testhelpers.MockResultProcessor;
+import org.holodeckb2b.commons.testing.TestUtils;
 import org.junit.jupiter.api.Test;
 
 class SMPResultReaderTest {

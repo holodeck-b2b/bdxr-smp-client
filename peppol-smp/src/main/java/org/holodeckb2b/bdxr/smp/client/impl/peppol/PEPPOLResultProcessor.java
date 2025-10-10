@@ -44,22 +44,22 @@ import org.busdox.servicemetadata.publishing._1.ServiceInformationType;
 import org.busdox.servicemetadata.publishing._1.ServiceMetadataReferenceType;
 import org.busdox.servicemetadata.publishing._1.ServiceMetadataType;
 import org.busdox.servicemetadata.publishing._1.SignedServiceMetadataType;
+import org.holodeckb2b.bdxr.common.datamodel.Extension;
+import org.holodeckb2b.bdxr.common.datamodel.Identifier;
+import org.holodeckb2b.bdxr.common.datamodel.ProcessIdentifier;
+import org.holodeckb2b.bdxr.common.datamodel.impl.IdentifierImpl;
+import org.holodeckb2b.bdxr.common.datamodel.impl.ProcessIdentifierImpl;
 import org.holodeckb2b.bdxr.smp.client.api.ISMPResultProcessor;
 import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
 import org.holodeckb2b.bdxr.smp.datamodel.EndpointInfo;
-import org.holodeckb2b.bdxr.smp.datamodel.Extension;
-import org.holodeckb2b.bdxr.smp.datamodel.Identifier;
 import org.holodeckb2b.bdxr.smp.datamodel.ProcessGroup;
-import org.holodeckb2b.bdxr.smp.datamodel.ProcessIdentifier;
 import org.holodeckb2b.bdxr.smp.datamodel.QueryResult;
 import org.holodeckb2b.bdxr.smp.datamodel.Redirection;
 import org.holodeckb2b.bdxr.smp.datamodel.ServiceMetadata;
 import org.holodeckb2b.bdxr.smp.datamodel.SignedQueryResult;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.CertificateImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.EndpointInfoV1Impl;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.IdentifierImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessGroupImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessIdentifierImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessInfoImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.RedirectionV1Impl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ServiceGroupV1Impl;
@@ -120,7 +120,8 @@ public class PEPPOLResultProcessor implements ISMPResultProcessor {
     	return NAMESPACE_URI.equals(namespaceURI);
     }
 
-    @Override
+    @SuppressWarnings("rawtypes")
+	@Override
     public QueryResult processResult(Document xmlDocument) throws SMPQueryException {
         JAXBElement jaxbDoc;
         try {
@@ -217,7 +218,7 @@ public class PEPPOLResultProcessor implements ISMPResultProcessor {
 	 * @param extensions	The extension included with the <code>Redirection</code> element
 	 * @return				The object representation of the extensions
 	 */
-	protected List<Extension> handleRedirectionExtensions(ExtensionType extensions) {
+	protected List<Extension<?>> handleRedirectionExtensions(ExtensionType extensions) {
 		return null;
 	}
 
@@ -231,7 +232,7 @@ public class PEPPOLResultProcessor implements ISMPResultProcessor {
 	 * @param extensions	The extension included with the <code>ServiceInformation</code> element
 	 * @return				The object representation of the extensions
 	 */
-	protected List<Extension> handleServiceInfoExtensions(ExtensionType extensions) {
+	protected List<Extension<?>> handleServiceInfoExtensions(ExtensionType extensions) {
 		return null;
 	}
 
@@ -273,7 +274,7 @@ public class PEPPOLResultProcessor implements ISMPResultProcessor {
 	 * @param extensions	The extension included with the <code>Process</code> element
 	 * @return				The object representation of the extensions
 	 */
-	protected List<Extension> handleProcessInfoExtensions(ExtensionType extensions) {
+	protected List<Extension<?>> handleProcessInfoExtensions(ExtensionType extensions) {
 		return null;
 	}
 
@@ -332,7 +333,7 @@ public class PEPPOLResultProcessor implements ISMPResultProcessor {
 	 * @param extensions	The extension included with the <code>Endpoint</code> element
 	 * @return				The object representation of the extensions
 	 */
-	protected List<Extension> handleEndpointInfoExtensions(ExtensionType extensions) {
+	protected List<Extension<?>> handleEndpointInfoExtensions(ExtensionType extensions) {
 		return null;
 	}
 
@@ -367,7 +368,7 @@ public class PEPPOLResultProcessor implements ISMPResultProcessor {
 	 * @param extensions	The extension included with the <code>ServiceGroup</code> element
 	 * @return				The object representation of the extensions
 	 */
-	private List<Extension> handleServiceGroupExtensions(ExtensionType extension) {
+	private List<Extension<?>> handleServiceGroupExtensions(ExtensionType extension) {
 		return null;
 	}
 }

@@ -20,6 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.cert.CertificateException;
 import java.util.List;
+
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -27,20 +28,21 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.holodeckb2b.bdxr.common.datamodel.Extension;
+import org.holodeckb2b.bdxr.common.datamodel.impl.IdentifierImpl;
+import org.holodeckb2b.bdxr.common.datamodel.impl.ProcessIdentifierImpl;
 import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
 import org.holodeckb2b.bdxr.smp.datamodel.Certificate;
 import org.holodeckb2b.bdxr.smp.datamodel.EndpointInfo;
-import org.holodeckb2b.bdxr.smp.datamodel.Extension;
 import org.holodeckb2b.bdxr.smp.datamodel.ProcessGroup;
 import org.holodeckb2b.bdxr.smp.datamodel.QueryResult;
 import org.holodeckb2b.bdxr.smp.datamodel.Redirection;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.CertificateImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.EndpointInfoImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.IdentifierImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessGroupImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessIdentifierImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessInfoImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.RedirectionV2Impl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ServiceMetadataImpl;
@@ -52,6 +54,7 @@ import org.oasis_open.docs.bdxr.ns.smp._2.aggregatecomponents.ProcessMetadataTyp
 import org.oasis_open.docs.bdxr.ns.smp._2.aggregatecomponents.ProcessType;
 import org.oasis_open.docs.bdxr.ns.smp._2.aggregatecomponents.RedirectType;
 import org.oasis_open.docs.bdxr.ns.smp._2.basiccomponents.RoleIDType;
+import org.oasis_open.docs.bdxr.ns.smp._2.basiccomponents.TransportProfileIDType;
 import org.oasis_open.docs.bdxr.ns.smp._2.basiccomponents.TypeCodeType;
 import org.oasis_open.docs.bdxr.ns.smp._2.extensioncomponents.SMPExtensionsType;
 import org.oasis_open.docs.bdxr.ns.smp._2.servicemetadata.ServiceMetadataType;
@@ -158,14 +161,13 @@ class ServiceMetadataProcessor {
 	private EndpointInfo convertEndpoint(EndpointType epInfoXML) throws SMPQueryException {
 		final EndpointInfoImpl epInfo = new EndpointInfoImpl();
 
-		final String tpID = epInfoXML.getTransportProfileID() != null ? epInfoXML.getTransportProfileID().getValue()
-																		: null;
-		if (Utils.isNullOrEmpty(tpID)) {
+		TransportProfileIDType transportProfileID = epInfoXML.getTransportProfileID();
+		if (transportProfileID == null || Utils.isNullOrEmpty(transportProfileID.getValue())) {
 			log.error("Missing transport profile identifier");
 			throw new SMPQueryException("Invalid endpoint meta-data");
 		}
-		epInfo.setTransportProfile(tpID);
-
+		epInfo.setTransportProfileId(new IdentifierImpl(transportProfileID.getValue(), transportProfileID.getSchemeID()));
+		
 		final String epURL = epInfoXML.getAddressURI() != null ? epInfoXML.getAddressURI().getValue() : null;
 		try {
 			epInfo.setEndpointURL(new URL(epURL));
@@ -252,7 +254,7 @@ class ServiceMetadataProcessor {
 	 * @param extensions	The extension included with the <code>Redirection</code> element
 	 * @return				The object representation of the extensions
 	 */
-	protected List<Extension> handleRedirectionExtensions(SMPExtensionsType extensions) {
+	protected List<Extension<?>> handleRedirectionExtensions(SMPExtensionsType extensions) {
 		return null;
 	}
 
@@ -266,7 +268,7 @@ class ServiceMetadataProcessor {
 	 * @param extensions	The extension included with the <code>ServiceMetadata</code> element
 	 * @return				The object representation of the extensions
 	 */
-	protected List<Extension> handleServiceMetadataExtensions(SMPExtensionsType extensions) {
+	protected List<Extension<?>> handleServiceMetadataExtensions(SMPExtensionsType extensions) {
 		return null;
 	}
 
@@ -280,7 +282,7 @@ class ServiceMetadataProcessor {
 	 * @param extensions	The extension included with the <code>Process</code> element
 	 * @return				The object representation of the extensions
 	 */
-	protected List<Extension> handleProcessInfoExtensions(SMPExtensionsType extensions) {
+	protected List<Extension<?>> handleProcessInfoExtensions(SMPExtensionsType extensions) {
 		return null;
 	}
 
@@ -294,7 +296,7 @@ class ServiceMetadataProcessor {
 	 * @param extensions	The extension included with the <code>ProcessMetadata</code> element
 	 * @return				The object representation of the extensions
 	 */
-	protected List<Extension> handleProcessMetadataExtensions(SMPExtensionsType extensions) {
+	protected List<Extension<?>> handleProcessMetadataExtensions(SMPExtensionsType extensions) {
 		return null;
 	}
 
@@ -308,7 +310,7 @@ class ServiceMetadataProcessor {
 	 * @param extensions	The extension included with the <code>Endpoint</code> element
 	 * @return				The object representation of the extensions
 	 */
-	protected List<Extension> handleEndpointInfoExtensions(SMPExtensionsType extensions) {
+	protected List<Extension<?>> handleEndpointInfoExtensions(SMPExtensionsType extensions) {
 		return null;
 	}
 }

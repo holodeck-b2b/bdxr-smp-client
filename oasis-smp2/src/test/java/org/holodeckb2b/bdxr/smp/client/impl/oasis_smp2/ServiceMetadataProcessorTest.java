@@ -20,6 +20,8 @@ import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.holodeckb2b.bdxr.common.datamodel.impl.IdentifierImpl;
+import org.holodeckb2b.bdxr.common.datamodel.impl.ProcessIdentifierImpl;
 import org.holodeckb2b.bdxr.smp.client.api.SMPQueryException;
 import org.holodeckb2b.bdxr.smp.datamodel.Certificate;
 import org.holodeckb2b.bdxr.smp.datamodel.EndpointInfo;
@@ -28,8 +30,6 @@ import org.holodeckb2b.bdxr.smp.datamodel.ProcessInfo;
 import org.holodeckb2b.bdxr.smp.datamodel.QueryResult;
 import org.holodeckb2b.bdxr.smp.datamodel.RedirectionV2;
 import org.holodeckb2b.bdxr.smp.datamodel.ServiceMetadata;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.IdentifierImpl;
-import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessIdentifierImpl;
 import org.holodeckb2b.bdxr.smp.datamodel.impl.ProcessInfoImpl;
 import org.holodeckb2b.commons.security.CertificateUtils;
 import org.holodeckb2b.commons.testing.TestUtils;
@@ -68,7 +68,7 @@ public class ServiceMetadataProcessorTest {
 		assertTrue(Utils.isNullOrEmpty(pg.getProcessInfo()));
 		assertEquals(1, pg.getEndpoints().size());
 		EndpointInfo ep = pg.getEndpoints().iterator().next();
-		assertEquals("bdxr-transport-ebms3-as4-v1p0", ep.getTransportProfile());
+		assertEquals("bdxr-transport-ebms3-as4-v1p0", ep.getTransportProfileId().getValue());
 		assertEquals(new URL("https://ap.sample.holodeck-b2b.org/"), ep.getEndpointURL());
 		assertNull(ep.getServiceActivationDate());
 		assertNull(ep.getServiceExpirationDate());
@@ -107,7 +107,7 @@ public class ServiceMetadataProcessorTest {
 
 		assertEquals(1, pg.getEndpoints().size());
 		EndpointInfo ep = pg.getEndpoints().iterator().next();
-		assertEquals("bdxr-transport-ebms3-as4-v1p0", ep.getTransportProfile());
+		assertEquals("bdxr-transport-ebms3-as4-v1p0", ep.getTransportProfileId().getValue());
 		assertEquals(new URL("https://ap.sample.holodeck-b2b.org/"), ep.getEndpointURL());
 		assertEquals(Instant.parse("2022-02-23T23:00:00Z"), ep.getServiceActivationDate().toInstant());
 		assertEquals(Instant.parse("2023-12-31T23:00:00Z"), ep.getServiceExpirationDate().toInstant());
@@ -154,7 +154,7 @@ public class ServiceMetadataProcessorTest {
 
 				assertEquals(2, pg.getEndpoints().size());
 				for(EndpointInfo ep : pg.getEndpoints()) {
-					if ("bdxr-transport-ebms3-as4-v1p0".equals(ep.getTransportProfile())) {
+					if ("bdxr-transport-ebms3-as4-v1p0".equals(ep.getTransportProfileId().getValue())) {
 						assertEquals(new URL("https://ap.sample.holodeck-b2b.org/"), ep.getEndpointURL());
 						assertEquals(Instant.parse("2022-02-23T23:00:00Z"), ep.getServiceActivationDate().toInstant());
 						assertEquals(Instant.parse("2023-12-31T23:00:00Z"), ep.getServiceExpirationDate().toInstant());
@@ -171,7 +171,7 @@ public class ServiceMetadataProcessorTest {
 							}
 						}
 					} else {
-						assertEquals("old-transport-protocol", ep.getTransportProfile());
+						assertEquals("old-transport-protocol", ep.getTransportProfileId().getValue());
 						assertEquals(new URL("https://ap.sample.holodeck-b2b.org/old"), ep.getEndpointURL());
 						assertNull(ep.getServiceActivationDate());
 						assertEquals(Instant.parse("2022-07-31T23:00:00Z"), ep.getServiceExpirationDate().toInstant());
@@ -189,7 +189,7 @@ public class ServiceMetadataProcessorTest {
 							 pg.getProcessInfo().iterator().next());
 				assertEquals(1, pg.getEndpoints().size());
 				EndpointInfo ep = pg.getEndpoints().iterator().next();
-				assertEquals("old-transport-protocol", ep.getTransportProfile());
+				assertEquals("old-transport-protocol", ep.getTransportProfileId().getValue());
 				assertEquals(new URL("https://ap.sample.holodeck-b2b.org/old"), ep.getEndpointURL());
 				assertNull(ep.getServiceActivationDate());
 				assertEquals(Instant.parse("2022-04-30T23:00:00Z"), ep.getServiceExpirationDate().toInstant());
