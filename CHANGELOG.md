@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 4.0.0
-##### 
+##### 2025-10-10
 ### Added
 * `org.holodeckb2b.bdxr.smp.peppol.DocumentID.from(String)` to create a `DocumentID` by parsing the provided URL encoded 
   string representation
