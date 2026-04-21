@@ -2,8 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.0.1
+##### 2026-04-21
+### Fixed
+* Failure to process Peppol _ServiceMetadata_ response when an `Extension` element is included [#3](https://github.com/holodeck-b2b/bdxr-smp-client/issues/3) 
+
 ## 4.0.0
-##### 
+##### 2025-10-10
 ### Added
 * `org.holodeckb2b.bdxr.smp.peppol.DocumentID.from(String)` to create a `DocumentID` by parsing the provided URL encoded 
   string representation
